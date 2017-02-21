@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.df.dao.user.IUserDAO">
+
+    <sql id="Base_Column_List">
+        id,
+        code,
+        username,
+        password,
+        salt,
+        age,
+        sex,
+        position,
+        workNum,
+        createDate,
+        creator,
+        lastModifier,
+        lastModDate,
+        status
+    </sql>
+    <insert id="insert" parameterType="cn.df.domain.user.User">
+        INSERT INTO df_user (
+		    code
+		    ,username
+		    ,password
+		    ,salt
+		    ,age
+		    ,sex
+		    ,position
+		    ,workNum
+		    ,createDate
+		    ,creator
+		    ,lastModifier
+		    ,lastModDate
+		    ,status
+        ) VALUES (
+		    	#{code}
+		    	,#{username}
+		    	,#{password}
+		    	,#{salt}
+		    	,#{age}
+		    	,#{sex}
+		    	,#{position}
+		    	,#{workNum}
+		    	,#{createDate}
+		    	,#{creator}
+		    	,#{lastModifier}
+		    	,#{lastModDate}
+		    	,#{status}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO df_user (
+		    code
+		    ,username
+		    ,password
+		    ,salt
+		    ,age
+		    ,sex
+		    ,position
+		    ,workNum
+		    ,createDate
+		    ,creator
+		    ,lastModifier
+		    ,lastModDate
+		    ,status
+        ) VALUES (
+		    	#{map.code}
+		    	,#{map.username}
+		    	,#{map.password}
+		    	,#{map.salt}
+		    	,#{map.age}
+		    	,#{map.sex}
+		    	,#{map.position}
+		    	,#{map.workNum}
+		    	,#{map.createDate}
+		    	,#{map.creator}
+		    	,#{map.lastModifier}
+		    	,#{map.lastModDate}
+		    	,#{map.status}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.df.domain.user.User">
+        UPDATE df_user
+        <trim prefix="SET" suffixOverrides=",">
+		    code=#{code},
+		    username=#{username},
+		    password=#{password},
+		    salt=#{salt},
+		    age=#{age},
+		    sex=#{sex},
+		    position=#{position},
+		    workNum=#{workNum},
+		    createDate=#{createDate},
+		    creator=#{creator},
+		    lastModifier=#{lastModifier},
+		    lastModDate=#{lastModDate},
+		    status=#{status},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE df_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+            <if test="map.username!=null">
+                username = #{map.username},
+            </if>
+            <if test="map.password!=null">
+                password = #{map.password},
+            </if>
+            <if test="map.salt!=null">
+                salt = #{map.salt},
+            </if>
+            <if test="map.age!=null">
+                age = #{map.age},
+            </if>
+            <if test="map.sex!=null">
+                sex = #{map.sex},
+            </if>
+            <if test="map.position!=null">
+                position = #{map.position},
+            </if>
+            <if test="map.workNum!=null">
+                workNum = #{map.workNum},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.creator!=null">
+                creator = #{map.creator},
+            </if>
+            <if test="map.lastModifier!=null">
+                lastModifier = #{map.lastModifier},
+            </if>
+            <if test="map.lastModDate!=null">
+                lastModDate = #{map.lastModDate},
+            </if>
+            <if test="map.status!=null">
+                status = #{map.status},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE df_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+            <if test="update.username!=null">
+                username = #{update.username},
+            </if>
+            <if test="update.password!=null">
+                password = #{update.password},
+            </if>
+            <if test="update.salt!=null">
+                salt = #{update.salt},
+            </if>
+            <if test="update.age!=null">
+                age = #{update.age},
+            </if>
+            <if test="update.sex!=null">
+                sex = #{update.sex},
+            </if>
+            <if test="update.position!=null">
+                position = #{update.position},
+            </if>
+            <if test="update.workNum!=null">
+                workNum = #{update.workNum},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.creator!=null">
+                creator = #{update.creator},
+            </if>
+            <if test="update.lastModifier!=null">
+                lastModifier = #{update.lastModifier},
+            </if>
+            <if test="update.lastModDate!=null">
+                lastModDate = #{update.lastModDate},
+            </if>
+            <if test="update.status!=null">
+                status = #{update.status},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.sex!=null">
+                AND sex = #{condition.sex}
+            </if>
+            <if test="condition.position!=null">
+                AND position = #{condition.position}
+            </if>
+            <if test="condition.workNum!=null">
+                AND workNum = #{condition.workNum}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="cn.df.domain.user.User">
+        UPDATE df_user
+        <trim prefix="SET" suffixOverrides=",">
+            code = #{code},
+            username = #{username},
+            password = #{password},
+            salt = #{salt},
+            age = #{age},
+            sex = #{sex},
+            position = #{position},
+            workNum = #{workNum},
+            createDate = #{createDate},
+            creator = #{creator},
+            lastModifier = #{lastModifier},
+            lastModDate = #{lastModDate},
+            status = #{status},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM df_user
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="username!=null">
+                AND username = #{username}
+            </if>
+            <if test="password!=null">
+                AND password = #{password}
+            </if>
+            <if test="salt!=null">
+                AND salt = #{salt}
+            </if>
+            <if test="age!=null">
+                AND age = #{age}
+            </if>
+            <if test="sex!=null">
+                AND sex = #{sex}
+            </if>
+            <if test="position!=null">
+                AND position = #{position}
+            </if>
+            <if test="workNum!=null">
+                AND workNum = #{workNum}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="creator!=null">
+                AND creator = #{creator}
+            </if>
+            <if test="lastModifier!=null">
+                AND lastModifier = #{lastModifier}
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate = #{lastModDate}
+            </if>
+            <if test="status!=null">
+                AND status = #{status}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM df_user WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.username!=null">
+                ${condition.groupOp}   username  ${condition.username.op}  #{condition.username.data}
+            </if>
+            <if test="condition.password!=null">
+                ${condition.groupOp}   password  ${condition.password.op}  #{condition.password.data}
+            </if>
+            <if test="condition.salt!=null">
+                ${condition.groupOp}   salt  ${condition.salt.op}  #{condition.salt.data}
+            </if>
+            <if test="condition.age!=null">
+                ${condition.groupOp}   age  ${condition.age.op}  #{condition.age.data}
+            </if>
+            <if test="condition.sex!=null">
+                ${condition.groupOp}   sex  ${condition.sex.op}  #{condition.sex.data}
+            </if>
+            <if test="condition.position!=null">
+                ${condition.groupOp}   position  ${condition.position.op}  #{condition.position.data}
+            </if>
+            <if test="condition.workNum!=null">
+                ${condition.groupOp}   workNum  ${condition.workNum.op}  #{condition.workNum.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.creator!=null">
+                ${condition.groupOp}   creator  ${condition.creator.op}  #{condition.creator.data}
+            </if>
+            <if test="condition.lastModifier!=null">
+                ${condition.groupOp}   lastModifier  ${condition.lastModifier.op}  #{condition.lastModifier.data}
+            </if>
+            <if test="condition.lastModDate!=null">
+                ${condition.groupOp}   lastModDate  ${condition.lastModDate.op}  #{condition.lastModDate.data}
+            </if>
+            <if test="condition.status!=null">
+                ${condition.groupOp}   status  ${condition.status.op}  #{condition.status.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="code!=null">
+                AND code like CONCAT('%', #{code} , '%')
+            </if>
+            <if test="username!=null">
+                AND username like CONCAT('%', #{username} , '%')
+            </if>
+            <if test="password!=null">
+                AND password like CONCAT('%', #{password} , '%')
+            </if>
+            <if test="salt!=null">
+                AND salt like CONCAT('%', #{salt} , '%')
+            </if>
+            <if test="age!=null">
+                AND age like CONCAT('%', #{age} , '%')
+            </if>
+            <if test="sex!=null">
+                AND sex like CONCAT('%', #{sex} , '%')
+            </if>
+            <if test="position!=null">
+                AND position like CONCAT('%', #{position} , '%')
+            </if>
+            <if test="workNum!=null">
+                AND workNum like CONCAT('%', #{workNum} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="creator!=null">
+                AND creator like CONCAT('%', #{creator} , '%')
+            </if>
+            <if test="lastModifier!=null">
+                AND lastModifier like CONCAT('%', #{lastModifier} , '%')
+            </if>
+            <if test="lastModDate!=null">
+                AND lastModDate like CONCAT('%', #{lastModDate} , '%')
+            </if>
+            <if test="status!=null">
+                AND status like CONCAT('%', #{status} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.sex!=null">
+                AND sex = #{condition.sex}
+            </if>
+            <if test="condition.position!=null">
+                AND position = #{condition.position}
+            </if>
+            <if test="condition.workNum!=null">
+                AND workNum = #{condition.workNum}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="cn.df.domain.user.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.username!=null">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.password!=null">
+                AND password = #{condition.password}
+            </if>
+            <if test="condition.salt!=null">
+                AND salt = #{condition.salt}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.sex!=null">
+                AND sex = #{condition.sex}
+            </if>
+            <if test="condition.position!=null">
+                AND position = #{condition.position}
+            </if>
+            <if test="condition.workNum!=null">
+                AND workNum = #{condition.workNum}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.creator!=null">
+                AND creator = #{condition.creator}
+            </if>
+            <if test="condition.lastModifier!=null">
+                AND lastModifier = #{condition.lastModifier}
+            </if>
+            <if test="condition.lastModDate!=null">
+                AND lastModDate = #{condition.lastModDate}
+            </if>
+            <if test="condition.status!=null">
+                AND status = #{condition.status}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_user
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="username!=null">
+               ${groupOp} username ${username.op}  #{username.data}
+           </if>
+           <if test="password!=null">
+               ${groupOp} password ${password.op}  #{password.data}
+           </if>
+           <if test="salt!=null">
+               ${groupOp} salt ${salt.op}  #{salt.data}
+           </if>
+           <if test="age!=null">
+               ${groupOp} age ${age.op}  #{age.data}
+           </if>
+           <if test="sex!=null">
+               ${groupOp} sex ${sex.op}  #{sex.data}
+           </if>
+           <if test="position!=null">
+               ${groupOp} position ${position.op}  #{position.data}
+           </if>
+           <if test="workNum!=null">
+               ${groupOp} workNum ${workNum.op}  #{workNum.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="creator!=null">
+               ${groupOp} creator ${creator.op}  #{creator.data}
+           </if>
+           <if test="lastModifier!=null">
+               ${groupOp} lastModifier ${lastModifier.op}  #{lastModifier.data}
+           </if>
+           <if test="lastModDate!=null">
+               ${groupOp} lastModDate ${lastModDate.op}  #{lastModDate.data}
+           </if>
+           <if test="status!=null">
+               ${groupOp} status ${status.op}  #{status.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM df_user
+    </select>
+   
+</mapper>
