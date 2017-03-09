@@ -37,10 +37,10 @@ public interface IAuthRoleDAO extends IDFBaseDAO<AuthRole> {
      * 分页查询权限角色
      * @param condition     查询条件
      * @param offset        偏移量
-     * @param pageSize      页大小
+     * @param rows      页大小
      * @return  返回，分页结果
      */
-     List queryPageEx(@Param("condition") Map<String, Object> condition, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+     List<AuthRole> queryPageEx(@Param("condition") Map<String, Object> condition, @Param("offset") Integer offset, @Param("rows") Integer rows);
 
     /**
      * 统计分页列表总数
@@ -48,4 +48,17 @@ public interface IAuthRoleDAO extends IDFBaseDAO<AuthRole> {
      */
      Integer countEx(@Param("condition")Map<String, Object> condition);
 
- }
+    /**
+     * 根据用户uid判断用户是否具有超级管理员角色
+     * @param uid   用户uid
+     * @return  返回，角色实体
+     */
+    AuthRole hasSuper(@Param("usercode") String uid);
+
+    /**
+     * 根据用户代码查询用户角色列表
+     * @param userCode      用户代码
+     * @return  返回，用户实体
+     */
+    List queryRoles4User(String userCode);
+}

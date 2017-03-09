@@ -1,4 +1,4 @@
-package cn.df.common.filter;
+package cn.df.common.listener;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.RequestContextListener;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Katybaby on 2017/2/21.
  *
  */
-public class DFRequestFilter extends RequestContextListener {
+public class DFRequestListener extends RequestContextListener {
 
     public static HttpServletRequest getRequest(){
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

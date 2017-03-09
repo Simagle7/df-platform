@@ -3,5 +3,12 @@
 
 <mapper namespace="cn.df.dao.auth.IAuthAclDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AuthAclDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <delete id="deleteBatchByProperty">
+        DELETE FROM df_auth_acl
+        WHERE  #{property} IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

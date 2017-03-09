@@ -1,6 +1,7 @@
 package cn.df.controller.user;
 
 import cn.df.common.domain.BizData4Page;
+import cn.df.common.dto.user.AccountDto;
 import cn.df.common.exception.BizException;
 import cn.df.common.utils.base.ERRORCODE;
 import cn.df.common.utils.base.RETURNCODE;
@@ -16,18 +17,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
  * Created by Katybaby on 2017/2/21.
  */
 @Controller
-@RequestMapping(value = "cn/df/user")
+    @RequestMapping(value = "/cn/df/user")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
+
+    /**
+     * 用户登入
+     * @param request       请求流
+     * @param response      响应流
+     * @return  返回，用户信息实体
+     */
+    @ResponseBody
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String isLogin(HttpServletRequest request, HttpServletResponse response) {
+        return userService.isLogin(request, response);
+    }
+
+    /**
+     * 初始化用户信息
+     * @param userCode  用户代码
+     * @param roleCode  角色代码
+     * @return  返回，用户信息实体
+     */
+    @ResponseBody
+    @RequestMapping(value = "/initUser", method = RequestMethod.POST)
+    public AccountDto intUser(String userCode, String roleCode){
+        return userService.initUser(userCode, roleCode);
+    }
     /**
      * 分页查询
      * @param param     查询参数
@@ -102,7 +129,7 @@ public class UserController {
      * @return 返回，操作码
      */
     @ResponseBody
-    @RequestMapping(value = "/disabledOrEnabled")
+    @RequestMapping(value = "/disabledOrEnabled", method = RequestMethod.POST)
     public String disabledOrEnabled(UserParam param){
         return userService.disabledOrEnabled(param, UserContext.getCurrentUser());
     }

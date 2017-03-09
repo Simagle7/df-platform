@@ -19,14 +19,51 @@
 package cn.df.service.auth;
 
 import cn.df.common.domain.BaseDomain;
+import cn.df.common.domain.BizData4Page;
+import cn.df.common.dto.user.AccountDto;
 import cn.df.dao.IDFBaseDAO;
+import cn.df.param.auth.AuthOperationParam;
 import cn.df.service.IDFBaseService;
 
- /**
+/**
  * 《权限操作》 业务逻辑服务接口
- * @author Katybaby
  *
+ * @author Katybaby
  */
-public interface IAuthOperationService<D extends IDFBaseDAO<T>, T extends BaseDomain> extends IDFBaseService<D, T>{
+public interface IAuthOperationService<D extends IDFBaseDAO<T>, T extends BaseDomain> extends IDFBaseService<D, T> {
 
+    /**
+     * 分页查询操作列表
+     *
+     * @param param    查询参数
+     * @param pageNo   页码
+     * @param pageSize 页大小
+     * @return 返回，分页结果
+     */
+    BizData4Page queryPage(AuthOperationParam param, int pageNo, int pageSize);
+
+    /**
+     * 单个添加操作
+     *
+     * @param param       操作新增参数
+     * @param currentUser 当前操作者
+     * @return 返回，操作码
+     */
+    String add(AuthOperationParam param, AccountDto currentUser);
+
+    /**
+     * 更新操作
+     * @param param         操作更新参数
+     * @param currentUser   当前操作者
+     * @return 返回，操作码
+     */
+    String update(AuthOperationParam param, AccountDto currentUser);
+
+    /**
+     * 停用启用操作
+     * @param id            操作id
+     * @param currentUser   当前操作者
+     * @return  返回，操作码
+     */
+    String disableOrEnable(long id, AccountDto currentUser);
 }

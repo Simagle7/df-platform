@@ -3,5 +3,44 @@
 
 <mapper namespace="cn.df.dao.auth.IAuthOperationDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AuthOperationDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <delete id="deleteOperationByCodes">
+        DELETE FROM df_auth_operation
+        WHERE moduleCode IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="queryPageEx" resultType="cn.df.domain.auth.AuthOperationEx">
+        SELECT dao.*,dam.name AS moduleName FROM df_auth_operation dao
+        LEFT JOIN  df_auth_module dam
+        ON dao.moduleCode = dam.code
+        <where>
+            <if test="condition.name != null and condition.name !=''">
+                AND name LIKE '%${condition.name}%'
+            </if>
+            <if test="condition.moduleCode != null and condition.moduleCode != '0'.toString()">
+                AND moduleCode = #{condition.moduleCode}
+            </if>
+        </where>
+        order by createDate desc
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="countEx" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_auth_operation dao
+        LEFT JOIN  df_auth_module dam
+        ON dao.moduleCode = dam.code
+        <where>
+            <if test="condition.name != null and condition.name != ''">
+                AND name LIKE '%${condition.name}%'
+            </if>
+            <if test="condition.moduleCode != null and condition.moduleCode != '0'.toString()">
+                AND moduleCode = #{condition.moduleCode}
+            </if>
+        </where>
+    </select>
 </mapper>

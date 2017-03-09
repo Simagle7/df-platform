@@ -3,13 +3,11 @@ package cn.df.common.utils.user;
 
 import cn.df.common.dto.user.AccountDto;
 import cn.df.common.exception.BizException;
-import cn.df.common.filter.DFRequestFilter;
+import cn.df.common.listener.DFRequestListener;
 import cn.df.common.utils.base.ERRORCODE;
-import cn.df.common.utils.http.HttpUtils;
 import cn.df.domain.user.User;
 import org.apache.shiro.SecurityUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -55,21 +53,21 @@ public class UserContext {
      * @return 返回 AccountDto
      */
     public static AccountDto getCurrentUser(){
-        HttpServletRequest request = DFRequestFilter.getRequest();
+        HttpServletRequest request = DFRequestListener.getRequest();
         //获取access_token
-        Cookie cookie = HttpUtils.getCookie(request.getCookies(),HttpUtils.ACCESS_TOKEN);
-        if (cookie != null){
-            String token = cookie.getValue();
-            AccountDto accountDto = (AccountDto) SecurityUtils.getSubject().getSession().getAttribute(token);
+//        Cookie cookie = HttpUtils.getCookie(request.getCookies(),HttpUtils.ACCESS_TOKEN);
+//        if (cookie != null){
+//            String token = cookie.getValue();
+            AccountDto accountDto = (AccountDto) SecurityUtils.getSubject().getSession().getAttribute("CURRENTUSER");
 //            UserDetail userDetail = (UserDetail) request.getSession().getAttribute(token);
             if (accountDto != null){
                 return accountDto;
             }else {
                 throw new BizException(ERRORCODE.ILLEGAL_LOGIN.getCode(), ERRORCODE.ILLEGAL_LOGIN.getMessage());
             }
-        }else {
-            throw new BizException(ERRORCODE.ILLEGAL_LOGIN.getCode(), ERRORCODE.ILLEGAL_LOGIN.getMessage());
-        }
+//        }else {
+//            throw new BizException(ERRORCODE.ILLEGAL_LOGIN.getCode(), ERRORCODE.ILLEGAL_LOGIN.getMessage());
+//        }
 
     }
 

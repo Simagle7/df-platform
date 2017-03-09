@@ -3,5 +3,45 @@
 
 <mapper namespace="cn.df.dao.auth.IAuthRoleDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AuthRoleDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <!--根据用户uid查询用户是否具有超级管理员角色-->
+    <select id="hasSuper" resultType="cn.df.domain.auth.AuthRole">
+        SELECT * FROM df_auth_role dur
+        LEFT JOIN df_auth_user_role daur
+        ON dur.dur.`code` = daur.rolecode
+        WHERE daur.usercode = #{usercode} AND dur.isSuper = 1
+    </select>
+
+    <!--根据用户代码查询用户角色列表-->
+    <select id="queryRoles4User" resultType="java.util.List">
+      SELECT dur.* FROM df_auth_role dur
+        LEFT JOIN df_auth_user_role daur
+        ON dur.dur.`code` = daur.rolecode
+        WHERE daur.usercode = #{usercode}
+    </select>
+
+    <!--分页查询角色-->
+    <select id="queryPageEx" resultType="cn.df.domain.auth.AuthRole">
+        SELECT * FROM df_auth_role
+        <where>
+            <if test="condition.name !=  null and condition.name != ''">
+                AND `name` like '%用户%'
+            </if>
+        </where>
+        ORDER BY createDate
+        <if test="offset != null">
+            limit ${offset} ,${rows}
+        </if>
+    </select>
+
+     <!--统计分页结果-->
+    <select id="countEx" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_auth_role
+        <where>
+            <if test="condition.name !=  null and condition.name != ''">
+                AND `name` like '%用户%'
+            </if>
+        </where>
+    </select>
+
 </mapper>

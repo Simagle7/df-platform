@@ -28,6 +28,10 @@ public enum ERRORCODE {
     MODULE_NOT_EXIST("0100018", "模块不存在"),
     INITIAL_EXC("0100019", "初始化异常"),
     AUTH_INSUFFICIENT("0100020", "权限不足"),
+    MODULEURL_EXIST("0100021", "模块地址已存在"),
+    ENABLE_EXC("0100022", "启用异常"),
+    OPERATION_EXIST("0100023", "操作已存在"),
+    AUTHCODE_EXIST("0100024", "权限代码已存在")
     ;
 
     /**

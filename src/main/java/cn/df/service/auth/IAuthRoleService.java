@@ -99,4 +99,18 @@ public interface IAuthRoleService<D extends IDFBaseDAO<T>, T extends BaseDomain>
      * @return  返回，操作码
      */
     String saveAuth(String roleCode, String[] moduleCodes, String[] operationCodes, AccountDto accountDto);
+
+    /**
+     * 是否具有超级管理员角色
+     * @param uid       用户uid
+     * @return  返回，true：是，false：否
+     */
+    boolean isSuper(String uid);
+
+    /**
+     * 根据用户代码查询用户角色列表
+     * @param userCode  用户代码
+     * @return  返回，用户角色列表
+     */
+    List queryRoles4User(String userCode);
 }

@@ -26,7 +26,10 @@ import cn.df.param.user.UserParam;
 import cn.df.param.user.UserParamEx;
 import cn.df.service.IDFBaseService;
 
- /**
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
  * 《用户基础》 业务逻辑服务接口
  * @author katybaby
  *
@@ -34,6 +37,13 @@ import cn.df.service.IDFBaseService;
 public interface IUserService<D extends IDFBaseDAO<T>, T extends BaseDomain> extends IDFBaseService<D, T>{
 
 
+    /**
+     * 判断用户登录状态
+     * @param request       请求流
+     * @param response      响应流
+     * @return  返回，成功：返回用户代码，失败：返回操作码
+     */
+     String isLogin(HttpServletRequest request, HttpServletResponse response);
      /**
       * 分页查询
       * @param param      查询参数
@@ -82,4 +92,12 @@ public interface IUserService<D extends IDFBaseDAO<T>, T extends BaseDomain> ext
       * @return 返回，操作码
       */
      String disabledOrEnabled(UserParam param, AccountDto currentUser);
- }
+
+     /**
+      * 初始化用户信息
+      * @param userCode  用户代码
+      * @param roleCode  角色代码
+      * @return 返回，用户实体信息
+      */
+     AccountDto initUser(String userCode, String roleCode);
+}

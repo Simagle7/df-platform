@@ -20,8 +20,9 @@ package cn.df.dao.user;
 
 import cn.df.dao.IDFBaseDAO;
 import cn.df.domain.user.User;
-import com.sun.tools.javac.util.List;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +33,19 @@ import java.util.Map;
 public interface IUserDAO extends IDFBaseDAO<User> {
 
 
-     List<User> queryPageEx(Map<String, Object> stringObjectMap, int i, Integer pageSize);
+    /**
+     * 分页查询用户列表
+     * @param condition     查询条件
+     * @param offset        偏移量
+     * @param rows          页大小
+     * @return  返回，分页列表
+     */
+     List<User> queryPageEx(@Param("condition") Map<String, Object> condition, @Param("offset") Integer offset, @Param("rows") Integer rows);
 
-    int countEx(Map<String, Object> stringObjectMap);
+    /**
+     * 统计分页
+     * @param condition     查询条件
+     * @return  返回，统计结果
+     */
+    int countEx(@Param("condition") Map<String, Object> condition);
 }

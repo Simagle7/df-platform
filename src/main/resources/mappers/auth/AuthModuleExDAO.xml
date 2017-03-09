@@ -3,5 +3,10 @@
 
 <mapper namespace="cn.df.dao.auth.IAuthModuleDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AuthModuleDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <update id="updateStatus">
+        UPDATE df_auth_module
+		SET status = #{status}, lastModDate = #{lastModDate}, lastModifier = #{lastModifier}
+		WHERE fullCode LIKE '%${pCode}%'
+    </update>
 </mapper>

@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  	  http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/cache
+      http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <description>redis配置</description>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <!--<bean name="slaver" class="redis.clients.jedis.JedisShardInfo">-->
+                    <!--<constructor-arg index="0" value="${redis.slaver.host}"/>-->
+                    <!--<constructor-arg index="1" value="${redis.slaver.port}" type="int"/>-->
+                <!--</bean>-->
+                <bean name="master" class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.master.host}"/>
+                    <constructor-arg index="1" value="${redis.master.port}" type="int"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.master.maxTotal}" />
+        <property name="maxIdle" value="${redis.master.maxIdle}" />
+        <property name="numTestsPerEvictionRun" value="${redis.master.numTestsPerEvictionRun}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.master.timeBetweenEvictionRunsMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${redis.master.minEvictableIdleTimeMillis}" />
+        <property name="softMinEvictableIdleTimeMillis" value="${redis.master.softMinEvictableIdleTimeMillis}" />
+        <property name="maxWaitMillis" value="${redis.master.maxWaitMillis}"/>
+        <property name="testOnBorrow" value="${redis.master.testOnBorrow}" />
+        <property name="testWhileIdle" value="${redis.master.testWhileIdle}"/>
+        <property name="testOnReturn" value="${redis.master.testOnReturn}"/>
+        <property name="jmxEnabled" value="${redis.master.jmxEnabled}"/>
+        <property name="jmxNamePrefix" value="${redis.master.jmxNamePrefix}"/>
+        <property name="blockWhenExhausted" value="${redis.master.blockWhenExhausted}"/>
+    </bean>
+
+    <!--<bean id="redisUtils" class="cn.eatammy.common.sys.redis.RedisUtils"/>-->
+
+</beans>

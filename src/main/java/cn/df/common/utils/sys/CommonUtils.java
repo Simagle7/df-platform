@@ -193,6 +193,9 @@ public class CommonUtils {
 //            Date date = randomDate("2016-08-20", "2016-09-10");
 //            System.out.println(format.format(date));
 //        }
-        System.out.println(getPassword("123123", "simagle"));
+        System.out.println(getPassword("123123", "nicos"));
+//        System.out.println(getUUID());
+//        System.out.println(RandomStringUtils.randomNumeric(8));
+//        System.out.println(System.currentTimeMillis());
     }
 }

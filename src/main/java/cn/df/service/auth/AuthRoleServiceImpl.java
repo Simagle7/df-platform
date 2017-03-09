@@ -21,7 +21,6 @@ package cn.df.service.auth;
 import cn.df.common.domain.BizData4Page;
 import cn.df.common.dto.user.AccountDto;
 import cn.df.common.exception.BizException;
-import cn.df.common.shiro.DfRealm;
 import cn.df.common.utils.base.DataStatusEnum;
 import cn.df.common.utils.base.ERRORCODE;
 import cn.df.common.utils.base.RETURNCODE;
@@ -39,6 +38,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 /**
  * 《权限角色》 业务逻辑服务类
  * @author Katybaby
@@ -57,8 +58,8 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
     private IAuthModuleDAO authModuleDAO;
     @Autowired
     private IAuthOperationDAO authOperationDAO;
-    @Autowired
-    private DfRealm dfRealm;
+//    @Autowired
+//    private DfRealm dfRealm;
 
     @Override
     public IDFBaseDAO<AuthRole> getDao() {
@@ -103,14 +104,15 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
 
     @Override
     public String update(AuthRoleParam param, AccountDto currentUser) {
+        AuthRole one = this.findOne(AuthRoleParam.F_IsDefault, true);
         //查询是不是默认角色，如果是这抛出异常不给插入（默认角色只有一个）
-        if(param.getIsDefault()&& this.isExists(AuthRoleParam.F_IsDefault, param.getIsDefault())){
+        if(param.getIsDefault() && !Objects.equals(param.getId(), param.getId())){
             throw new BizException(ERRORCODE.DEFAULT_ROLE_EXIST.getCode(), ERRORCODE.DEFAULT_ROLE_EXIST.getMessage());
         }
 
         //查询角色名称是不是存在，角色名存在不准插入
         AuthRole queryRole = this.findOne(AuthRoleParam.F_Name, param.getName());
-        if(queryRole != null && !queryRole.getCode().equals(param.getCode())){
+        if(queryRole != null && !Objects.equals(param.getId(), param.getId())){
             throw new BizException(ERRORCODE.ROLE_EXIST.getCode(), ERRORCODE.ROLE_EXIST.getMessage());
         }
 
@@ -227,8 +229,19 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
             authAclDAO.insertBatch(authAcls);
         }
         //更新系统权限
-        dfRealm.clearCahced();
+//        dfRealm.clearCahced();
 
         return RETURNCODE.AUTH_SUCCESS.getMessage();
+    }
+
+    @Override
+    public boolean isSuper(String uid) {
+        AuthRole authRole = authRoleDAO.hasSuper(uid);
+        return authRole != null;
+    }
+
+    @Override
+    public List queryRoles4User(String userCode) {
+        return authRoleDAO.queryRoles4User(userCode);
     }
 }

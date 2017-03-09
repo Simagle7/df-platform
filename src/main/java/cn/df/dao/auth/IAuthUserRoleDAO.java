@@ -39,4 +39,11 @@ public interface IAuthUserRoleDAO extends IDFBaseDAO<AuthUserRole> {
      * @return  返回，非零：删除的条数，0：失败
      */
     int deleteBatchByProperty(@Param("property") String property, @Param("list") List<Object> values);
- }
+
+    /**
+     * 批量插入赋予用户角色（一次赋予用户多个角色）
+     * @param authRoleUsers     关系集合
+     * @return 返回，非零：成功插入条数，0：失败
+     */
+    int insertBatch(List<AuthUserRole> authRoleUsers);
+}

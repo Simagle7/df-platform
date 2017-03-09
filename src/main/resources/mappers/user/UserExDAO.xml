@@ -3,5 +3,33 @@
 
 <mapper namespace="cn.df.dao.user.IUserDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：UserDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <!--分页查询用户列表-->
+    <select id="queryPageEx" resultType="cn.df.domain.user.User">
+        SELECT * FROM df_user
+        <where>
+            <if test="condition.username != null and condition.username != ''">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.workNum != null and condition.workNum != ''">
+                AND workNum = #{condition.workNum}
+            </if>
+        </where>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <!--统计分页结果-->
+    <select id="countEx" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_user
+        <where>
+            <if test="condition.username != null and condition.username != ''">
+                AND username = #{condition.username}
+            </if>
+            <if test="condition.workNum != null and condition.workNum != ''">
+                AND workNum = #{condition.workNum}
+            </if>
+        </where>
+    </select>
 </mapper>

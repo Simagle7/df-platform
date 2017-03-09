@@ -18,13 +18,9 @@
 
 package cn.df.param.auth;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import cn.df.common.param.CreateBaseParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.df.common.param.CreateBaseParam;
-
-import java.util.*;
 
 /**
  * 《权限模块》 查询参数实体
@@ -137,13 +133,13 @@ public class AuthModuleParam extends CreateBaseParam<Long> {
 	/**
 	 * @return pCode 根节点code
 	 */
-	public String getPCode(){
+	public String getpCode(){
 		return this.pCode;
 	}
 	/**
 	 * @param pCode 根节点code
 	 */
-	public void setPCode(String pCode){
+	public void setpCode(String pCode){
 		this.pCode = pCode;
 	}
 	/**
@@ -237,7 +233,7 @@ public class AuthModuleParam extends CreateBaseParam<Long> {
 			.append("code",getCode())
 			.append("name",getName())
 			.append("pid",getPid())
-			.append("pCode",getPCode())
+			.append("pCode",getpCode())
 			.append("url",getUrl())
 			.append("icon",getIcon())
 			.append("isMenu",getIsMenu())

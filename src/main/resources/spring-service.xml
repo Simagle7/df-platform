@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+           http://mybatis.org/schema/mybatis-spring      http://mybatis.org/schema/mybatis-spring.xsd
+           http://www.springframework.org/schema/aop     http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       ">
+
+    <!--读取本地配置-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:sys/db.properties</value>
+                <value>classpath:sys/ignoreUrl-config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="cn.df"/>
+    <aop:aspectj-autoproxy/>
+
+
+
+    <!-- 配置事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <!-- 开启事务注解驱动 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--配置aop-->
+    <aop:config>
+        <aop:pointcut id="serviceMehtod" expression="execution(* cn.df.service.*.*Service.*(..))"/>
+        <aop:advisor pointcut-ref="serviceMehtod" advice-ref="txAdvice" />
+    </aop:config>
+
+    <!--事务增强-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.RuntimeException" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="is*" propagation="SUPPORTS" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+
+    <!-- MyBatis配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描domain目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="cn.df.domain"/>
+        <!-- 显式指定Mapper文件位置 -->
+        <property name="mapperLocations" value="classpath:/mappers/**/*DAO.xml"/>
+    </bean>
+    <!-- 扫描basePackage下接口 自动生成代理实现类 -->
+    <mybatis:scan base-package="cn.df.dao" factory-ref="sqlSessionFactory"/>
+
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.master.driver}"/>
+        <!-- 基本属性 url、user、password -->
+        <property name="url"
+                  value="${jdbc.master.url}"/>
+        <property name="username" value="${jdbc.master.username}"/>
+        <property name="password" value="${jdbc.master.password}"/>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.master.initialSize}"/>
+        <property name="minIdle" value="${jdbc.master.minIdle}"/>
+        <property name="maxActive" value="${jdbc.master.maxActive}"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc.master.maxWait}"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.master.timeBetweenEvictionRunsMillis}"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.master.minEvictableIdleTimeMillis}"/>
+
+        <property name="validationQuery" value="${jdbc.master.validationQuery}"/>
+        <property name="testWhileIdle" value="${jdbc.master.testWhileIdle}"/>
+        <property name="testOnBorrow" value="${jdbc.master.testOnBorrow}"/>
+        <property name="testOnReturn" value="${jdbc.master.testOnReturn}"/>
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="${jdbc.master.poolPreparedStatements}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.master.maxPoolPreparedStatementPerConnectionSize}"/>
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat"/>
+    </bean>
+
+
+    <!-- 激活自动代理功能 -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 配置数据库注解aop -->
+    <!--<bean id="dataSourceAspect" class="cn.df.common.sys.database.DataSourceAspect" />-->
+    <!--<aop:config>-->
+        <!--<aop:aspect id="c" ref="dataSourceAspect">-->
+            <!--<aop:pointcut id="tx" expression="execution(public * cn.eatammy.cm.dao..*.*(..))"/>-->
+            <!--<aop:before pointcut-ref="tx" method="before"/>-->
+            <!--<aop:after pointcut-ref="tx" method="after"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+
+    <!-- 配置七牛云空间管理服务 -->
+    <!--<bean id="bucketManagerService" class="cn.eatammy.common.qiniu.BucketManagerService"/>-->
+    <!--默认的redis配置，启动时会建立连接-->
+    <!--<import resource="classpath*:spring-redis.xml"/>-->
+
+</beans>

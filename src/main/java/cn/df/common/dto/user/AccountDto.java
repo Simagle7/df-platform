@@ -9,8 +9,7 @@ public class AccountDto {
     private String username; //账号
     private String password; //密码
     private String salt;        //加密盐
-    private String token;   //数字签名
-    private Integer userType; //当前身份
+    private String roleCode;    //角色代码
 
     public String getUid() {
         return uid;
@@ -44,19 +43,11 @@ public class AccountDto {
         this.salt = salt;
     }
 
-    public String getToken() {
-        return token;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 }

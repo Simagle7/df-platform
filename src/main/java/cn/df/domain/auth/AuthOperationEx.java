@@ -18,13 +18,6 @@
 
 package cn.df.domain.auth;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.util.*;
-
 /**
  * 《权限操作》扩展实体
  * @author Katybaby
@@ -34,4 +27,14 @@ public class AuthOperationEx extends AuthOperation {
 	private static final long serialVersionUID = 1L;
 	
 	//针对AuthOperation实体在这里增加额外的属性和对应的get和set方法
+
+	private String moduleName;
+
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
 }
