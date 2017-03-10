@@ -46,7 +46,7 @@ public interface IAuthAclDAO extends IDFBaseDAO<AuthAcl> {
      * @param subjectCode 主体代码
      * @return 返回，资源列表
      */
-    List<String> queryResourceCode(Integer subjectType, String subjectCode);
+    List<String> queryResourceCode(@Param("subjectType") Integer subjectType, @Param("subjectCode") String subjectCode);
 
     /**
      * 批量插入

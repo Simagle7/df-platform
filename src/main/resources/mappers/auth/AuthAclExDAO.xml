@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.df.dao.auth.IAuthAclDAO">
-	<!-- 在这里存放用户自定义的映射配置（注：AuthAclDAO.xml里各节点的ID不能在这里重复出现）  -->
+    <!-- 在这里存放用户自定义的映射配置（注：AuthAclDAO.xml里各节点的ID不能在这里重复出现）  -->
 
     <delete id="deleteBatchByProperty">
         DELETE FROM df_auth_acl
@@ -11,4 +11,33 @@
             #{item}
         </foreach>
     </delete>
+
+    <!--查询资源代码-->
+    <select id="queryResourceCode" resultType="java.lang.String">
+        SELECT DISTINCT resourceCode
+		FROM df_auth_acl
+		WHERE subjectType = #{subjectType} AND subjectCode = #{subjectCode} AND status = 0
+    </select>
+
+    <insert id="insertBatch">
+        INSERT INTO df_auth_acl (
+        subjectType,
+        subjectCode,
+        resourceType,
+        resourceCode,
+        creator,
+        createDate,
+        status
+        ) VALUES
+        <foreach collection="authAclList" index="index" item="item" separator=",">
+            (#{item.subjectType}
+            ,#{item.subjectCode}
+            ,#{item.resourceType}
+            ,#{item.resourceCode}
+            ,#{item.creator}
+            ,#{item.createDate}
+            ,#{item.status})
+        </foreach>
+    </insert>
+
 </mapper>
