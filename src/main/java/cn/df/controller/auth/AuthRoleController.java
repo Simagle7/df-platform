@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -168,5 +169,11 @@ public class AuthRoleController {
     @RequestMapping(value = "/queryRoles4User")
     public List queryRoles4User(String userCode){
         return authRoleService.queryRoles4User(userCode);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/queryRolesForAuth")
+    public Map<String, Object> queryRolesForAuth(){
+        return null;
     }
 }

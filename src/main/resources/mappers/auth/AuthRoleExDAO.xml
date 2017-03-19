@@ -14,7 +14,7 @@
 
     <!--根据用户代码查询用户角色列表-->
     <select id="queryRoles4User" resultType="java.util.List">
-      SELECT dur.* FROM df_auth_role dur
+        SELECT dur.* FROM df_auth_role dur
         LEFT JOIN df_auth_user_role daur
         ON dur.dur.`code` = daur.rolecode
         WHERE daur.usercode = #{usercode}

@@ -23,15 +23,20 @@ import cn.df.common.exception.BizException;
 import cn.df.common.utils.base.DataStatusEnum;
 import cn.df.common.utils.base.ERRORCODE;
 import cn.df.common.utils.base.RETURNCODE;
+import cn.df.common.utils.base.SqlOrderEnum;
 import cn.df.dao.IDFBaseDAO;
+import cn.df.dao.auth.IAuthRoleDAO;
 import cn.df.dao.auth.IAuthUserRoleDAO;
+import cn.df.domain.auth.AuthRole;
 import cn.df.domain.auth.AuthUserRole;
+import cn.df.param.auth.AuthRoleParam;
 import cn.df.param.auth.AuthUserRoleParam;
 import cn.df.service.AbstractDFService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +49,8 @@ import java.util.Map;
 public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUserRole>, AuthUserRole> implements IAuthUserRoleService<IDFBaseDAO<AuthUserRole>,AuthUserRole>{
     @Autowired
     private IAuthUserRoleDAO authUserRoleDAO;
+    @Autowired
+    private IAuthRoleDAO authRoleDAO;
 
     @Override
     public IDFBaseDAO<AuthUserRole> getDao() {
@@ -52,7 +59,19 @@ public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUs
 
      @Override
      public Map<String, Object> queryRolesForAuth(String uid, Boolean isNeedDefault) {
-         return null;
+         AuthRoleParam authRoleParam = new AuthRoleParam();
+         authRoleParam.setStatus(DataStatusEnum.ENABLED.getValue());
+         if(!isNeedDefault){
+             authRoleParam.setIsDefault(isNeedDefault);
+         }
+
+         //获取所有的角色（不包括默认角色）
+         List<AuthRole> authRoleList = authRoleDAO.queryList(authRoleParam.toMap(), AuthRoleParam.F_CreateDate, SqlOrderEnum.ASC.getAction());
+         List<String> roleCodes = authUserRoleDAO.querySelectedRoles(uid);
+         Map<String, Object> result = new HashMap<>();
+         result.put("allRole", authRoleList);
+         result.put("selected", roleCodes);
+         return result;
      }
 
      @Override

@@ -3,5 +3,12 @@
 
 <mapper namespace="cn.df.dao.auth.IAuthUserRoleDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：AuthUserRoleDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <select id="querySelectedRoles" resultType="java.lang.String">
+          SELECT DISTINCT  daur.roleCode
+		  FROM df_auth_user_role daur
+		  LEFT JOIN df_auth_role dar
+		  ON (dar.code = daur.roleCode AND  dar.isDefault = 0 AND dar.status = 0)
+		  WHERE daur.userCode = #{userCode}
+    </select>
 </mapper>
