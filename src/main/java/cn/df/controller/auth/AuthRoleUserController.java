@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 /**
- * Created by 郭旭辉 on 2017/2/22.
+ * Created by katybaby on 2017/2/22.
  * 用户角色授权控制表
  */
 @Controller

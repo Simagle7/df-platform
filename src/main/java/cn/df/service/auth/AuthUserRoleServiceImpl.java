@@ -61,9 +61,10 @@ public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUs
      public Map<String, Object> queryRolesForAuth(String uid, Boolean isNeedDefault) {
          AuthRoleParam authRoleParam = new AuthRoleParam();
          authRoleParam.setStatus(DataStatusEnum.ENABLED.getValue());
-         if(!isNeedDefault){
-             authRoleParam.setIsDefault(isNeedDefault);
-         }
+         authRoleParam.setIsDefault(null);
+//         if(!isNeedDefault){
+//             authRoleParam.setIsDefault(isNeedDefault);
+//         }
 
          //获取所有的角色（不包括默认角色）
          List<AuthRole> authRoleList = authRoleDAO.queryList(authRoleParam.toMap(), AuthRoleParam.F_CreateDate, SqlOrderEnum.ASC.getAction());
@@ -92,7 +93,6 @@ public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUs
              authRoleUsers.add(authRoleUser);
          }
          if(authUserRoleDAO.insertBatch(authRoleUsers) > 0){
-             //todo 在这里刷新改用户权限模型,调用shiro权限刷新
              return RETURNCODE.ADD_COMPLETE.getMessage();
          }
          throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());

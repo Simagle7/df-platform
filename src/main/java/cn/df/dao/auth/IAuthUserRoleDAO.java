@@ -45,7 +45,7 @@ public interface IAuthUserRoleDAO extends IDFBaseDAO<AuthUserRole> {
      * @param authRoleUsers     关系集合
      * @return 返回，非零：成功插入条数，0：失败
      */
-    int insertBatch(List<AuthUserRole> authRoleUsers);
+    int insertBatch(@Param("list") List<AuthUserRole> authRoleUsers);
 
     /**
      * 根据用户id查询已选角色

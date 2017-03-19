@@ -130,12 +130,18 @@ public class AuthModuleController {
      * @return 返回，操作码
      */
     @ResponseBody
-    @RequestMapping(value = "deleteByIds")
+    @RequestMapping(value = "/deleteByIds")
 //    @RequiresPermissions("module:delete")
     public String deleteByIds(@RequestParam(required = true) Long[] ids){
         for (Long id: ids){
             authModuleService.deleteOne(id);
         }
         return RETURNCODE.DELETE_COMPLETE.getMessage();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getModules")
+    public List<AuthModule> getModules(String uid, String roleCode){
+        return  authModuleService.getModules(uid, roleCode);
     }
 }
