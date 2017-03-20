@@ -13,11 +13,11 @@
     </select>
 
     <!--根据用户代码查询用户角色列表-->
-    <select id="queryRoles4User" resultType="java.util.List">
-        SELECT dur.* FROM df_auth_role dur
-        LEFT JOIN df_auth_user_role daur
-        ON dur.dur.`code` = daur.rolecode
-        WHERE daur.usercode = #{usercode}
+    <select id="queryRoles4User" resultType="cn.df.domain.auth.AuthRole">
+       SELECT dar.* FROM df_auth_role dar
+       LEFT JOIN df_auth_user_role daur
+       ON dar.`code` = daur.rolecode
+       WHERE daur.usercode = #{usercode}
     </select>
 
     <!--分页查询角色-->
