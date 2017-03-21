@@ -25,6 +25,9 @@ import cn.df.dao.IDFBaseDAO;
 import cn.df.param.auth.AuthOperationParam;
 import cn.df.service.IDFBaseService;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 《权限操作》 业务逻辑服务接口
  *
@@ -66,4 +69,11 @@ public interface IAuthOperationService<D extends IDFBaseDAO<T>, T extends BaseDo
      * @return  返回，操作码
      */
     String disableOrEnable(long id, AccountDto currentUser);
+
+    /**
+     * 获取用户当前身份的操作列表
+     * @param uid  用户code
+     * @return 返回，获取操作列表
+     */
+    Map<String,List<String>> getOperation(String uid, String roleCode);
 }
