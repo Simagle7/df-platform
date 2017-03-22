@@ -1,5 +1,7 @@
 package cn.df.controller.auth;
 
+import cn.df.common.shiro.DfRealm;
+import cn.df.common.utils.base.RETURNCODE;
 import cn.df.service.auth.IAuthAclService;
 import cn.df.service.auth.IAuthOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class AuthAclController {
     private IAuthAclService authAclService;
     @Autowired
     private IAuthOperationService authOperationService;
+    @Autowired
+    private DfRealm dfRealm;
 
 
     /**
@@ -53,5 +57,17 @@ public class AuthAclController {
             }
         }
         return  result;
+    }
+
+    /**
+     * 更新用户权限缓存
+     * @return 返回，操作码
+     */
+    @ResponseBody
+    @RequestMapping(value = "/refreshCache")
+//    @RequiresPermissions("userRole:refreshCache")
+    public String refreshCache(){
+        dfRealm.clearCahced();
+        return RETURNCODE.SUCCESS_COMPLETE.getMessage();
     }
 }

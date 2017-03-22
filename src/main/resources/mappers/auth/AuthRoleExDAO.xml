@@ -8,7 +8,7 @@
     <select id="hasSuper" resultType="cn.df.domain.auth.AuthRole">
         SELECT * FROM df_auth_role dur
         LEFT JOIN df_auth_user_role daur
-        ON dur.dur.`code` = daur.rolecode
+        ON dur.`code` = daur.rolecode
         WHERE daur.usercode = #{usercode} AND dur.isSuper = 1
     </select>
 

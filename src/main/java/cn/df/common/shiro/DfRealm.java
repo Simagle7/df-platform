@@ -75,7 +75,7 @@ public class DfRealm extends AuthorizingRealm {
         //查到权限数据，返回，授权信息
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //将查询到的授权信息填充到SimpleAuthorizationInfo中
-//        simpleAuthorizationInfo.addStringPermissions(permission);
+        simpleAuthorizationInfo.addStringPermissions(permission);
         return simpleAuthorizationInfo;
     }
 

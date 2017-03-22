@@ -23,7 +23,7 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
-                <!--/cm/admin/user/logout = logout-->
+                /df/admin/user/logout = logout
                 <!-- user表示身份认证通过或通过记住我认证通过的可以访问 -->
                 /** = authc
             </value>
