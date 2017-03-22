@@ -18,17 +18,15 @@
 
 package cn.df.service.specimen;
 
-import cn.df.common.domain.BaseDomain;
+import cn.df.common.domain.BizData4Page;
+import cn.df.common.dto.user.AccountDto;
 import cn.df.dao.IDFBaseDAO;
 import cn.df.dao.specimen.IPatientDAO;
 import cn.df.domain.specimen.Patient;
-import cn.df.service.specimen.IPatientService;
+import cn.df.param.specimen.PatientParam;
 import cn.df.service.AbstractDFService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
  /**
  * 《病人》 业务逻辑服务类
@@ -45,4 +43,19 @@ public class PatientServiceImpl extends AbstractDFService<IDFBaseDAO<Patient>, P
         return patientDAO;
     }
 
-}
+
+     @Override
+     public BizData4Page queryPage(PatientParam param, int pageNo, int pageSize) {
+         return null;
+     }
+
+     @Override
+     public String add(PatientParam param, AccountDto currentUser) {
+         return null;
+     }
+
+     @Override
+     public String update(PatientParam param, AccountDto currentUser) {
+         return null;
+     }
+ }
