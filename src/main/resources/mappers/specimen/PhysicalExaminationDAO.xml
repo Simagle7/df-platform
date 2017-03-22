@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.df.dao.specimen.IPhysicalExaminationDAO">
+
+    <sql id="Base_Column_List">
+        id,
+        patientCode,
+        MSCB,
+        MSJB,
+        MSAH,
+        MSWH,
+        MH,
+        MC,
+        YZSA,
+        YJFZ,
+        CYAH,
+        CJSD,
+        ENMA,
+        SFBYT,
+        XZSZ,
+        SDDW,
+        XTXS,
+        FLY,
+        XZKD,
+        XZZY
+    </sql>
+    <insert id="insert" parameterType="cn.df.domain.specimen.PhysicalExamination">
+        INSERT INTO df_specimen_physical_examination (
+		    patientCode
+		    ,MSCB
+		    ,MSJB
+		    ,MSAH
+		    ,MSWH
+		    ,MH
+		    ,MC
+		    ,YZSA
+		    ,YJFZ
+		    ,CYAH
+		    ,CJSD
+		    ,ENMA
+		    ,SFBYT
+		    ,XZSZ
+		    ,SDDW
+		    ,XTXS
+		    ,FLY
+		    ,XZKD
+		    ,XZZY
+        ) VALUES (
+		    	#{patientCode}
+		    	,#{mSCB}
+		    	,#{mSJB}
+		    	,#{mSAH}
+		    	,#{mSWH}
+		    	,#{mH}
+		    	,#{mC}
+		    	,#{yZSA}
+		    	,#{yJFZ}
+		    	,#{cYAH}
+		    	,#{cJSD}
+		    	,#{eNMA}
+		    	,#{sFBYT}
+		    	,#{xZSZ}
+		    	,#{sDDW}
+		    	,#{xTXS}
+		    	,#{fLY}
+		    	,#{xZKD}
+		    	,#{xZZY}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO df_specimen_physical_examination (
+		    patientCode
+		    ,MSCB
+		    ,MSJB
+		    ,MSAH
+		    ,MSWH
+		    ,MH
+		    ,MC
+		    ,YZSA
+		    ,YJFZ
+		    ,CYAH
+		    ,CJSD
+		    ,ENMA
+		    ,SFBYT
+		    ,XZSZ
+		    ,SDDW
+		    ,XTXS
+		    ,FLY
+		    ,XZKD
+		    ,XZZY
+        ) VALUES (
+		    	#{map.patientCode}
+		    	,#{map.mSCB}
+		    	,#{map.mSJB}
+		    	,#{map.mSAH}
+		    	,#{map.mSWH}
+		    	,#{map.mH}
+		    	,#{map.mC}
+		    	,#{map.yZSA}
+		    	,#{map.yJFZ}
+		    	,#{map.cYAH}
+		    	,#{map.cJSD}
+		    	,#{map.eNMA}
+		    	,#{map.sFBYT}
+		    	,#{map.xZSZ}
+		    	,#{map.sDDW}
+		    	,#{map.xTXS}
+		    	,#{map.fLY}
+		    	,#{map.xZKD}
+		    	,#{map.xZZY}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.df.domain.specimen.PhysicalExamination">
+        UPDATE df_specimen_physical_examination
+        <trim prefix="SET" suffixOverrides=",">
+		    patientCode=#{patientCode},
+		    MSCB=#{mSCB},
+		    MSJB=#{mSJB},
+		    MSAH=#{mSAH},
+		    MSWH=#{mSWH},
+		    MH=#{mH},
+		    MC=#{mC},
+		    YZSA=#{yZSA},
+		    YJFZ=#{yJFZ},
+		    CYAH=#{cYAH},
+		    CJSD=#{cJSD},
+		    ENMA=#{eNMA},
+		    SFBYT=#{sFBYT},
+		    XZSZ=#{xZSZ},
+		    SDDW=#{sDDW},
+		    XTXS=#{xTXS},
+		    FLY=#{fLY},
+		    XZKD=#{xZKD},
+		    XZZY=#{xZZY},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE df_specimen_physical_examination
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.patientCode!=null">
+                patientCode = #{map.patientCode},
+            </if>
+            <if test="map.mSCB!=null">
+                MSCB = #{map.mSCB},
+            </if>
+            <if test="map.mSJB!=null">
+                MSJB = #{map.mSJB},
+            </if>
+            <if test="map.mSAH!=null">
+                MSAH = #{map.mSAH},
+            </if>
+            <if test="map.mSWH!=null">
+                MSWH = #{map.mSWH},
+            </if>
+            <if test="map.mH!=null">
+                MH = #{map.mH},
+            </if>
+            <if test="map.mC!=null">
+                MC = #{map.mC},
+            </if>
+            <if test="map.yZSA!=null">
+                YZSA = #{map.yZSA},
+            </if>
+            <if test="map.yJFZ!=null">
+                YJFZ = #{map.yJFZ},
+            </if>
+            <if test="map.cYAH!=null">
+                CYAH = #{map.cYAH},
+            </if>
+            <if test="map.cJSD!=null">
+                CJSD = #{map.cJSD},
+            </if>
+            <if test="map.eNMA!=null">
+                ENMA = #{map.eNMA},
+            </if>
+            <if test="map.sFBYT!=null">
+                SFBYT = #{map.sFBYT},
+            </if>
+            <if test="map.xZSZ!=null">
+                XZSZ = #{map.xZSZ},
+            </if>
+            <if test="map.sDDW!=null">
+                SDDW = #{map.sDDW},
+            </if>
+            <if test="map.xTXS!=null">
+                XTXS = #{map.xTXS},
+            </if>
+            <if test="map.fLY!=null">
+                FLY = #{map.fLY},
+            </if>
+            <if test="map.xZKD!=null">
+                XZKD = #{map.xZKD},
+            </if>
+            <if test="map.xZZY!=null">
+                XZZY = #{map.xZZY},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE df_specimen_physical_examination
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.patientCode!=null">
+                patientCode = #{update.patientCode},
+            </if>
+            <if test="update.mSCB!=null">
+                MSCB = #{update.mSCB},
+            </if>
+            <if test="update.mSJB!=null">
+                MSJB = #{update.mSJB},
+            </if>
+            <if test="update.mSAH!=null">
+                MSAH = #{update.mSAH},
+            </if>
+            <if test="update.mSWH!=null">
+                MSWH = #{update.mSWH},
+            </if>
+            <if test="update.mH!=null">
+                MH = #{update.mH},
+            </if>
+            <if test="update.mC!=null">
+                MC = #{update.mC},
+            </if>
+            <if test="update.yZSA!=null">
+                YZSA = #{update.yZSA},
+            </if>
+            <if test="update.yJFZ!=null">
+                YJFZ = #{update.yJFZ},
+            </if>
+            <if test="update.cYAH!=null">
+                CYAH = #{update.cYAH},
+            </if>
+            <if test="update.cJSD!=null">
+                CJSD = #{update.cJSD},
+            </if>
+            <if test="update.eNMA!=null">
+                ENMA = #{update.eNMA},
+            </if>
+            <if test="update.sFBYT!=null">
+                SFBYT = #{update.sFBYT},
+            </if>
+            <if test="update.xZSZ!=null">
+                XZSZ = #{update.xZSZ},
+            </if>
+            <if test="update.sDDW!=null">
+                SDDW = #{update.sDDW},
+            </if>
+            <if test="update.xTXS!=null">
+                XTXS = #{update.xTXS},
+            </if>
+            <if test="update.fLY!=null">
+                FLY = #{update.fLY},
+            </if>
+            <if test="update.xZKD!=null">
+                XZKD = #{update.xZKD},
+            </if>
+            <if test="update.xZZY!=null">
+                XZZY = #{update.xZZY},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.mSCB!=null">
+                AND MSCB = #{condition.mSCB}
+            </if>
+            <if test="condition.mSJB!=null">
+                AND MSJB = #{condition.mSJB}
+            </if>
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
+            </if>
+            <if test="condition.mSWH!=null">
+                AND MSWH = #{condition.mSWH}
+            </if>
+            <if test="condition.mH!=null">
+                AND MH = #{condition.mH}
+            </if>
+            <if test="condition.mC!=null">
+                AND MC = #{condition.mC}
+            </if>
+            <if test="condition.yZSA!=null">
+                AND YZSA = #{condition.yZSA}
+            </if>
+            <if test="condition.yJFZ!=null">
+                AND YJFZ = #{condition.yJFZ}
+            </if>
+            <if test="condition.cYAH!=null">
+                AND CYAH = #{condition.cYAH}
+            </if>
+            <if test="condition.cJSD!=null">
+                AND CJSD = #{condition.cJSD}
+            </if>
+            <if test="condition.eNMA!=null">
+                AND ENMA = #{condition.eNMA}
+            </if>
+            <if test="condition.sFBYT!=null">
+                AND SFBYT = #{condition.sFBYT}
+            </if>
+            <if test="condition.xZSZ!=null">
+                AND XZSZ = #{condition.xZSZ}
+            </if>
+            <if test="condition.sDDW!=null">
+                AND SDDW = #{condition.sDDW}
+            </if>
+            <if test="condition.xTXS!=null">
+                AND XTXS = #{condition.xTXS}
+            </if>
+            <if test="condition.fLY!=null">
+                AND FLY = #{condition.fLY}
+            </if>
+            <if test="condition.xZKD!=null">
+                AND XZKD = #{condition.xZKD}
+            </if>
+            <if test="condition.xZZY!=null">
+                AND XZZY = #{condition.xZZY}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="cn.df.domain.specimen.PhysicalExamination">
+        UPDATE df_specimen_physical_examination
+        <trim prefix="SET" suffixOverrides=",">
+            patientCode = #{patientCode},
+            MSCB = #{mSCB},
+            MSJB = #{mSJB},
+            MSAH = #{mSAH},
+            MSWH = #{mSWH},
+            MH = #{mH},
+            MC = #{mC},
+            YZSA = #{yZSA},
+            YJFZ = #{yJFZ},
+            CYAH = #{cYAH},
+            CJSD = #{cJSD},
+            ENMA = #{eNMA},
+            SFBYT = #{sFBYT},
+            XZSZ = #{xZSZ},
+            SDDW = #{sDDW},
+            XTXS = #{xTXS},
+            FLY = #{fLY},
+            XZKD = #{xZKD},
+            XZZY = #{xZZY},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM df_specimen_physical_examination
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode = #{patientCode}
+            </if>
+            <if test="mSCB!=null">
+                AND MSCB = #{mSCB}
+            </if>
+            <if test="mSJB!=null">
+                AND MSJB = #{mSJB}
+            </if>
+            <if test="mSAH!=null">
+                AND MSAH = #{mSAH}
+            </if>
+            <if test="mSWH!=null">
+                AND MSWH = #{mSWH}
+            </if>
+            <if test="mH!=null">
+                AND MH = #{mH}
+            </if>
+            <if test="mC!=null">
+                AND MC = #{mC}
+            </if>
+            <if test="yZSA!=null">
+                AND YZSA = #{yZSA}
+            </if>
+            <if test="yJFZ!=null">
+                AND YJFZ = #{yJFZ}
+            </if>
+            <if test="cYAH!=null">
+                AND CYAH = #{cYAH}
+            </if>
+            <if test="cJSD!=null">
+                AND CJSD = #{cJSD}
+            </if>
+            <if test="eNMA!=null">
+                AND ENMA = #{eNMA}
+            </if>
+            <if test="sFBYT!=null">
+                AND SFBYT = #{sFBYT}
+            </if>
+            <if test="xZSZ!=null">
+                AND XZSZ = #{xZSZ}
+            </if>
+            <if test="sDDW!=null">
+                AND SDDW = #{sDDW}
+            </if>
+            <if test="xTXS!=null">
+                AND XTXS = #{xTXS}
+            </if>
+            <if test="fLY!=null">
+                AND FLY = #{fLY}
+            </if>
+            <if test="xZKD!=null">
+                AND XZKD = #{xZKD}
+            </if>
+            <if test="xZZY!=null">
+                AND XZZY = #{xZZY}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM df_specimen_physical_examination WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.patientCode!=null">
+                ${condition.groupOp}   patientCode  ${condition.patientCode.op}  #{condition.patientCode.data}
+            </if>
+            <if test="condition.mSCB!=null">
+                ${condition.groupOp}   MSCB  ${condition.MSCB.op}  #{condition.MSCB.data}
+            </if>
+            <if test="condition.mSJB!=null">
+                ${condition.groupOp}   MSJB  ${condition.MSJB.op}  #{condition.MSJB.data}
+            </if>
+            <if test="condition.mSAH!=null">
+                ${condition.groupOp}   MSAH  ${condition.MSAH.op}  #{condition.MSAH.data}
+            </if>
+            <if test="condition.mSWH!=null">
+                ${condition.groupOp}   MSWH  ${condition.MSWH.op}  #{condition.MSWH.data}
+            </if>
+            <if test="condition.mH!=null">
+                ${condition.groupOp}   MH  ${condition.MH.op}  #{condition.MH.data}
+            </if>
+            <if test="condition.mC!=null">
+                ${condition.groupOp}   MC  ${condition.MC.op}  #{condition.MC.data}
+            </if>
+            <if test="condition.yZSA!=null">
+                ${condition.groupOp}   YZSA  ${condition.YZSA.op}  #{condition.YZSA.data}
+            </if>
+            <if test="condition.yJFZ!=null">
+                ${condition.groupOp}   YJFZ  ${condition.YJFZ.op}  #{condition.YJFZ.data}
+            </if>
+            <if test="condition.cYAH!=null">
+                ${condition.groupOp}   CYAH  ${condition.CYAH.op}  #{condition.CYAH.data}
+            </if>
+            <if test="condition.cJSD!=null">
+                ${condition.groupOp}   CJSD  ${condition.CJSD.op}  #{condition.CJSD.data}
+            </if>
+            <if test="condition.eNMA!=null">
+                ${condition.groupOp}   ENMA  ${condition.ENMA.op}  #{condition.ENMA.data}
+            </if>
+            <if test="condition.sFBYT!=null">
+                ${condition.groupOp}   SFBYT  ${condition.SFBYT.op}  #{condition.SFBYT.data}
+            </if>
+            <if test="condition.xZSZ!=null">
+                ${condition.groupOp}   XZSZ  ${condition.XZSZ.op}  #{condition.XZSZ.data}
+            </if>
+            <if test="condition.sDDW!=null">
+                ${condition.groupOp}   SDDW  ${condition.SDDW.op}  #{condition.SDDW.data}
+            </if>
+            <if test="condition.xTXS!=null">
+                ${condition.groupOp}   XTXS  ${condition.XTXS.op}  #{condition.XTXS.data}
+            </if>
+            <if test="condition.fLY!=null">
+                ${condition.groupOp}   FLY  ${condition.FLY.op}  #{condition.FLY.data}
+            </if>
+            <if test="condition.xZKD!=null">
+                ${condition.groupOp}   XZKD  ${condition.XZKD.op}  #{condition.XZKD.data}
+            </if>
+            <if test="condition.xZZY!=null">
+                ${condition.groupOp}   XZZY  ${condition.XZZY.op}  #{condition.XZZY.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode like CONCAT('%', #{patientCode} , '%')
+            </if>
+            <if test="mSCB!=null">
+                AND MSCB like CONCAT('%', #{mSCB} , '%')
+            </if>
+            <if test="mSJB!=null">
+                AND MSJB like CONCAT('%', #{mSJB} , '%')
+            </if>
+            <if test="mSAH!=null">
+                AND MSAH like CONCAT('%', #{mSAH} , '%')
+            </if>
+            <if test="mSWH!=null">
+                AND MSWH like CONCAT('%', #{mSWH} , '%')
+            </if>
+            <if test="mH!=null">
+                AND MH like CONCAT('%', #{mH} , '%')
+            </if>
+            <if test="mC!=null">
+                AND MC like CONCAT('%', #{mC} , '%')
+            </if>
+            <if test="yZSA!=null">
+                AND YZSA like CONCAT('%', #{yZSA} , '%')
+            </if>
+            <if test="yJFZ!=null">
+                AND YJFZ like CONCAT('%', #{yJFZ} , '%')
+            </if>
+            <if test="cYAH!=null">
+                AND CYAH like CONCAT('%', #{cYAH} , '%')
+            </if>
+            <if test="cJSD!=null">
+                AND CJSD like CONCAT('%', #{cJSD} , '%')
+            </if>
+            <if test="eNMA!=null">
+                AND ENMA like CONCAT('%', #{eNMA} , '%')
+            </if>
+            <if test="sFBYT!=null">
+                AND SFBYT like CONCAT('%', #{sFBYT} , '%')
+            </if>
+            <if test="xZSZ!=null">
+                AND XZSZ like CONCAT('%', #{xZSZ} , '%')
+            </if>
+            <if test="sDDW!=null">
+                AND SDDW like CONCAT('%', #{sDDW} , '%')
+            </if>
+            <if test="xTXS!=null">
+                AND XTXS like CONCAT('%', #{xTXS} , '%')
+            </if>
+            <if test="fLY!=null">
+                AND FLY like CONCAT('%', #{fLY} , '%')
+            </if>
+            <if test="xZKD!=null">
+                AND XZKD like CONCAT('%', #{xZKD} , '%')
+            </if>
+            <if test="xZZY!=null">
+                AND XZZY like CONCAT('%', #{xZZY} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.mSCB!=null">
+                AND MSCB = #{condition.mSCB}
+            </if>
+            <if test="condition.mSJB!=null">
+                AND MSJB = #{condition.mSJB}
+            </if>
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
+            </if>
+            <if test="condition.mSWH!=null">
+                AND MSWH = #{condition.mSWH}
+            </if>
+            <if test="condition.mH!=null">
+                AND MH = #{condition.mH}
+            </if>
+            <if test="condition.mC!=null">
+                AND MC = #{condition.mC}
+            </if>
+            <if test="condition.yZSA!=null">
+                AND YZSA = #{condition.yZSA}
+            </if>
+            <if test="condition.yJFZ!=null">
+                AND YJFZ = #{condition.yJFZ}
+            </if>
+            <if test="condition.cYAH!=null">
+                AND CYAH = #{condition.cYAH}
+            </if>
+            <if test="condition.cJSD!=null">
+                AND CJSD = #{condition.cJSD}
+            </if>
+            <if test="condition.eNMA!=null">
+                AND ENMA = #{condition.eNMA}
+            </if>
+            <if test="condition.sFBYT!=null">
+                AND SFBYT = #{condition.sFBYT}
+            </if>
+            <if test="condition.xZSZ!=null">
+                AND XZSZ = #{condition.xZSZ}
+            </if>
+            <if test="condition.sDDW!=null">
+                AND SDDW = #{condition.sDDW}
+            </if>
+            <if test="condition.xTXS!=null">
+                AND XTXS = #{condition.xTXS}
+            </if>
+            <if test="condition.fLY!=null">
+                AND FLY = #{condition.fLY}
+            </if>
+            <if test="condition.xZKD!=null">
+                AND XZKD = #{condition.xZKD}
+            </if>
+            <if test="condition.xZZY!=null">
+                AND XZZY = #{condition.xZZY}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.PhysicalExamination">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_physical_examination
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.mSCB!=null">
+                AND MSCB = #{condition.mSCB}
+            </if>
+            <if test="condition.mSJB!=null">
+                AND MSJB = #{condition.mSJB}
+            </if>
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
+            </if>
+            <if test="condition.mSWH!=null">
+                AND MSWH = #{condition.mSWH}
+            </if>
+            <if test="condition.mH!=null">
+                AND MH = #{condition.mH}
+            </if>
+            <if test="condition.mC!=null">
+                AND MC = #{condition.mC}
+            </if>
+            <if test="condition.yZSA!=null">
+                AND YZSA = #{condition.yZSA}
+            </if>
+            <if test="condition.yJFZ!=null">
+                AND YJFZ = #{condition.yJFZ}
+            </if>
+            <if test="condition.cYAH!=null">
+                AND CYAH = #{condition.cYAH}
+            </if>
+            <if test="condition.cJSD!=null">
+                AND CJSD = #{condition.cJSD}
+            </if>
+            <if test="condition.eNMA!=null">
+                AND ENMA = #{condition.eNMA}
+            </if>
+            <if test="condition.sFBYT!=null">
+                AND SFBYT = #{condition.sFBYT}
+            </if>
+            <if test="condition.xZSZ!=null">
+                AND XZSZ = #{condition.xZSZ}
+            </if>
+            <if test="condition.sDDW!=null">
+                AND SDDW = #{condition.sDDW}
+            </if>
+            <if test="condition.xTXS!=null">
+                AND XTXS = #{condition.xTXS}
+            </if>
+            <if test="condition.fLY!=null">
+                AND FLY = #{condition.fLY}
+            </if>
+            <if test="condition.xZKD!=null">
+                AND XZKD = #{condition.xZKD}
+            </if>
+            <if test="condition.xZZY!=null">
+                AND XZZY = #{condition.xZZY}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_specimen_physical_examination
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="patientCode!=null">
+               ${groupOp} patientCode ${patientCode.op}  #{patientCode.data}
+           </if>
+           <if test="mSCB!=null">
+               ${groupOp} MSCB ${MSCB.op}  #{MSCB.data}
+           </if>
+           <if test="mSJB!=null">
+               ${groupOp} MSJB ${MSJB.op}  #{MSJB.data}
+           </if>
+           <if test="mSAH!=null">
+               ${groupOp} MSAH ${MSAH.op}  #{MSAH.data}
+           </if>
+           <if test="mSWH!=null">
+               ${groupOp} MSWH ${MSWH.op}  #{MSWH.data}
+           </if>
+           <if test="mH!=null">
+               ${groupOp} MH ${MH.op}  #{MH.data}
+           </if>
+           <if test="mC!=null">
+               ${groupOp} MC ${MC.op}  #{MC.data}
+           </if>
+           <if test="yZSA!=null">
+               ${groupOp} YZSA ${YZSA.op}  #{YZSA.data}
+           </if>
+           <if test="yJFZ!=null">
+               ${groupOp} YJFZ ${YJFZ.op}  #{YJFZ.data}
+           </if>
+           <if test="cYAH!=null">
+               ${groupOp} CYAH ${CYAH.op}  #{CYAH.data}
+           </if>
+           <if test="cJSD!=null">
+               ${groupOp} CJSD ${CJSD.op}  #{CJSD.data}
+           </if>
+           <if test="eNMA!=null">
+               ${groupOp} ENMA ${ENMA.op}  #{ENMA.data}
+           </if>
+           <if test="sFBYT!=null">
+               ${groupOp} SFBYT ${SFBYT.op}  #{SFBYT.data}
+           </if>
+           <if test="xZSZ!=null">
+               ${groupOp} XZSZ ${XZSZ.op}  #{XZSZ.data}
+           </if>
+           <if test="sDDW!=null">
+               ${groupOp} SDDW ${SDDW.op}  #{SDDW.data}
+           </if>
+           <if test="xTXS!=null">
+               ${groupOp} XTXS ${XTXS.op}  #{XTXS.data}
+           </if>
+           <if test="fLY!=null">
+               ${groupOp} FLY ${FLY.op}  #{FLY.data}
+           </if>
+           <if test="xZKD!=null">
+               ${groupOp} XZKD ${XZKD.op}  #{XZKD.data}
+           </if>
+           <if test="xZZY!=null">
+               ${groupOp} XZZY ${XZZY.op}  #{XZZY.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM df_specimen_physical_examination
+    </select>
+   
+</mapper>

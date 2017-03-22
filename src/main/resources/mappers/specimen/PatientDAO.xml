@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.df.dao.specimen.IPatientDAO">
+
+    <sql id="Base_Column_List">
+        id,
+        gender,
+        age,
+        code,
+        isSicken
+    </sql>
+    <insert id="insert" parameterType="cn.df.domain.specimen.Patient">
+        INSERT INTO df_specimen_patient (
+		    gender
+		    ,age
+		    ,isSicken
+        ) VALUES (
+		    	#{gender}
+		    	,#{age}
+		    	,#{isSicken}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO df_specimen_patient (
+		    gender
+		    ,age
+		    ,isSicken
+        ) VALUES (
+		    	#{map.gender}
+		    	,#{map.age}
+		    	,#{map.isSicken}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.df.domain.specimen.Patient">
+        UPDATE df_specimen_patient
+        <trim prefix="SET" suffixOverrides=",">
+		    gender=#{gender},
+		    age=#{age},
+		    isSicken=#{isSicken},
+        </trim>
+        WHERE
+        id = #{id}
+        code = #{code} AND 
+    </update>
+	
+	<update id="updateMap">
+        UPDATE df_specimen_patient
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.gender!=null">
+                gender = #{map.gender},
+            </if>
+            <if test="map.age!=null">
+                age = #{map.age},
+            </if>
+            <if test="map.isSicken!=null">
+                isSicken = #{map.isSicken},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE df_specimen_patient
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.gender!=null">
+                gender = #{update.gender},
+            </if>
+            <if test="update.age!=null">
+                age = #{update.age},
+            </if>
+            <if test="update.isSicken!=null">
+                isSicken = #{update.isSicken},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.gender!=null">
+                AND gender = #{condition.gender}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.isSicken!=null">
+                AND isSicken = #{condition.isSicken}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="cn.df.domain.specimen.Patient">
+        UPDATE df_specimen_patient
+        <trim prefix="SET" suffixOverrides=",">
+            gender = #{gender},
+            age = #{age},
+            isSicken = #{isSicken},
+        </trim>
+        WHERE
+        id = #{id}
+        code = #{code} AND 
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+            AND code = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM df_specimen_patient
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="gender!=null">
+                AND gender = #{gender}
+            </if>
+            <if test="age!=null">
+                AND age = #{age}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="isSicken!=null">
+                AND isSicken = #{isSicken}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM df_specimen_patient WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+            AND code = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.gender!=null">
+                ${condition.groupOp}   gender  ${condition.gender.op}  #{condition.gender.data}
+            </if>
+            <if test="condition.age!=null">
+                ${condition.groupOp}   age  ${condition.age.op}  #{condition.age.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.isSicken!=null">
+                ${condition.groupOp}   isSicken  ${condition.isSicken.op}  #{condition.isSicken.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="gender!=null">
+                AND gender like CONCAT('%', #{gender} , '%')
+            </if>
+            <if test="age!=null">
+                AND age like CONCAT('%', #{age} , '%')
+            </if>
+            <if test="code!=null">
+                AND code like CONCAT('%', #{code} , '%')
+            </if>
+            <if test="isSicken!=null">
+                AND isSicken like CONCAT('%', #{isSicken} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.gender!=null">
+                AND gender = #{condition.gender}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.isSicken!=null">
+                AND isSicken = #{condition.isSicken}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.Patient">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_patient
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.gender!=null">
+                AND gender = #{condition.gender}
+            </if>
+            <if test="condition.age!=null">
+                AND age = #{condition.age}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.isSicken!=null">
+                AND isSicken = #{condition.isSicken}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_specimen_patient
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="gender!=null">
+               ${groupOp} gender ${gender.op}  #{gender.data}
+           </if>
+           <if test="age!=null">
+               ${groupOp} age ${age.op}  #{age.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+           <if test="isSicken!=null">
+               ${groupOp} isSicken ${isSicken.op}  #{isSicken.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM df_specimen_patient
+    </select>
+   
+</mapper>
