@@ -4,11 +4,10 @@ import cn.df.common.domain.BizData4Page;
 import cn.df.common.exception.BizException;
 import cn.df.common.utils.base.ERRORCODE;
 import cn.df.common.utils.base.RETURNCODE;
-import cn.df.common.utils.user.UserContext;
 import cn.df.domain.specimen.Patient;
 import cn.df.param.specimen.PatientParam;
+import cn.df.param.specimen.PatientParamEx;
 import cn.df.service.specimen.IPatientService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +37,7 @@ public class PatientController {
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage", method = RequestMethod.POST)
-    @RequiresPermissions("user:query")
-    public BizData4Page queryPage(PatientParam param, @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize){
+    public BizData4Page queryPage(PatientParamEx param, @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize){
         return patientService.queryPage(param, pageNo, pageSize);
     }
 
@@ -51,7 +49,7 @@ public class PatientController {
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(PatientParam param){
-        return patientService.add(param, UserContext.getCurrentUser());
+        return patientService.add(param);
     }
 
     /**
@@ -73,7 +71,10 @@ public class PatientController {
     @ResponseBody
     @RequestMapping(value = "/update")
     public String update(PatientParam param){
-        return patientService.update(param, UserContext.getCurrentUser());
+        if(patientService.updateMap(param.toMap()) > 0){
+            return RETURNCODE.UPDATE_COMPLETE.getMessage();
+        }
+        throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
     }
 
 

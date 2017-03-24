@@ -18,12 +18,6 @@
 
 package cn.df.param.specimen;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-import java.util.*;
-
 /**
  * 《病人》 查询参数实体
  * @author Katybaby
@@ -31,7 +25,25 @@ import java.util.*;
  */
 public class PatientParamEx extends PatientParam {
 	private static final long serialVersionUID = 1L;
-	
+
+	private Integer minAge;
+	private Integer maxAge;
 	//针对PatientParam实体在这里增加额外的属性和对应的get和set方法
-	
+
+
+	public Integer getMinAge() {
+		return minAge;
+	}
+
+	public void setMinAge(Integer minAge) {
+		this.minAge = minAge;
+	}
+
+	public Integer getMaxAge() {
+		return maxAge;
+	}
+
+	public void setMaxAge(Integer maxAge) {
+		this.maxAge = maxAge;
+	}
 }

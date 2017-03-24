@@ -3,5 +3,31 @@
 
 <mapper namespace="cn.df.dao.specimen.IPatientDAO">
 	<!-- 在这里存放用户自定义的映射配置（注：PatientDAO.xml里各节点的ID不能在这里重复出现）  -->
-	
+
+    <select id="queryPageEx" resultType="cn.df.domain.specimen.Patient">
+        SELECT * FROM df_specimen_patient
+        <where>
+            <if test="condition.gender != null and condition.gender != -1">
+                  AND gender = #{condition.gender}
+            </if>
+            <if test="condition.minAge != null and condition.minAge != 0">
+                AND age >= #{condition.minAge} and age &lt;= #{condition.maxAge}
+            </if>
+        </where>
+        <if test="offset != null">
+            limit ${offset},${rows}
+        </if>
+    </select>
+
+    <select id="countEx" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_specimen_patient
+        <where>
+            <if test="condition.gender != null and condition.gender != -1">
+                AND gender = #{condition.gender}
+            </if>
+            <if test="condition.minAge != null and condition.minAge != 0">
+                AND age >= #{condition.minAge} and age &lt;= #{condition.maxAge}
+            </if>
+        </where>
+    </select>
 </mapper>

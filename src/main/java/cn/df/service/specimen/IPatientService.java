@@ -23,6 +23,7 @@ import cn.df.common.domain.BizData4Page;
 import cn.df.common.dto.user.AccountDto;
 import cn.df.dao.IDFBaseDAO;
 import cn.df.param.specimen.PatientParam;
+import cn.df.param.specimen.PatientParamEx;
 import cn.df.service.IDFBaseService;
 
 /**
@@ -40,15 +41,14 @@ public interface IPatientService<D extends IDFBaseDAO<T>, T extends BaseDomain> 
      * @param pageSize  页大小
      * @return  返回，分页结果
      */
-    BizData4Page queryPage(PatientParam param, int pageNo, int pageSize);
+    BizData4Page queryPage(PatientParamEx param, int pageNo, int pageSize);
 
     /**
      * 添加一条病人基础信息
      * @param param         添加参数
-     * @param currentUser   当前操作用户
      * @return 返回，操作码
      */
-    String add(PatientParam param, AccountDto currentUser);
+    String add(PatientParam param);
 
     /**
      * 更新一条病人信息
