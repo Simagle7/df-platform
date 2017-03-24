@@ -6,6 +6,7 @@ import cn.df.common.utils.user.UserContext;
 import cn.df.domain.auth.AuthModule;
 import cn.df.param.auth.AuthModuleParam;
 import cn.df.service.auth.IAuthModuleService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,7 +83,7 @@ public class AuthModuleController {
      */
     @ResponseBody
     @RequestMapping("/queryOne")
-//    @RequiresPermissions("module:query")
+    @RequiresPermissions("module:queryOne")
     public AuthModule queryOne(@RequestParam(required = true) long id){
         return (AuthModule) authModuleService.findOne(AuthModuleParam.F_ID, id);
     }
@@ -130,12 +131,18 @@ public class AuthModuleController {
      * @return 返回，操作码
      */
     @ResponseBody
-    @RequestMapping(value = "deleteByIds")
+    @RequestMapping(value = "/deleteByIds")
 //    @RequiresPermissions("module:delete")
     public String deleteByIds(@RequestParam(required = true) Long[] ids){
         for (Long id: ids){
             authModuleService.deleteOne(id);
         }
         return RETURNCODE.DELETE_COMPLETE.getMessage();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getModules")
+    public List<AuthModule> getModules(String uid, String roleCode){
+        return  authModuleService.getModules(uid, roleCode);
     }
 }

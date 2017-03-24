@@ -38,8 +38,7 @@ import cn.df.service.AbstractDFService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 《权限操作》 业务逻辑服务类
@@ -52,6 +51,8 @@ public class AuthOperationServiceImpl extends AbstractDFService<IDFBaseDAO<AuthO
     private IAuthOperationDAO authOperationDAO;
     @Autowired
     private IAuthModuleDAO authModuleDAO;
+    @Autowired
+    private IAuthRoleService authRoleService;
 
     @Override
     public IDFBaseDAO<AuthOperation> getDao() {
@@ -127,5 +128,42 @@ public class AuthOperationServiceImpl extends AbstractDFService<IDFBaseDAO<AuthO
             return RETURNCODE.UPDATE_COMPLETE.getMessage();
         }
         throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
+    }
+
+    @Override
+    public Map<String, List<String>> getOperation(String uid, String roleCode) {
+        List<AuthOperation> authOperations ;
+        if(authRoleService.isSuper(uid)){
+            authOperations = this.findList(AuthOperationParam.F_Status, DataStatusEnum.ENABLED);
+        }else {
+            authOperations = authOperationDAO.queryOperationsByUser(uid, roleCode, null, null);
+        }
+        List<AuthModule> modules = authModuleDAO.queryModulesByUser(uid, roleCode);
+        if(modules.size() > 1){
+            Collections.sort(modules, new Comparator<AuthModule>() {
+                @Override
+                public int compare(AuthModule a1, AuthModule o2) {
+                    if(Objects.equals(a1.getLevel(), o2.getLevel())){
+                        return a1.getPriority().compareTo(o2.getPriority());
+                    }else{
+                        return a1.getLevel().compareTo(o2.getLevel());
+                    }
+                }
+            });
+        }
+        Map<String, List<String>> result = new HashMap<>();
+        for(AuthModule authModule : modules){
+            result.put(authModule.getUrl(), getAuthCodeListByModuleCode(authModule.getCode(), authOperations));
+        }
+        return result;
+    }
+    private List<String> getAuthCodeListByModuleCode(String moduleCode, List<AuthOperation> authOperations){
+        List<String> authCodes = new ArrayList<>();
+        for(AuthOperation authOperation: authOperations){
+            if(moduleCode.equals(authOperation.getModuleCode())){
+                authCodes.add(authOperation.getAuthCode());
+            }
+        }
+        return authCodes;
     }
 }

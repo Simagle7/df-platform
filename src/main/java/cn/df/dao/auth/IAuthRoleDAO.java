@@ -60,5 +60,5 @@ public interface IAuthRoleDAO extends IDFBaseDAO<AuthRole> {
      * @param userCode      用户代码
      * @return  返回，用户实体
      */
-    List queryRoles4User(String userCode);
+    List<AuthRole> queryRoles4User(String userCode);
 }

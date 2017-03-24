@@ -10,6 +10,7 @@ import cn.df.domain.user.User;
 import cn.df.param.user.UserParam;
 import cn.df.param.user.UserParamEx;
 import cn.df.service.user.IUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +65,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value = "/queryPage", method = RequestMethod.POST)
+    @RequiresPermissions("user:query")
     public BizData4Page queryPage(UserParam param, @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "2") Integer pageSize){
         return userService.queryPage(param, pageNo, pageSize);
     }
@@ -75,6 +77,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequiresPermissions("user:add")
     public String add(UserParam param){
         return userService.add(param, UserContext.getCurrentUser());
     }

@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.df.dao.specimen.IColorUltrasoundDAO">
+
+    <sql id="Base_Column_List">
+        id,
+        patientCode,
+        ZDMGB,
+        ZXF,
+        YXF,
+        SJG,
+        ZXS,
+        YXS,
+        ZXSHB,
+        FDM,
+        EF,
+        FS
+    </sql>
+    <insert id="insert" parameterType="cn.df.domain.specimen.ColorUltrasound">
+        INSERT INTO df_specimen_color_ultrasound (
+		    patientCode
+		    ,ZDMGB
+		    ,ZXF
+		    ,YXF
+		    ,SJG
+		    ,ZXS
+		    ,YXS
+		    ,ZXSHB
+		    ,FDM
+		    ,EF
+		    ,FS
+        ) VALUES (
+		    	#{patientCode}
+		    	,#{zDMGB}
+		    	,#{zXF}
+		    	,#{yXF}
+		    	,#{sJG}
+		    	,#{zXS}
+		    	,#{yXS}
+		    	,#{zXSHB}
+		    	,#{fDM}
+		    	,#{eF}
+		    	,#{fS}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO df_specimen_color_ultrasound (
+		    patientCode
+		    ,ZDMGB
+		    ,ZXF
+		    ,YXF
+		    ,SJG
+		    ,ZXS
+		    ,YXS
+		    ,ZXSHB
+		    ,FDM
+		    ,EF
+		    ,FS
+        ) VALUES (
+		    	#{map.patientCode}
+		    	,#{map.zDMGB}
+		    	,#{map.zXF}
+		    	,#{map.yXF}
+		    	,#{map.sJG}
+		    	,#{map.zXS}
+		    	,#{map.yXS}
+		    	,#{map.zXSHB}
+		    	,#{map.fDM}
+		    	,#{map.eF}
+		    	,#{map.fS}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.df.domain.specimen.ColorUltrasound">
+        UPDATE df_specimen_color_ultrasound
+        <trim prefix="SET" suffixOverrides=",">
+		    patientCode=#{patientCode},
+		    ZDMGB=#{zDMGB},
+		    ZXF=#{zXF},
+		    YXF=#{yXF},
+		    SJG=#{sJG},
+		    ZXS=#{zXS},
+		    YXS=#{yXS},
+		    ZXSHB=#{zXSHB},
+		    FDM=#{fDM},
+		    EF=#{eF},
+		    FS=#{fS},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE df_specimen_color_ultrasound
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.patientCode!=null">
+                patientCode = #{map.patientCode},
+            </if>
+            <if test="map.zDMGB!=null">
+                ZDMGB = #{map.zDMGB},
+            </if>
+            <if test="map.zXF!=null">
+                ZXF = #{map.zXF},
+            </if>
+            <if test="map.yXF!=null">
+                YXF = #{map.yXF},
+            </if>
+            <if test="map.sJG!=null">
+                SJG = #{map.sJG},
+            </if>
+            <if test="map.zXS!=null">
+                ZXS = #{map.zXS},
+            </if>
+            <if test="map.yXS!=null">
+                YXS = #{map.yXS},
+            </if>
+            <if test="map.zXSHB!=null">
+                ZXSHB = #{map.zXSHB},
+            </if>
+            <if test="map.fDM!=null">
+                FDM = #{map.fDM},
+            </if>
+            <if test="map.eF!=null">
+                EF = #{map.eF},
+            </if>
+            <if test="map.fS!=null">
+                FS = #{map.fS},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE df_specimen_color_ultrasound
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.patientCode!=null">
+                patientCode = #{update.patientCode},
+            </if>
+            <if test="update.zDMGB!=null">
+                ZDMGB = #{update.zDMGB},
+            </if>
+            <if test="update.zXF!=null">
+                ZXF = #{update.zXF},
+            </if>
+            <if test="update.yXF!=null">
+                YXF = #{update.yXF},
+            </if>
+            <if test="update.sJG!=null">
+                SJG = #{update.sJG},
+            </if>
+            <if test="update.zXS!=null">
+                ZXS = #{update.zXS},
+            </if>
+            <if test="update.yXS!=null">
+                YXS = #{update.yXS},
+            </if>
+            <if test="update.zXSHB!=null">
+                ZXSHB = #{update.zXSHB},
+            </if>
+            <if test="update.fDM!=null">
+                FDM = #{update.fDM},
+            </if>
+            <if test="update.eF!=null">
+                EF = #{update.eF},
+            </if>
+            <if test="update.fS!=null">
+                FS = #{update.fS},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.zDMGB!=null">
+                AND ZDMGB = #{condition.zDMGB}
+            </if>
+            <if test="condition.zXF!=null">
+                AND ZXF = #{condition.zXF}
+            </if>
+            <if test="condition.yXF!=null">
+                AND YXF = #{condition.yXF}
+            </if>
+            <if test="condition.sJG!=null">
+                AND SJG = #{condition.sJG}
+            </if>
+            <if test="condition.zXS!=null">
+                AND ZXS = #{condition.zXS}
+            </if>
+            <if test="condition.yXS!=null">
+                AND YXS = #{condition.yXS}
+            </if>
+            <if test="condition.zXSHB!=null">
+                AND ZXSHB = #{condition.zXSHB}
+            </if>
+            <if test="condition.fDM!=null">
+                AND FDM = #{condition.fDM}
+            </if>
+            <if test="condition.eF!=null">
+                AND EF = #{condition.eF}
+            </if>
+            <if test="condition.fS!=null">
+                AND FS = #{condition.fS}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="cn.df.domain.specimen.ColorUltrasound">
+        UPDATE df_specimen_color_ultrasound
+        <trim prefix="SET" suffixOverrides=",">
+            patientCode = #{patientCode},
+            ZDMGB = #{zDMGB},
+            ZXF = #{zXF},
+            YXF = #{yXF},
+            SJG = #{sJG},
+            ZXS = #{zXS},
+            YXS = #{yXS},
+            ZXSHB = #{zXSHB},
+            FDM = #{fDM},
+            EF = #{eF},
+            FS = #{fS},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM df_specimen_color_ultrasound
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode = #{patientCode}
+            </if>
+            <if test="zDMGB!=null">
+                AND ZDMGB = #{zDMGB}
+            </if>
+            <if test="zXF!=null">
+                AND ZXF = #{zXF}
+            </if>
+            <if test="yXF!=null">
+                AND YXF = #{yXF}
+            </if>
+            <if test="sJG!=null">
+                AND SJG = #{sJG}
+            </if>
+            <if test="zXS!=null">
+                AND ZXS = #{zXS}
+            </if>
+            <if test="yXS!=null">
+                AND YXS = #{yXS}
+            </if>
+            <if test="zXSHB!=null">
+                AND ZXSHB = #{zXSHB}
+            </if>
+            <if test="fDM!=null">
+                AND FDM = #{fDM}
+            </if>
+            <if test="eF!=null">
+                AND EF = #{eF}
+            </if>
+            <if test="fS!=null">
+                AND FS = #{fS}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM df_specimen_color_ultrasound WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.patientCode!=null">
+                ${condition.groupOp}   patientCode  ${condition.patientCode.op}  #{condition.patientCode.data}
+            </if>
+            <if test="condition.zDMGB!=null">
+                ${condition.groupOp}   ZDMGB  ${condition.ZDMGB.op}  #{condition.ZDMGB.data}
+            </if>
+            <if test="condition.zXF!=null">
+                ${condition.groupOp}   ZXF  ${condition.ZXF.op}  #{condition.ZXF.data}
+            </if>
+            <if test="condition.yXF!=null">
+                ${condition.groupOp}   YXF  ${condition.YXF.op}  #{condition.YXF.data}
+            </if>
+            <if test="condition.sJG!=null">
+                ${condition.groupOp}   SJG  ${condition.SJG.op}  #{condition.SJG.data}
+            </if>
+            <if test="condition.zXS!=null">
+                ${condition.groupOp}   ZXS  ${condition.ZXS.op}  #{condition.ZXS.data}
+            </if>
+            <if test="condition.yXS!=null">
+                ${condition.groupOp}   YXS  ${condition.YXS.op}  #{condition.YXS.data}
+            </if>
+            <if test="condition.zXSHB!=null">
+                ${condition.groupOp}   ZXSHB  ${condition.ZXSHB.op}  #{condition.ZXSHB.data}
+            </if>
+            <if test="condition.fDM!=null">
+                ${condition.groupOp}   FDM  ${condition.FDM.op}  #{condition.FDM.data}
+            </if>
+            <if test="condition.eF!=null">
+                ${condition.groupOp}   EF  ${condition.EF.op}  #{condition.EF.data}
+            </if>
+            <if test="condition.fS!=null">
+                ${condition.groupOp}   FS  ${condition.FS.op}  #{condition.FS.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode like CONCAT('%', #{patientCode} , '%')
+            </if>
+            <if test="zDMGB!=null">
+                AND ZDMGB like CONCAT('%', #{zDMGB} , '%')
+            </if>
+            <if test="zXF!=null">
+                AND ZXF like CONCAT('%', #{zXF} , '%')
+            </if>
+            <if test="yXF!=null">
+                AND YXF like CONCAT('%', #{yXF} , '%')
+            </if>
+            <if test="sJG!=null">
+                AND SJG like CONCAT('%', #{sJG} , '%')
+            </if>
+            <if test="zXS!=null">
+                AND ZXS like CONCAT('%', #{zXS} , '%')
+            </if>
+            <if test="yXS!=null">
+                AND YXS like CONCAT('%', #{yXS} , '%')
+            </if>
+            <if test="zXSHB!=null">
+                AND ZXSHB like CONCAT('%', #{zXSHB} , '%')
+            </if>
+            <if test="fDM!=null">
+                AND FDM like CONCAT('%', #{fDM} , '%')
+            </if>
+            <if test="eF!=null">
+                AND EF like CONCAT('%', #{eF} , '%')
+            </if>
+            <if test="fS!=null">
+                AND FS like CONCAT('%', #{fS} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.zDMGB!=null">
+                AND ZDMGB = #{condition.zDMGB}
+            </if>
+            <if test="condition.zXF!=null">
+                AND ZXF = #{condition.zXF}
+            </if>
+            <if test="condition.yXF!=null">
+                AND YXF = #{condition.yXF}
+            </if>
+            <if test="condition.sJG!=null">
+                AND SJG = #{condition.sJG}
+            </if>
+            <if test="condition.zXS!=null">
+                AND ZXS = #{condition.zXS}
+            </if>
+            <if test="condition.yXS!=null">
+                AND YXS = #{condition.yXS}
+            </if>
+            <if test="condition.zXSHB!=null">
+                AND ZXSHB = #{condition.zXSHB}
+            </if>
+            <if test="condition.fDM!=null">
+                AND FDM = #{condition.fDM}
+            </if>
+            <if test="condition.eF!=null">
+                AND EF = #{condition.eF}
+            </if>
+            <if test="condition.fS!=null">
+                AND FS = #{condition.fS}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.ColorUltrasound">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_color_ultrasound
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.zDMGB!=null">
+                AND ZDMGB = #{condition.zDMGB}
+            </if>
+            <if test="condition.zXF!=null">
+                AND ZXF = #{condition.zXF}
+            </if>
+            <if test="condition.yXF!=null">
+                AND YXF = #{condition.yXF}
+            </if>
+            <if test="condition.sJG!=null">
+                AND SJG = #{condition.sJG}
+            </if>
+            <if test="condition.zXS!=null">
+                AND ZXS = #{condition.zXS}
+            </if>
+            <if test="condition.yXS!=null">
+                AND YXS = #{condition.yXS}
+            </if>
+            <if test="condition.zXSHB!=null">
+                AND ZXSHB = #{condition.zXSHB}
+            </if>
+            <if test="condition.fDM!=null">
+                AND FDM = #{condition.fDM}
+            </if>
+            <if test="condition.eF!=null">
+                AND EF = #{condition.eF}
+            </if>
+            <if test="condition.fS!=null">
+                AND FS = #{condition.fS}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_specimen_color_ultrasound
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="patientCode!=null">
+               ${groupOp} patientCode ${patientCode.op}  #{patientCode.data}
+           </if>
+           <if test="zDMGB!=null">
+               ${groupOp} ZDMGB ${ZDMGB.op}  #{ZDMGB.data}
+           </if>
+           <if test="zXF!=null">
+               ${groupOp} ZXF ${ZXF.op}  #{ZXF.data}
+           </if>
+           <if test="yXF!=null">
+               ${groupOp} YXF ${YXF.op}  #{YXF.data}
+           </if>
+           <if test="sJG!=null">
+               ${groupOp} SJG ${SJG.op}  #{SJG.data}
+           </if>
+           <if test="zXS!=null">
+               ${groupOp} ZXS ${ZXS.op}  #{ZXS.data}
+           </if>
+           <if test="yXS!=null">
+               ${groupOp} YXS ${YXS.op}  #{YXS.data}
+           </if>
+           <if test="zXSHB!=null">
+               ${groupOp} ZXSHB ${ZXSHB.op}  #{ZXSHB.data}
+           </if>
+           <if test="fDM!=null">
+               ${groupOp} FDM ${FDM.op}  #{FDM.data}
+           </if>
+           <if test="eF!=null">
+               ${groupOp} EF ${EF.op}  #{EF.data}
+           </if>
+           <if test="fS!=null">
+               ${groupOp} FS ${FS.op}  #{FS.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM df_specimen_color_ultrasound
+    </select>
+   
+</mapper>

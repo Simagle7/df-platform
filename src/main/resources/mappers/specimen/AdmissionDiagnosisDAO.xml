@@ -1,0 +1,2012 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.df.dao.specimen.IAdmissionDiagnosisDAO">
+
+    <sql id="Base_Column_List">
+        id,
+        patientCode,
+        XT,
+        XM,
+        XJ,
+        QD,
+        QC,
+        KS,
+        WHZL,
+        PJFL,
+        ZH,
+        DH,
+        WXFR,
+        LMGS,
+        TY,
+        JW,
+        TH,
+        SM,
+        JZYN,
+        LZ,
+        TX,
+        YY,
+        SYBZ,
+        FZ,
+        AP,
+        AQ,
+        EXOT,
+        BT,
+        BM,
+        YQSR,
+        YNPD,
+        ZTMM,
+        ZTPT,
+        PXYX,
+        PFCC,
+        XTFP,
+        BAIT,
+        HT,
+        TZDX,
+        PMT,
+        YBYW,
+        KBDY,
+        KD,
+        KK,
+        KT,
+        KX,
+        KNN,
+        WGXW,
+        PBWL,
+        XBDH,
+        XBQC,
+        YLBJ,
+        WFYL,
+        TZCZ
+    </sql>
+    <insert id="insert" parameterType="cn.df.domain.specimen.AdmissionDiagnosis">
+        INSERT INTO df_specimen_admission_diagnosis (
+		    patientCode
+		    ,XT
+		    ,XM
+		    ,XJ
+		    ,QD
+		    ,QC
+		    ,KS
+		    ,WHZL
+		    ,PJFL
+		    ,ZH
+		    ,DH
+		    ,WXFR
+		    ,LMGS
+		    ,TY
+		    ,JW
+		    ,TH
+		    ,SM
+		    ,JZYN
+		    ,LZ
+		    ,TX
+		    ,YY
+		    ,SYBZ
+		    ,FZ
+		    ,AP
+		    ,AQ
+		    ,EXOT
+		    ,BT
+		    ,BM
+		    ,YQSR
+		    ,YNPD
+		    ,ZTMM
+		    ,ZTPT
+		    ,PXYX
+		    ,PFCC
+		    ,XTFP
+		    ,BAIT
+		    ,HT
+		    ,TZDX
+		    ,PMT
+		    ,YBYW
+		    ,KBDY
+		    ,KD
+		    ,KK
+		    ,KT
+		    ,KX
+		    ,KNN
+		    ,WGXW
+		    ,PBWL
+		    ,XBDH
+		    ,XBQC
+		    ,YLBJ
+		    ,WFYL
+		    ,TZCZ
+        ) VALUES (
+		    	#{patientCode}
+		    	,#{xT}
+		    	,#{xM}
+		    	,#{xJ}
+		    	,#{qD}
+		    	,#{qC}
+		    	,#{kS}
+		    	,#{wHZL}
+		    	,#{pJFL}
+		    	,#{zH}
+		    	,#{dH}
+		    	,#{wXFR}
+		    	,#{lMGS}
+		    	,#{tY}
+		    	,#{jW}
+		    	,#{tH}
+		    	,#{sM}
+		    	,#{jZYN}
+		    	,#{lZ}
+		    	,#{tX}
+		    	,#{yY}
+		    	,#{sYBZ}
+		    	,#{fZ}
+		    	,#{aP}
+		    	,#{aQ}
+		    	,#{eXOT}
+		    	,#{bT}
+		    	,#{bM}
+		    	,#{yQSR}
+		    	,#{yNPD}
+		    	,#{zTMM}
+		    	,#{zTPT}
+		    	,#{pXYX}
+		    	,#{pFCC}
+		    	,#{xTFP}
+		    	,#{bAIT}
+		    	,#{hT}
+		    	,#{tZDX}
+		    	,#{pMT}
+		    	,#{yBYW}
+		    	,#{kBDY}
+		    	,#{kD}
+		    	,#{kK}
+		    	,#{kT}
+		    	,#{kX}
+		    	,#{kNN}
+		    	,#{wGXW}
+		    	,#{pBWL}
+		    	,#{xBDH}
+		    	,#{xBQC}
+		    	,#{yLBJ}
+		    	,#{wFYL}
+		    	,#{tZCZ}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        	SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertMap" >
+        INSERT INTO df_specimen_admission_diagnosis (
+		    patientCode
+		    ,XT
+		    ,XM
+		    ,XJ
+		    ,QD
+		    ,QC
+		    ,KS
+		    ,WHZL
+		    ,PJFL
+		    ,ZH
+		    ,DH
+		    ,WXFR
+		    ,LMGS
+		    ,TY
+		    ,JW
+		    ,TH
+		    ,SM
+		    ,JZYN
+		    ,LZ
+		    ,TX
+		    ,YY
+		    ,SYBZ
+		    ,FZ
+		    ,AP
+		    ,AQ
+		    ,EXOT
+		    ,BT
+		    ,BM
+		    ,YQSR
+		    ,YNPD
+		    ,ZTMM
+		    ,ZTPT
+		    ,PXYX
+		    ,PFCC
+		    ,XTFP
+		    ,BAIT
+		    ,HT
+		    ,TZDX
+		    ,PMT
+		    ,YBYW
+		    ,KBDY
+		    ,KD
+		    ,KK
+		    ,KT
+		    ,KX
+		    ,KNN
+		    ,WGXW
+		    ,PBWL
+		    ,XBDH
+		    ,XBQC
+		    ,YLBJ
+		    ,WFYL
+		    ,TZCZ
+        ) VALUES (
+		    	#{map.patientCode}
+		    	,#{map.xT}
+		    	,#{map.xM}
+		    	,#{map.xJ}
+		    	,#{map.qD}
+		    	,#{map.qC}
+		    	,#{map.kS}
+		    	,#{map.wHZL}
+		    	,#{map.pJFL}
+		    	,#{map.zH}
+		    	,#{map.dH}
+		    	,#{map.wXFR}
+		    	,#{map.lMGS}
+		    	,#{map.tY}
+		    	,#{map.jW}
+		    	,#{map.tH}
+		    	,#{map.sM}
+		    	,#{map.jZYN}
+		    	,#{map.lZ}
+		    	,#{map.tX}
+		    	,#{map.yY}
+		    	,#{map.sYBZ}
+		    	,#{map.fZ}
+		    	,#{map.aP}
+		    	,#{map.aQ}
+		    	,#{map.eXOT}
+		    	,#{map.bT}
+		    	,#{map.bM}
+		    	,#{map.yQSR}
+		    	,#{map.yNPD}
+		    	,#{map.zTMM}
+		    	,#{map.zTPT}
+		    	,#{map.pXYX}
+		    	,#{map.pFCC}
+		    	,#{map.xTFP}
+		    	,#{map.bAIT}
+		    	,#{map.hT}
+		    	,#{map.tZDX}
+		    	,#{map.pMT}
+		    	,#{map.yBYW}
+		    	,#{map.kBDY}
+		    	,#{map.kD}
+		    	,#{map.kK}
+		    	,#{map.kT}
+		    	,#{map.kX}
+		    	,#{map.kNN}
+		    	,#{map.wGXW}
+		    	,#{map.pBWL}
+		    	,#{map.xBDH}
+		    	,#{map.xBQC}
+		    	,#{map.yLBJ}
+		    	,#{map.wFYL}
+		    	,#{map.tZCZ}
+        )
+    </insert>
+    
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.df.domain.specimen.AdmissionDiagnosis">
+        UPDATE df_specimen_admission_diagnosis
+        <trim prefix="SET" suffixOverrides=",">
+		    patientCode=#{patientCode},
+		    XT=#{xT},
+		    XM=#{xM},
+		    XJ=#{xJ},
+		    QD=#{qD},
+		    QC=#{qC},
+		    KS=#{kS},
+		    WHZL=#{wHZL},
+		    PJFL=#{pJFL},
+		    ZH=#{zH},
+		    DH=#{dH},
+		    WXFR=#{wXFR},
+		    LMGS=#{lMGS},
+		    TY=#{tY},
+		    JW=#{jW},
+		    TH=#{tH},
+		    SM=#{sM},
+		    JZYN=#{jZYN},
+		    LZ=#{lZ},
+		    TX=#{tX},
+		    YY=#{yY},
+		    SYBZ=#{sYBZ},
+		    FZ=#{fZ},
+		    AP=#{aP},
+		    AQ=#{aQ},
+		    EXOT=#{eXOT},
+		    BT=#{bT},
+		    BM=#{bM},
+		    YQSR=#{yQSR},
+		    YNPD=#{yNPD},
+		    ZTMM=#{zTMM},
+		    ZTPT=#{zTPT},
+		    PXYX=#{pXYX},
+		    PFCC=#{pFCC},
+		    XTFP=#{xTFP},
+		    BAIT=#{bAIT},
+		    HT=#{hT},
+		    TZDX=#{tZDX},
+		    PMT=#{pMT},
+		    YBYW=#{yBYW},
+		    KBDY=#{kBDY},
+		    KD=#{kD},
+		    KK=#{kK},
+		    KT=#{kT},
+		    KX=#{kX},
+		    KNN=#{kNN},
+		    WGXW=#{wGXW},
+		    PBWL=#{pBWL},
+		    XBDH=#{xBDH},
+		    XBQC=#{xBQC},
+		    YLBJ=#{yLBJ},
+		    WFYL=#{wFYL},
+		    TZCZ=#{tZCZ},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+	
+	<update id="updateMap">
+        UPDATE df_specimen_admission_diagnosis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.patientCode!=null">
+                patientCode = #{map.patientCode},
+            </if>
+            <if test="map.xT!=null">
+                XT = #{map.xT},
+            </if>
+            <if test="map.xM!=null">
+                XM = #{map.xM},
+            </if>
+            <if test="map.xJ!=null">
+                XJ = #{map.xJ},
+            </if>
+            <if test="map.qD!=null">
+                QD = #{map.qD},
+            </if>
+            <if test="map.qC!=null">
+                QC = #{map.qC},
+            </if>
+            <if test="map.kS!=null">
+                KS = #{map.kS},
+            </if>
+            <if test="map.wHZL!=null">
+                WHZL = #{map.wHZL},
+            </if>
+            <if test="map.pJFL!=null">
+                PJFL = #{map.pJFL},
+            </if>
+            <if test="map.zH!=null">
+                ZH = #{map.zH},
+            </if>
+            <if test="map.dH!=null">
+                DH = #{map.dH},
+            </if>
+            <if test="map.wXFR!=null">
+                WXFR = #{map.wXFR},
+            </if>
+            <if test="map.lMGS!=null">
+                LMGS = #{map.lMGS},
+            </if>
+            <if test="map.tY!=null">
+                TY = #{map.tY},
+            </if>
+            <if test="map.jW!=null">
+                JW = #{map.jW},
+            </if>
+            <if test="map.tH!=null">
+                TH = #{map.tH},
+            </if>
+            <if test="map.sM!=null">
+                SM = #{map.sM},
+            </if>
+            <if test="map.jZYN!=null">
+                JZYN = #{map.jZYN},
+            </if>
+            <if test="map.lZ!=null">
+                LZ = #{map.lZ},
+            </if>
+            <if test="map.tX!=null">
+                TX = #{map.tX},
+            </if>
+            <if test="map.yY!=null">
+                YY = #{map.yY},
+            </if>
+            <if test="map.sYBZ!=null">
+                SYBZ = #{map.sYBZ},
+            </if>
+            <if test="map.fZ!=null">
+                FZ = #{map.fZ},
+            </if>
+            <if test="map.aP!=null">
+                AP = #{map.aP},
+            </if>
+            <if test="map.aQ!=null">
+                AQ = #{map.aQ},
+            </if>
+            <if test="map.eXOT!=null">
+                EXOT = #{map.eXOT},
+            </if>
+            <if test="map.bT!=null">
+                BT = #{map.bT},
+            </if>
+            <if test="map.bM!=null">
+                BM = #{map.bM},
+            </if>
+            <if test="map.yQSR!=null">
+                YQSR = #{map.yQSR},
+            </if>
+            <if test="map.yNPD!=null">
+                YNPD = #{map.yNPD},
+            </if>
+            <if test="map.zTMM!=null">
+                ZTMM = #{map.zTMM},
+            </if>
+            <if test="map.zTPT!=null">
+                ZTPT = #{map.zTPT},
+            </if>
+            <if test="map.pXYX!=null">
+                PXYX = #{map.pXYX},
+            </if>
+            <if test="map.pFCC!=null">
+                PFCC = #{map.pFCC},
+            </if>
+            <if test="map.xTFP!=null">
+                XTFP = #{map.xTFP},
+            </if>
+            <if test="map.bAIT!=null">
+                BAIT = #{map.bAIT},
+            </if>
+            <if test="map.hT!=null">
+                HT = #{map.hT},
+            </if>
+            <if test="map.tZDX!=null">
+                TZDX = #{map.tZDX},
+            </if>
+            <if test="map.pMT!=null">
+                PMT = #{map.pMT},
+            </if>
+            <if test="map.yBYW!=null">
+                YBYW = #{map.yBYW},
+            </if>
+            <if test="map.kBDY!=null">
+                KBDY = #{map.kBDY},
+            </if>
+            <if test="map.kD!=null">
+                KD = #{map.kD},
+            </if>
+            <if test="map.kK!=null">
+                KK = #{map.kK},
+            </if>
+            <if test="map.kT!=null">
+                KT = #{map.kT},
+            </if>
+            <if test="map.kX!=null">
+                KX = #{map.kX},
+            </if>
+            <if test="map.kNN!=null">
+                KNN = #{map.kNN},
+            </if>
+            <if test="map.wGXW!=null">
+                WGXW = #{map.wGXW},
+            </if>
+            <if test="map.pBWL!=null">
+                PBWL = #{map.pBWL},
+            </if>
+            <if test="map.xBDH!=null">
+                XBDH = #{map.xBDH},
+            </if>
+            <if test="map.xBQC!=null">
+                XBQC = #{map.xBQC},
+            </if>
+            <if test="map.yLBJ!=null">
+                YLBJ = #{map.yLBJ},
+            </if>
+            <if test="map.wFYL!=null">
+                WFYL = #{map.wFYL},
+            </if>
+            <if test="map.tZCZ!=null">
+                TZCZ = #{map.tZCZ},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE df_specimen_admission_diagnosis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.patientCode!=null">
+                patientCode = #{update.patientCode},
+            </if>
+            <if test="update.xT!=null">
+                XT = #{update.xT},
+            </if>
+            <if test="update.xM!=null">
+                XM = #{update.xM},
+            </if>
+            <if test="update.xJ!=null">
+                XJ = #{update.xJ},
+            </if>
+            <if test="update.qD!=null">
+                QD = #{update.qD},
+            </if>
+            <if test="update.qC!=null">
+                QC = #{update.qC},
+            </if>
+            <if test="update.kS!=null">
+                KS = #{update.kS},
+            </if>
+            <if test="update.wHZL!=null">
+                WHZL = #{update.wHZL},
+            </if>
+            <if test="update.pJFL!=null">
+                PJFL = #{update.pJFL},
+            </if>
+            <if test="update.zH!=null">
+                ZH = #{update.zH},
+            </if>
+            <if test="update.dH!=null">
+                DH = #{update.dH},
+            </if>
+            <if test="update.wXFR!=null">
+                WXFR = #{update.wXFR},
+            </if>
+            <if test="update.lMGS!=null">
+                LMGS = #{update.lMGS},
+            </if>
+            <if test="update.tY!=null">
+                TY = #{update.tY},
+            </if>
+            <if test="update.jW!=null">
+                JW = #{update.jW},
+            </if>
+            <if test="update.tH!=null">
+                TH = #{update.tH},
+            </if>
+            <if test="update.sM!=null">
+                SM = #{update.sM},
+            </if>
+            <if test="update.jZYN!=null">
+                JZYN = #{update.jZYN},
+            </if>
+            <if test="update.lZ!=null">
+                LZ = #{update.lZ},
+            </if>
+            <if test="update.tX!=null">
+                TX = #{update.tX},
+            </if>
+            <if test="update.yY!=null">
+                YY = #{update.yY},
+            </if>
+            <if test="update.sYBZ!=null">
+                SYBZ = #{update.sYBZ},
+            </if>
+            <if test="update.fZ!=null">
+                FZ = #{update.fZ},
+            </if>
+            <if test="update.aP!=null">
+                AP = #{update.aP},
+            </if>
+            <if test="update.aQ!=null">
+                AQ = #{update.aQ},
+            </if>
+            <if test="update.eXOT!=null">
+                EXOT = #{update.eXOT},
+            </if>
+            <if test="update.bT!=null">
+                BT = #{update.bT},
+            </if>
+            <if test="update.bM!=null">
+                BM = #{update.bM},
+            </if>
+            <if test="update.yQSR!=null">
+                YQSR = #{update.yQSR},
+            </if>
+            <if test="update.yNPD!=null">
+                YNPD = #{update.yNPD},
+            </if>
+            <if test="update.zTMM!=null">
+                ZTMM = #{update.zTMM},
+            </if>
+            <if test="update.zTPT!=null">
+                ZTPT = #{update.zTPT},
+            </if>
+            <if test="update.pXYX!=null">
+                PXYX = #{update.pXYX},
+            </if>
+            <if test="update.pFCC!=null">
+                PFCC = #{update.pFCC},
+            </if>
+            <if test="update.xTFP!=null">
+                XTFP = #{update.xTFP},
+            </if>
+            <if test="update.bAIT!=null">
+                BAIT = #{update.bAIT},
+            </if>
+            <if test="update.hT!=null">
+                HT = #{update.hT},
+            </if>
+            <if test="update.tZDX!=null">
+                TZDX = #{update.tZDX},
+            </if>
+            <if test="update.pMT!=null">
+                PMT = #{update.pMT},
+            </if>
+            <if test="update.yBYW!=null">
+                YBYW = #{update.yBYW},
+            </if>
+            <if test="update.kBDY!=null">
+                KBDY = #{update.kBDY},
+            </if>
+            <if test="update.kD!=null">
+                KD = #{update.kD},
+            </if>
+            <if test="update.kK!=null">
+                KK = #{update.kK},
+            </if>
+            <if test="update.kT!=null">
+                KT = #{update.kT},
+            </if>
+            <if test="update.kX!=null">
+                KX = #{update.kX},
+            </if>
+            <if test="update.kNN!=null">
+                KNN = #{update.kNN},
+            </if>
+            <if test="update.wGXW!=null">
+                WGXW = #{update.wGXW},
+            </if>
+            <if test="update.pBWL!=null">
+                PBWL = #{update.pBWL},
+            </if>
+            <if test="update.xBDH!=null">
+                XBDH = #{update.xBDH},
+            </if>
+            <if test="update.xBQC!=null">
+                XBQC = #{update.xBQC},
+            </if>
+            <if test="update.yLBJ!=null">
+                YLBJ = #{update.yLBJ},
+            </if>
+            <if test="update.wFYL!=null">
+                WFYL = #{update.wFYL},
+            </if>
+            <if test="update.tZCZ!=null">
+                TZCZ = #{update.tZCZ},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.xT!=null">
+                AND XT = #{condition.xT}
+            </if>
+            <if test="condition.xM!=null">
+                AND XM = #{condition.xM}
+            </if>
+            <if test="condition.xJ!=null">
+                AND XJ = #{condition.xJ}
+            </if>
+            <if test="condition.qD!=null">
+                AND QD = #{condition.qD}
+            </if>
+            <if test="condition.qC!=null">
+                AND QC = #{condition.qC}
+            </if>
+            <if test="condition.kS!=null">
+                AND KS = #{condition.kS}
+            </if>
+            <if test="condition.wHZL!=null">
+                AND WHZL = #{condition.wHZL}
+            </if>
+            <if test="condition.pJFL!=null">
+                AND PJFL = #{condition.pJFL}
+            </if>
+            <if test="condition.zH!=null">
+                AND ZH = #{condition.zH}
+            </if>
+            <if test="condition.dH!=null">
+                AND DH = #{condition.dH}
+            </if>
+            <if test="condition.wXFR!=null">
+                AND WXFR = #{condition.wXFR}
+            </if>
+            <if test="condition.lMGS!=null">
+                AND LMGS = #{condition.lMGS}
+            </if>
+            <if test="condition.tY!=null">
+                AND TY = #{condition.tY}
+            </if>
+            <if test="condition.jW!=null">
+                AND JW = #{condition.jW}
+            </if>
+            <if test="condition.tH!=null">
+                AND TH = #{condition.tH}
+            </if>
+            <if test="condition.sM!=null">
+                AND SM = #{condition.sM}
+            </if>
+            <if test="condition.jZYN!=null">
+                AND JZYN = #{condition.jZYN}
+            </if>
+            <if test="condition.lZ!=null">
+                AND LZ = #{condition.lZ}
+            </if>
+            <if test="condition.tX!=null">
+                AND TX = #{condition.tX}
+            </if>
+            <if test="condition.yY!=null">
+                AND YY = #{condition.yY}
+            </if>
+            <if test="condition.sYBZ!=null">
+                AND SYBZ = #{condition.sYBZ}
+            </if>
+            <if test="condition.fZ!=null">
+                AND FZ = #{condition.fZ}
+            </if>
+            <if test="condition.aP!=null">
+                AND AP = #{condition.aP}
+            </if>
+            <if test="condition.aQ!=null">
+                AND AQ = #{condition.aQ}
+            </if>
+            <if test="condition.eXOT!=null">
+                AND EXOT = #{condition.eXOT}
+            </if>
+            <if test="condition.bT!=null">
+                AND BT = #{condition.bT}
+            </if>
+            <if test="condition.bM!=null">
+                AND BM = #{condition.bM}
+            </if>
+            <if test="condition.yQSR!=null">
+                AND YQSR = #{condition.yQSR}
+            </if>
+            <if test="condition.yNPD!=null">
+                AND YNPD = #{condition.yNPD}
+            </if>
+            <if test="condition.zTMM!=null">
+                AND ZTMM = #{condition.zTMM}
+            </if>
+            <if test="condition.zTPT!=null">
+                AND ZTPT = #{condition.zTPT}
+            </if>
+            <if test="condition.pXYX!=null">
+                AND PXYX = #{condition.pXYX}
+            </if>
+            <if test="condition.pFCC!=null">
+                AND PFCC = #{condition.pFCC}
+            </if>
+            <if test="condition.xTFP!=null">
+                AND XTFP = #{condition.xTFP}
+            </if>
+            <if test="condition.bAIT!=null">
+                AND BAIT = #{condition.bAIT}
+            </if>
+            <if test="condition.hT!=null">
+                AND HT = #{condition.hT}
+            </if>
+            <if test="condition.tZDX!=null">
+                AND TZDX = #{condition.tZDX}
+            </if>
+            <if test="condition.pMT!=null">
+                AND PMT = #{condition.pMT}
+            </if>
+            <if test="condition.yBYW!=null">
+                AND YBYW = #{condition.yBYW}
+            </if>
+            <if test="condition.kBDY!=null">
+                AND KBDY = #{condition.kBDY}
+            </if>
+            <if test="condition.kD!=null">
+                AND KD = #{condition.kD}
+            </if>
+            <if test="condition.kK!=null">
+                AND KK = #{condition.kK}
+            </if>
+            <if test="condition.kT!=null">
+                AND KT = #{condition.kT}
+            </if>
+            <if test="condition.kX!=null">
+                AND KX = #{condition.kX}
+            </if>
+            <if test="condition.kNN!=null">
+                AND KNN = #{condition.kNN}
+            </if>
+            <if test="condition.wGXW!=null">
+                AND WGXW = #{condition.wGXW}
+            </if>
+            <if test="condition.pBWL!=null">
+                AND PBWL = #{condition.pBWL}
+            </if>
+            <if test="condition.xBDH!=null">
+                AND XBDH = #{condition.xBDH}
+            </if>
+            <if test="condition.xBQC!=null">
+                AND XBQC = #{condition.xBQC}
+            </if>
+            <if test="condition.yLBJ!=null">
+                AND YLBJ = #{condition.yLBJ}
+            </if>
+            <if test="condition.wFYL!=null">
+                AND WFYL = #{condition.wFYL}
+            </if>
+            <if test="condition.tZCZ!=null">
+                AND TZCZ = #{condition.tZCZ}
+            </if>
+        </trim>
+    </update>
+
+    <update id="updateNull" parameterType="cn.df.domain.specimen.AdmissionDiagnosis">
+        UPDATE df_specimen_admission_diagnosis
+        <trim prefix="SET" suffixOverrides=",">
+            patientCode = #{patientCode},
+            XT = #{xT},
+            XM = #{xM},
+            XJ = #{xJ},
+            QD = #{qD},
+            QC = #{qC},
+            KS = #{kS},
+            WHZL = #{wHZL},
+            PJFL = #{pJFL},
+            ZH = #{zH},
+            DH = #{dH},
+            WXFR = #{wXFR},
+            LMGS = #{lMGS},
+            TY = #{tY},
+            JW = #{jW},
+            TH = #{tH},
+            SM = #{sM},
+            JZYN = #{jZYN},
+            LZ = #{lZ},
+            TX = #{tX},
+            YY = #{yY},
+            SYBZ = #{sYBZ},
+            FZ = #{fZ},
+            AP = #{aP},
+            AQ = #{aQ},
+            EXOT = #{eXOT},
+            BT = #{bT},
+            BM = #{bM},
+            YQSR = #{yQSR},
+            YNPD = #{yNPD},
+            ZTMM = #{zTMM},
+            ZTPT = #{zTPT},
+            PXYX = #{pXYX},
+            PFCC = #{pFCC},
+            XTFP = #{xTFP},
+            BAIT = #{bAIT},
+            HT = #{hT},
+            TZDX = #{tZDX},
+            PMT = #{pMT},
+            YBYW = #{yBYW},
+            KBDY = #{kBDY},
+            KD = #{kD},
+            KK = #{kK},
+            KT = #{kT},
+            KX = #{kX},
+            KNN = #{kNN},
+            WGXW = #{wGXW},
+            PBWL = #{pBWL},
+            XBDH = #{xBDH},
+            XBQC = #{xBQC},
+            YLBJ = #{yLBJ},
+            WFYL = #{wFYL},
+            TZCZ = #{tZCZ},
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+    
+    
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+    <!--根据list(ids)删除对象-->
+    <delete id="deleteByIds">
+        DELETE FROM df_specimen_admission_diagnosis
+        WHERE id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode = #{patientCode}
+            </if>
+            <if test="xT!=null">
+                AND XT = #{xT}
+            </if>
+            <if test="xM!=null">
+                AND XM = #{xM}
+            </if>
+            <if test="xJ!=null">
+                AND XJ = #{xJ}
+            </if>
+            <if test="qD!=null">
+                AND QD = #{qD}
+            </if>
+            <if test="qC!=null">
+                AND QC = #{qC}
+            </if>
+            <if test="kS!=null">
+                AND KS = #{kS}
+            </if>
+            <if test="wHZL!=null">
+                AND WHZL = #{wHZL}
+            </if>
+            <if test="pJFL!=null">
+                AND PJFL = #{pJFL}
+            </if>
+            <if test="zH!=null">
+                AND ZH = #{zH}
+            </if>
+            <if test="dH!=null">
+                AND DH = #{dH}
+            </if>
+            <if test="wXFR!=null">
+                AND WXFR = #{wXFR}
+            </if>
+            <if test="lMGS!=null">
+                AND LMGS = #{lMGS}
+            </if>
+            <if test="tY!=null">
+                AND TY = #{tY}
+            </if>
+            <if test="jW!=null">
+                AND JW = #{jW}
+            </if>
+            <if test="tH!=null">
+                AND TH = #{tH}
+            </if>
+            <if test="sM!=null">
+                AND SM = #{sM}
+            </if>
+            <if test="jZYN!=null">
+                AND JZYN = #{jZYN}
+            </if>
+            <if test="lZ!=null">
+                AND LZ = #{lZ}
+            </if>
+            <if test="tX!=null">
+                AND TX = #{tX}
+            </if>
+            <if test="yY!=null">
+                AND YY = #{yY}
+            </if>
+            <if test="sYBZ!=null">
+                AND SYBZ = #{sYBZ}
+            </if>
+            <if test="fZ!=null">
+                AND FZ = #{fZ}
+            </if>
+            <if test="aP!=null">
+                AND AP = #{aP}
+            </if>
+            <if test="aQ!=null">
+                AND AQ = #{aQ}
+            </if>
+            <if test="eXOT!=null">
+                AND EXOT = #{eXOT}
+            </if>
+            <if test="bT!=null">
+                AND BT = #{bT}
+            </if>
+            <if test="bM!=null">
+                AND BM = #{bM}
+            </if>
+            <if test="yQSR!=null">
+                AND YQSR = #{yQSR}
+            </if>
+            <if test="yNPD!=null">
+                AND YNPD = #{yNPD}
+            </if>
+            <if test="zTMM!=null">
+                AND ZTMM = #{zTMM}
+            </if>
+            <if test="zTPT!=null">
+                AND ZTPT = #{zTPT}
+            </if>
+            <if test="pXYX!=null">
+                AND PXYX = #{pXYX}
+            </if>
+            <if test="pFCC!=null">
+                AND PFCC = #{pFCC}
+            </if>
+            <if test="xTFP!=null">
+                AND XTFP = #{xTFP}
+            </if>
+            <if test="bAIT!=null">
+                AND BAIT = #{bAIT}
+            </if>
+            <if test="hT!=null">
+                AND HT = #{hT}
+            </if>
+            <if test="tZDX!=null">
+                AND TZDX = #{tZDX}
+            </if>
+            <if test="pMT!=null">
+                AND PMT = #{pMT}
+            </if>
+            <if test="yBYW!=null">
+                AND YBYW = #{yBYW}
+            </if>
+            <if test="kBDY!=null">
+                AND KBDY = #{kBDY}
+            </if>
+            <if test="kD!=null">
+                AND KD = #{kD}
+            </if>
+            <if test="kK!=null">
+                AND KK = #{kK}
+            </if>
+            <if test="kT!=null">
+                AND KT = #{kT}
+            </if>
+            <if test="kX!=null">
+                AND KX = #{kX}
+            </if>
+            <if test="kNN!=null">
+                AND KNN = #{kNN}
+            </if>
+            <if test="wGXW!=null">
+                AND WGXW = #{wGXW}
+            </if>
+            <if test="pBWL!=null">
+                AND PBWL = #{pBWL}
+            </if>
+            <if test="xBDH!=null">
+                AND XBDH = #{xBDH}
+            </if>
+            <if test="xBQC!=null">
+                AND XBQC = #{xBQC}
+            </if>
+            <if test="yLBJ!=null">
+                AND YLBJ = #{yLBJ}
+            </if>
+            <if test="wFYL!=null">
+                AND WFYL = #{wFYL}
+            </if>
+            <if test="tZCZ!=null">
+                AND TZCZ = #{tZCZ}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM df_specimen_admission_diagnosis WHERE
+        ${property} = #{value}
+    </delete>
+    
+    <!--查询相关 -->
+    <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis WHERE
+        ${property} = #{value}
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="findAll" resultType="AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.patientCode!=null">
+                ${condition.groupOp}   patientCode  ${condition.patientCode.op}  #{condition.patientCode.data}
+            </if>
+            <if test="condition.xT!=null">
+                ${condition.groupOp}   XT  ${condition.XT.op}  #{condition.XT.data}
+            </if>
+            <if test="condition.xM!=null">
+                ${condition.groupOp}   XM  ${condition.XM.op}  #{condition.XM.data}
+            </if>
+            <if test="condition.xJ!=null">
+                ${condition.groupOp}   XJ  ${condition.XJ.op}  #{condition.XJ.data}
+            </if>
+            <if test="condition.qD!=null">
+                ${condition.groupOp}   QD  ${condition.QD.op}  #{condition.QD.data}
+            </if>
+            <if test="condition.qC!=null">
+                ${condition.groupOp}   QC  ${condition.QC.op}  #{condition.QC.data}
+            </if>
+            <if test="condition.kS!=null">
+                ${condition.groupOp}   KS  ${condition.KS.op}  #{condition.KS.data}
+            </if>
+            <if test="condition.wHZL!=null">
+                ${condition.groupOp}   WHZL  ${condition.WHZL.op}  #{condition.WHZL.data}
+            </if>
+            <if test="condition.pJFL!=null">
+                ${condition.groupOp}   PJFL  ${condition.PJFL.op}  #{condition.PJFL.data}
+            </if>
+            <if test="condition.zH!=null">
+                ${condition.groupOp}   ZH  ${condition.ZH.op}  #{condition.ZH.data}
+            </if>
+            <if test="condition.dH!=null">
+                ${condition.groupOp}   DH  ${condition.DH.op}  #{condition.DH.data}
+            </if>
+            <if test="condition.wXFR!=null">
+                ${condition.groupOp}   WXFR  ${condition.WXFR.op}  #{condition.WXFR.data}
+            </if>
+            <if test="condition.lMGS!=null">
+                ${condition.groupOp}   LMGS  ${condition.LMGS.op}  #{condition.LMGS.data}
+            </if>
+            <if test="condition.tY!=null">
+                ${condition.groupOp}   TY  ${condition.TY.op}  #{condition.TY.data}
+            </if>
+            <if test="condition.jW!=null">
+                ${condition.groupOp}   JW  ${condition.JW.op}  #{condition.JW.data}
+            </if>
+            <if test="condition.tH!=null">
+                ${condition.groupOp}   TH  ${condition.TH.op}  #{condition.TH.data}
+            </if>
+            <if test="condition.sM!=null">
+                ${condition.groupOp}   SM  ${condition.SM.op}  #{condition.SM.data}
+            </if>
+            <if test="condition.jZYN!=null">
+                ${condition.groupOp}   JZYN  ${condition.JZYN.op}  #{condition.JZYN.data}
+            </if>
+            <if test="condition.lZ!=null">
+                ${condition.groupOp}   LZ  ${condition.LZ.op}  #{condition.LZ.data}
+            </if>
+            <if test="condition.tX!=null">
+                ${condition.groupOp}   TX  ${condition.TX.op}  #{condition.TX.data}
+            </if>
+            <if test="condition.yY!=null">
+                ${condition.groupOp}   YY  ${condition.YY.op}  #{condition.YY.data}
+            </if>
+            <if test="condition.sYBZ!=null">
+                ${condition.groupOp}   SYBZ  ${condition.SYBZ.op}  #{condition.SYBZ.data}
+            </if>
+            <if test="condition.fZ!=null">
+                ${condition.groupOp}   FZ  ${condition.FZ.op}  #{condition.FZ.data}
+            </if>
+            <if test="condition.aP!=null">
+                ${condition.groupOp}   AP  ${condition.AP.op}  #{condition.AP.data}
+            </if>
+            <if test="condition.aQ!=null">
+                ${condition.groupOp}   AQ  ${condition.AQ.op}  #{condition.AQ.data}
+            </if>
+            <if test="condition.eXOT!=null">
+                ${condition.groupOp}   EXOT  ${condition.EXOT.op}  #{condition.EXOT.data}
+            </if>
+            <if test="condition.bT!=null">
+                ${condition.groupOp}   BT  ${condition.BT.op}  #{condition.BT.data}
+            </if>
+            <if test="condition.bM!=null">
+                ${condition.groupOp}   BM  ${condition.BM.op}  #{condition.BM.data}
+            </if>
+            <if test="condition.yQSR!=null">
+                ${condition.groupOp}   YQSR  ${condition.YQSR.op}  #{condition.YQSR.data}
+            </if>
+            <if test="condition.yNPD!=null">
+                ${condition.groupOp}   YNPD  ${condition.YNPD.op}  #{condition.YNPD.data}
+            </if>
+            <if test="condition.zTMM!=null">
+                ${condition.groupOp}   ZTMM  ${condition.ZTMM.op}  #{condition.ZTMM.data}
+            </if>
+            <if test="condition.zTPT!=null">
+                ${condition.groupOp}   ZTPT  ${condition.ZTPT.op}  #{condition.ZTPT.data}
+            </if>
+            <if test="condition.pXYX!=null">
+                ${condition.groupOp}   PXYX  ${condition.PXYX.op}  #{condition.PXYX.data}
+            </if>
+            <if test="condition.pFCC!=null">
+                ${condition.groupOp}   PFCC  ${condition.PFCC.op}  #{condition.PFCC.data}
+            </if>
+            <if test="condition.xTFP!=null">
+                ${condition.groupOp}   XTFP  ${condition.XTFP.op}  #{condition.XTFP.data}
+            </if>
+            <if test="condition.bAIT!=null">
+                ${condition.groupOp}   BAIT  ${condition.BAIT.op}  #{condition.BAIT.data}
+            </if>
+            <if test="condition.hT!=null">
+                ${condition.groupOp}   HT  ${condition.HT.op}  #{condition.HT.data}
+            </if>
+            <if test="condition.tZDX!=null">
+                ${condition.groupOp}   TZDX  ${condition.TZDX.op}  #{condition.TZDX.data}
+            </if>
+            <if test="condition.pMT!=null">
+                ${condition.groupOp}   PMT  ${condition.PMT.op}  #{condition.PMT.data}
+            </if>
+            <if test="condition.yBYW!=null">
+                ${condition.groupOp}   YBYW  ${condition.YBYW.op}  #{condition.YBYW.data}
+            </if>
+            <if test="condition.kBDY!=null">
+                ${condition.groupOp}   KBDY  ${condition.KBDY.op}  #{condition.KBDY.data}
+            </if>
+            <if test="condition.kD!=null">
+                ${condition.groupOp}   KD  ${condition.KD.op}  #{condition.KD.data}
+            </if>
+            <if test="condition.kK!=null">
+                ${condition.groupOp}   KK  ${condition.KK.op}  #{condition.KK.data}
+            </if>
+            <if test="condition.kT!=null">
+                ${condition.groupOp}   KT  ${condition.KT.op}  #{condition.KT.data}
+            </if>
+            <if test="condition.kX!=null">
+                ${condition.groupOp}   KX  ${condition.KX.op}  #{condition.KX.data}
+            </if>
+            <if test="condition.kNN!=null">
+                ${condition.groupOp}   KNN  ${condition.KNN.op}  #{condition.KNN.data}
+            </if>
+            <if test="condition.wGXW!=null">
+                ${condition.groupOp}   WGXW  ${condition.WGXW.op}  #{condition.WGXW.data}
+            </if>
+            <if test="condition.pBWL!=null">
+                ${condition.groupOp}   PBWL  ${condition.PBWL.op}  #{condition.PBWL.data}
+            </if>
+            <if test="condition.xBDH!=null">
+                ${condition.groupOp}   XBDH  ${condition.XBDH.op}  #{condition.XBDH.data}
+            </if>
+            <if test="condition.xBQC!=null">
+                ${condition.groupOp}   XBQC  ${condition.XBQC.op}  #{condition.XBQC.data}
+            </if>
+            <if test="condition.yLBJ!=null">
+                ${condition.groupOp}   YLBJ  ${condition.YLBJ.op}  #{condition.YLBJ.data}
+            </if>
+            <if test="condition.wFYL!=null">
+                ${condition.groupOp}   WFYL  ${condition.WFYL.op}  #{condition.WFYL.data}
+            </if>
+            <if test="condition.tZCZ!=null">
+                ${condition.groupOp}   TZCZ  ${condition.TZCZ.op}  #{condition.TZCZ.data}
+            </if>
+
+
+    </where>
+
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="patientCode!=null">
+                AND patientCode like CONCAT('%', #{patientCode} , '%')
+            </if>
+            <if test="xT!=null">
+                AND XT like CONCAT('%', #{xT} , '%')
+            </if>
+            <if test="xM!=null">
+                AND XM like CONCAT('%', #{xM} , '%')
+            </if>
+            <if test="xJ!=null">
+                AND XJ like CONCAT('%', #{xJ} , '%')
+            </if>
+            <if test="qD!=null">
+                AND QD like CONCAT('%', #{qD} , '%')
+            </if>
+            <if test="qC!=null">
+                AND QC like CONCAT('%', #{qC} , '%')
+            </if>
+            <if test="kS!=null">
+                AND KS like CONCAT('%', #{kS} , '%')
+            </if>
+            <if test="wHZL!=null">
+                AND WHZL like CONCAT('%', #{wHZL} , '%')
+            </if>
+            <if test="pJFL!=null">
+                AND PJFL like CONCAT('%', #{pJFL} , '%')
+            </if>
+            <if test="zH!=null">
+                AND ZH like CONCAT('%', #{zH} , '%')
+            </if>
+            <if test="dH!=null">
+                AND DH like CONCAT('%', #{dH} , '%')
+            </if>
+            <if test="wXFR!=null">
+                AND WXFR like CONCAT('%', #{wXFR} , '%')
+            </if>
+            <if test="lMGS!=null">
+                AND LMGS like CONCAT('%', #{lMGS} , '%')
+            </if>
+            <if test="tY!=null">
+                AND TY like CONCAT('%', #{tY} , '%')
+            </if>
+            <if test="jW!=null">
+                AND JW like CONCAT('%', #{jW} , '%')
+            </if>
+            <if test="tH!=null">
+                AND TH like CONCAT('%', #{tH} , '%')
+            </if>
+            <if test="sM!=null">
+                AND SM like CONCAT('%', #{sM} , '%')
+            </if>
+            <if test="jZYN!=null">
+                AND JZYN like CONCAT('%', #{jZYN} , '%')
+            </if>
+            <if test="lZ!=null">
+                AND LZ like CONCAT('%', #{lZ} , '%')
+            </if>
+            <if test="tX!=null">
+                AND TX like CONCAT('%', #{tX} , '%')
+            </if>
+            <if test="yY!=null">
+                AND YY like CONCAT('%', #{yY} , '%')
+            </if>
+            <if test="sYBZ!=null">
+                AND SYBZ like CONCAT('%', #{sYBZ} , '%')
+            </if>
+            <if test="fZ!=null">
+                AND FZ like CONCAT('%', #{fZ} , '%')
+            </if>
+            <if test="aP!=null">
+                AND AP like CONCAT('%', #{aP} , '%')
+            </if>
+            <if test="aQ!=null">
+                AND AQ like CONCAT('%', #{aQ} , '%')
+            </if>
+            <if test="eXOT!=null">
+                AND EXOT like CONCAT('%', #{eXOT} , '%')
+            </if>
+            <if test="bT!=null">
+                AND BT like CONCAT('%', #{bT} , '%')
+            </if>
+            <if test="bM!=null">
+                AND BM like CONCAT('%', #{bM} , '%')
+            </if>
+            <if test="yQSR!=null">
+                AND YQSR like CONCAT('%', #{yQSR} , '%')
+            </if>
+            <if test="yNPD!=null">
+                AND YNPD like CONCAT('%', #{yNPD} , '%')
+            </if>
+            <if test="zTMM!=null">
+                AND ZTMM like CONCAT('%', #{zTMM} , '%')
+            </if>
+            <if test="zTPT!=null">
+                AND ZTPT like CONCAT('%', #{zTPT} , '%')
+            </if>
+            <if test="pXYX!=null">
+                AND PXYX like CONCAT('%', #{pXYX} , '%')
+            </if>
+            <if test="pFCC!=null">
+                AND PFCC like CONCAT('%', #{pFCC} , '%')
+            </if>
+            <if test="xTFP!=null">
+                AND XTFP like CONCAT('%', #{xTFP} , '%')
+            </if>
+            <if test="bAIT!=null">
+                AND BAIT like CONCAT('%', #{bAIT} , '%')
+            </if>
+            <if test="hT!=null">
+                AND HT like CONCAT('%', #{hT} , '%')
+            </if>
+            <if test="tZDX!=null">
+                AND TZDX like CONCAT('%', #{tZDX} , '%')
+            </if>
+            <if test="pMT!=null">
+                AND PMT like CONCAT('%', #{pMT} , '%')
+            </if>
+            <if test="yBYW!=null">
+                AND YBYW like CONCAT('%', #{yBYW} , '%')
+            </if>
+            <if test="kBDY!=null">
+                AND KBDY like CONCAT('%', #{kBDY} , '%')
+            </if>
+            <if test="kD!=null">
+                AND KD like CONCAT('%', #{kD} , '%')
+            </if>
+            <if test="kK!=null">
+                AND KK like CONCAT('%', #{kK} , '%')
+            </if>
+            <if test="kT!=null">
+                AND KT like CONCAT('%', #{kT} , '%')
+            </if>
+            <if test="kX!=null">
+                AND KX like CONCAT('%', #{kX} , '%')
+            </if>
+            <if test="kNN!=null">
+                AND KNN like CONCAT('%', #{kNN} , '%')
+            </if>
+            <if test="wGXW!=null">
+                AND WGXW like CONCAT('%', #{wGXW} , '%')
+            </if>
+            <if test="pBWL!=null">
+                AND PBWL like CONCAT('%', #{pBWL} , '%')
+            </if>
+            <if test="xBDH!=null">
+                AND XBDH like CONCAT('%', #{xBDH} , '%')
+            </if>
+            <if test="xBQC!=null">
+                AND XBQC like CONCAT('%', #{xBQC} , '%')
+            </if>
+            <if test="yLBJ!=null">
+                AND YLBJ like CONCAT('%', #{yLBJ} , '%')
+            </if>
+            <if test="wFYL!=null">
+                AND WFYL like CONCAT('%', #{wFYL} , '%')
+            </if>
+            <if test="tZCZ!=null">
+                AND TZCZ like CONCAT('%', #{tZCZ} , '%')
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.xT!=null">
+                AND XT = #{condition.xT}
+            </if>
+            <if test="condition.xM!=null">
+                AND XM = #{condition.xM}
+            </if>
+            <if test="condition.xJ!=null">
+                AND XJ = #{condition.xJ}
+            </if>
+            <if test="condition.qD!=null">
+                AND QD = #{condition.qD}
+            </if>
+            <if test="condition.qC!=null">
+                AND QC = #{condition.qC}
+            </if>
+            <if test="condition.kS!=null">
+                AND KS = #{condition.kS}
+            </if>
+            <if test="condition.wHZL!=null">
+                AND WHZL = #{condition.wHZL}
+            </if>
+            <if test="condition.pJFL!=null">
+                AND PJFL = #{condition.pJFL}
+            </if>
+            <if test="condition.zH!=null">
+                AND ZH = #{condition.zH}
+            </if>
+            <if test="condition.dH!=null">
+                AND DH = #{condition.dH}
+            </if>
+            <if test="condition.wXFR!=null">
+                AND WXFR = #{condition.wXFR}
+            </if>
+            <if test="condition.lMGS!=null">
+                AND LMGS = #{condition.lMGS}
+            </if>
+            <if test="condition.tY!=null">
+                AND TY = #{condition.tY}
+            </if>
+            <if test="condition.jW!=null">
+                AND JW = #{condition.jW}
+            </if>
+            <if test="condition.tH!=null">
+                AND TH = #{condition.tH}
+            </if>
+            <if test="condition.sM!=null">
+                AND SM = #{condition.sM}
+            </if>
+            <if test="condition.jZYN!=null">
+                AND JZYN = #{condition.jZYN}
+            </if>
+            <if test="condition.lZ!=null">
+                AND LZ = #{condition.lZ}
+            </if>
+            <if test="condition.tX!=null">
+                AND TX = #{condition.tX}
+            </if>
+            <if test="condition.yY!=null">
+                AND YY = #{condition.yY}
+            </if>
+            <if test="condition.sYBZ!=null">
+                AND SYBZ = #{condition.sYBZ}
+            </if>
+            <if test="condition.fZ!=null">
+                AND FZ = #{condition.fZ}
+            </if>
+            <if test="condition.aP!=null">
+                AND AP = #{condition.aP}
+            </if>
+            <if test="condition.aQ!=null">
+                AND AQ = #{condition.aQ}
+            </if>
+            <if test="condition.eXOT!=null">
+                AND EXOT = #{condition.eXOT}
+            </if>
+            <if test="condition.bT!=null">
+                AND BT = #{condition.bT}
+            </if>
+            <if test="condition.bM!=null">
+                AND BM = #{condition.bM}
+            </if>
+            <if test="condition.yQSR!=null">
+                AND YQSR = #{condition.yQSR}
+            </if>
+            <if test="condition.yNPD!=null">
+                AND YNPD = #{condition.yNPD}
+            </if>
+            <if test="condition.zTMM!=null">
+                AND ZTMM = #{condition.zTMM}
+            </if>
+            <if test="condition.zTPT!=null">
+                AND ZTPT = #{condition.zTPT}
+            </if>
+            <if test="condition.pXYX!=null">
+                AND PXYX = #{condition.pXYX}
+            </if>
+            <if test="condition.pFCC!=null">
+                AND PFCC = #{condition.pFCC}
+            </if>
+            <if test="condition.xTFP!=null">
+                AND XTFP = #{condition.xTFP}
+            </if>
+            <if test="condition.bAIT!=null">
+                AND BAIT = #{condition.bAIT}
+            </if>
+            <if test="condition.hT!=null">
+                AND HT = #{condition.hT}
+            </if>
+            <if test="condition.tZDX!=null">
+                AND TZDX = #{condition.tZDX}
+            </if>
+            <if test="condition.pMT!=null">
+                AND PMT = #{condition.pMT}
+            </if>
+            <if test="condition.yBYW!=null">
+                AND YBYW = #{condition.yBYW}
+            </if>
+            <if test="condition.kBDY!=null">
+                AND KBDY = #{condition.kBDY}
+            </if>
+            <if test="condition.kD!=null">
+                AND KD = #{condition.kD}
+            </if>
+            <if test="condition.kK!=null">
+                AND KK = #{condition.kK}
+            </if>
+            <if test="condition.kT!=null">
+                AND KT = #{condition.kT}
+            </if>
+            <if test="condition.kX!=null">
+                AND KX = #{condition.kX}
+            </if>
+            <if test="condition.kNN!=null">
+                AND KNN = #{condition.kNN}
+            </if>
+            <if test="condition.wGXW!=null">
+                AND WGXW = #{condition.wGXW}
+            </if>
+            <if test="condition.pBWL!=null">
+                AND PBWL = #{condition.pBWL}
+            </if>
+            <if test="condition.xBDH!=null">
+                AND XBDH = #{condition.xBDH}
+            </if>
+            <if test="condition.xBQC!=null">
+                AND XBQC = #{condition.xBQC}
+            </if>
+            <if test="condition.yLBJ!=null">
+                AND YLBJ = #{condition.yLBJ}
+            </if>
+            <if test="condition.wFYL!=null">
+                AND WFYL = #{condition.wFYL}
+            </if>
+            <if test="condition.tZCZ!=null">
+                AND TZCZ = #{condition.tZCZ}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="cn.df.domain.specimen.AdmissionDiagnosis">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM df_specimen_admission_diagnosis
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.patientCode!=null">
+                AND patientCode = #{condition.patientCode}
+            </if>
+            <if test="condition.xT!=null">
+                AND XT = #{condition.xT}
+            </if>
+            <if test="condition.xM!=null">
+                AND XM = #{condition.xM}
+            </if>
+            <if test="condition.xJ!=null">
+                AND XJ = #{condition.xJ}
+            </if>
+            <if test="condition.qD!=null">
+                AND QD = #{condition.qD}
+            </if>
+            <if test="condition.qC!=null">
+                AND QC = #{condition.qC}
+            </if>
+            <if test="condition.kS!=null">
+                AND KS = #{condition.kS}
+            </if>
+            <if test="condition.wHZL!=null">
+                AND WHZL = #{condition.wHZL}
+            </if>
+            <if test="condition.pJFL!=null">
+                AND PJFL = #{condition.pJFL}
+            </if>
+            <if test="condition.zH!=null">
+                AND ZH = #{condition.zH}
+            </if>
+            <if test="condition.dH!=null">
+                AND DH = #{condition.dH}
+            </if>
+            <if test="condition.wXFR!=null">
+                AND WXFR = #{condition.wXFR}
+            </if>
+            <if test="condition.lMGS!=null">
+                AND LMGS = #{condition.lMGS}
+            </if>
+            <if test="condition.tY!=null">
+                AND TY = #{condition.tY}
+            </if>
+            <if test="condition.jW!=null">
+                AND JW = #{condition.jW}
+            </if>
+            <if test="condition.tH!=null">
+                AND TH = #{condition.tH}
+            </if>
+            <if test="condition.sM!=null">
+                AND SM = #{condition.sM}
+            </if>
+            <if test="condition.jZYN!=null">
+                AND JZYN = #{condition.jZYN}
+            </if>
+            <if test="condition.lZ!=null">
+                AND LZ = #{condition.lZ}
+            </if>
+            <if test="condition.tX!=null">
+                AND TX = #{condition.tX}
+            </if>
+            <if test="condition.yY!=null">
+                AND YY = #{condition.yY}
+            </if>
+            <if test="condition.sYBZ!=null">
+                AND SYBZ = #{condition.sYBZ}
+            </if>
+            <if test="condition.fZ!=null">
+                AND FZ = #{condition.fZ}
+            </if>
+            <if test="condition.aP!=null">
+                AND AP = #{condition.aP}
+            </if>
+            <if test="condition.aQ!=null">
+                AND AQ = #{condition.aQ}
+            </if>
+            <if test="condition.eXOT!=null">
+                AND EXOT = #{condition.eXOT}
+            </if>
+            <if test="condition.bT!=null">
+                AND BT = #{condition.bT}
+            </if>
+            <if test="condition.bM!=null">
+                AND BM = #{condition.bM}
+            </if>
+            <if test="condition.yQSR!=null">
+                AND YQSR = #{condition.yQSR}
+            </if>
+            <if test="condition.yNPD!=null">
+                AND YNPD = #{condition.yNPD}
+            </if>
+            <if test="condition.zTMM!=null">
+                AND ZTMM = #{condition.zTMM}
+            </if>
+            <if test="condition.zTPT!=null">
+                AND ZTPT = #{condition.zTPT}
+            </if>
+            <if test="condition.pXYX!=null">
+                AND PXYX = #{condition.pXYX}
+            </if>
+            <if test="condition.pFCC!=null">
+                AND PFCC = #{condition.pFCC}
+            </if>
+            <if test="condition.xTFP!=null">
+                AND XTFP = #{condition.xTFP}
+            </if>
+            <if test="condition.bAIT!=null">
+                AND BAIT = #{condition.bAIT}
+            </if>
+            <if test="condition.hT!=null">
+                AND HT = #{condition.hT}
+            </if>
+            <if test="condition.tZDX!=null">
+                AND TZDX = #{condition.tZDX}
+            </if>
+            <if test="condition.pMT!=null">
+                AND PMT = #{condition.pMT}
+            </if>
+            <if test="condition.yBYW!=null">
+                AND YBYW = #{condition.yBYW}
+            </if>
+            <if test="condition.kBDY!=null">
+                AND KBDY = #{condition.kBDY}
+            </if>
+            <if test="condition.kD!=null">
+                AND KD = #{condition.kD}
+            </if>
+            <if test="condition.kK!=null">
+                AND KK = #{condition.kK}
+            </if>
+            <if test="condition.kT!=null">
+                AND KT = #{condition.kT}
+            </if>
+            <if test="condition.kX!=null">
+                AND KX = #{condition.kX}
+            </if>
+            <if test="condition.kNN!=null">
+                AND KNN = #{condition.kNN}
+            </if>
+            <if test="condition.wGXW!=null">
+                AND WGXW = #{condition.wGXW}
+            </if>
+            <if test="condition.pBWL!=null">
+                AND PBWL = #{condition.pBWL}
+            </if>
+            <if test="condition.xBDH!=null">
+                AND XBDH = #{condition.xBDH}
+            </if>
+            <if test="condition.xBQC!=null">
+                AND XBQC = #{condition.xBQC}
+            </if>
+            <if test="condition.yLBJ!=null">
+                AND YLBJ = #{condition.yLBJ}
+            </if>
+            <if test="condition.wFYL!=null">
+                AND WFYL = #{condition.wFYL}
+            </if>
+            <if test="condition.tZCZ!=null">
+                AND TZCZ = #{condition.tZCZ}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM df_specimen_admission_diagnosis
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="patientCode!=null">
+               ${groupOp} patientCode ${patientCode.op}  #{patientCode.data}
+           </if>
+           <if test="xT!=null">
+               ${groupOp} XT ${XT.op}  #{XT.data}
+           </if>
+           <if test="xM!=null">
+               ${groupOp} XM ${XM.op}  #{XM.data}
+           </if>
+           <if test="xJ!=null">
+               ${groupOp} XJ ${XJ.op}  #{XJ.data}
+           </if>
+           <if test="qD!=null">
+               ${groupOp} QD ${QD.op}  #{QD.data}
+           </if>
+           <if test="qC!=null">
+               ${groupOp} QC ${QC.op}  #{QC.data}
+           </if>
+           <if test="kS!=null">
+               ${groupOp} KS ${KS.op}  #{KS.data}
+           </if>
+           <if test="wHZL!=null">
+               ${groupOp} WHZL ${WHZL.op}  #{WHZL.data}
+           </if>
+           <if test="pJFL!=null">
+               ${groupOp} PJFL ${PJFL.op}  #{PJFL.data}
+           </if>
+           <if test="zH!=null">
+               ${groupOp} ZH ${ZH.op}  #{ZH.data}
+           </if>
+           <if test="dH!=null">
+               ${groupOp} DH ${DH.op}  #{DH.data}
+           </if>
+           <if test="wXFR!=null">
+               ${groupOp} WXFR ${WXFR.op}  #{WXFR.data}
+           </if>
+           <if test="lMGS!=null">
+               ${groupOp} LMGS ${LMGS.op}  #{LMGS.data}
+           </if>
+           <if test="tY!=null">
+               ${groupOp} TY ${TY.op}  #{TY.data}
+           </if>
+           <if test="jW!=null">
+               ${groupOp} JW ${JW.op}  #{JW.data}
+           </if>
+           <if test="tH!=null">
+               ${groupOp} TH ${TH.op}  #{TH.data}
+           </if>
+           <if test="sM!=null">
+               ${groupOp} SM ${SM.op}  #{SM.data}
+           </if>
+           <if test="jZYN!=null">
+               ${groupOp} JZYN ${JZYN.op}  #{JZYN.data}
+           </if>
+           <if test="lZ!=null">
+               ${groupOp} LZ ${LZ.op}  #{LZ.data}
+           </if>
+           <if test="tX!=null">
+               ${groupOp} TX ${TX.op}  #{TX.data}
+           </if>
+           <if test="yY!=null">
+               ${groupOp} YY ${YY.op}  #{YY.data}
+           </if>
+           <if test="sYBZ!=null">
+               ${groupOp} SYBZ ${SYBZ.op}  #{SYBZ.data}
+           </if>
+           <if test="fZ!=null">
+               ${groupOp} FZ ${FZ.op}  #{FZ.data}
+           </if>
+           <if test="aP!=null">
+               ${groupOp} AP ${AP.op}  #{AP.data}
+           </if>
+           <if test="aQ!=null">
+               ${groupOp} AQ ${AQ.op}  #{AQ.data}
+           </if>
+           <if test="eXOT!=null">
+               ${groupOp} EXOT ${EXOT.op}  #{EXOT.data}
+           </if>
+           <if test="bT!=null">
+               ${groupOp} BT ${BT.op}  #{BT.data}
+           </if>
+           <if test="bM!=null">
+               ${groupOp} BM ${BM.op}  #{BM.data}
+           </if>
+           <if test="yQSR!=null">
+               ${groupOp} YQSR ${YQSR.op}  #{YQSR.data}
+           </if>
+           <if test="yNPD!=null">
+               ${groupOp} YNPD ${YNPD.op}  #{YNPD.data}
+           </if>
+           <if test="zTMM!=null">
+               ${groupOp} ZTMM ${ZTMM.op}  #{ZTMM.data}
+           </if>
+           <if test="zTPT!=null">
+               ${groupOp} ZTPT ${ZTPT.op}  #{ZTPT.data}
+           </if>
+           <if test="pXYX!=null">
+               ${groupOp} PXYX ${PXYX.op}  #{PXYX.data}
+           </if>
+           <if test="pFCC!=null">
+               ${groupOp} PFCC ${PFCC.op}  #{PFCC.data}
+           </if>
+           <if test="xTFP!=null">
+               ${groupOp} XTFP ${XTFP.op}  #{XTFP.data}
+           </if>
+           <if test="bAIT!=null">
+               ${groupOp} BAIT ${BAIT.op}  #{BAIT.data}
+           </if>
+           <if test="hT!=null">
+               ${groupOp} HT ${HT.op}  #{HT.data}
+           </if>
+           <if test="tZDX!=null">
+               ${groupOp} TZDX ${TZDX.op}  #{TZDX.data}
+           </if>
+           <if test="pMT!=null">
+               ${groupOp} PMT ${PMT.op}  #{PMT.data}
+           </if>
+           <if test="yBYW!=null">
+               ${groupOp} YBYW ${YBYW.op}  #{YBYW.data}
+           </if>
+           <if test="kBDY!=null">
+               ${groupOp} KBDY ${KBDY.op}  #{KBDY.data}
+           </if>
+           <if test="kD!=null">
+               ${groupOp} KD ${KD.op}  #{KD.data}
+           </if>
+           <if test="kK!=null">
+               ${groupOp} KK ${KK.op}  #{KK.data}
+           </if>
+           <if test="kT!=null">
+               ${groupOp} KT ${KT.op}  #{KT.data}
+           </if>
+           <if test="kX!=null">
+               ${groupOp} KX ${KX.op}  #{KX.data}
+           </if>
+           <if test="kNN!=null">
+               ${groupOp} KNN ${KNN.op}  #{KNN.data}
+           </if>
+           <if test="wGXW!=null">
+               ${groupOp} WGXW ${WGXW.op}  #{WGXW.data}
+           </if>
+           <if test="pBWL!=null">
+               ${groupOp} PBWL ${PBWL.op}  #{PBWL.data}
+           </if>
+           <if test="xBDH!=null">
+               ${groupOp} XBDH ${XBDH.op}  #{XBDH.data}
+           </if>
+           <if test="xBQC!=null">
+               ${groupOp} XBQC ${XBQC.op}  #{XBQC.data}
+           </if>
+           <if test="yLBJ!=null">
+               ${groupOp} YLBJ ${YLBJ.op}  #{YLBJ.data}
+           </if>
+           <if test="wFYL!=null">
+               ${groupOp} WFYL ${WFYL.op}  #{WFYL.data}
+           </if>
+           <if test="tZCZ!=null">
+               ${groupOp} TZCZ ${TZCZ.op}  #{TZCZ.data}
+           </if>
+
+       </where>
+    <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+    </if>
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM df_specimen_admission_diagnosis
+    </select>
+   
+</mapper>

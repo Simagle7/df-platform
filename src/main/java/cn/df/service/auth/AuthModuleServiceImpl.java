@@ -277,4 +277,27 @@ public class AuthModuleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthModu
         condition.put(AuthModuleParam.F_FullCode, new SearchField(AuthModuleParam.F_FullCode, "like", fullCode + "%"));
         return this.queryPage(condition, 0, Integer.MAX_VALUE);
     }
+
+    @Override
+    public List<AuthModule> getModules(String uid, String roleCode) {
+        List<AuthModule> authModules = authModuleDAO.queryModulesByUser(uid, roleCode);
+//        if (authRoleService.isSuper(uid, userType)) {
+//            authModules = this.findList(AuthModuleParam.F_Status, DataStatusEnum.ENABLED);
+//        } else {
+//            authModules = this.queryModulesByUser(uid, userType, null, null);
+//        }
+        if(authModules.size() > 1){
+            Collections.sort(authModules, new Comparator<AuthModule>() {
+                @Override
+                public int compare(AuthModule o1, AuthModule o2) {
+                    if(Objects.equals(o1.getLevel(), o2.getLevel())){
+                        return o1.getPriority().compareTo(o2.getPriority());
+                    }else{
+                        return o1.getLevel().compareTo(o2.getLevel());
+                    }
+                }
+            });
+        }
+        return authModules;
+    }
 }

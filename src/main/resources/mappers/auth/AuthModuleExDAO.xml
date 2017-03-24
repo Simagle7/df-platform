@@ -9,4 +9,15 @@
 		SET status = #{status}, lastModDate = #{lastModDate}, lastModifier = #{lastModifier}
 		WHERE fullCode LIKE '%${pCode}%'
     </update>
+    <select id="queryModulesByUser" resultType="cn.df.domain.auth.AuthModule">
+        SELECT * from df_auth_module dam
+        WHERE `code` in(
+        SELECT DISTINCT daa.resourceCode
+        FROM df_auth_user_role daur LEFT JOIN df_auth_role dar on (dar.`status` = 0 AND dar.`code` = daur.rolecode)
+        LEFT JOIN df_auth_acl daa ON (daa.subjectCode = dar.`code` AND daa.subjectType = 0)
+        WHERE daa.subjectCode is NOT NULL AND daa.resourceType = 0
+        AND daur.userCode = #{uid} AND dar.`code` = #{roleCode})
+        AND dam.status = 0
+        ORDER BY dam.level ,dam.priority
+    </select>
 </mapper>

@@ -97,4 +97,12 @@ public interface IAuthModuleService<D extends IDFBaseDAO<T>, T extends BaseDomai
      * @return  返回操作码
      */
     String deleteOne(long id);
+
+    /**
+     * 根据用户uid获取用户模块
+     * @param uid       用户uid
+     * @param roleCode  角色代码
+     * @return  返回，模块列表
+     */
+    List<AuthModule> getModules(String uid, String roleCode);
 }

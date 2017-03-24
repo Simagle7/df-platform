@@ -43,4 +43,19 @@
             </if>
         </where>
     </select>
+    <select id="queryOperationsByUser" resultType="cn.df.domain.auth.AuthOperation">
+        SELECT * FROM
+        df_auth_operation dao
+        WHERE code in(
+        select DISTINCT daa.resourceCode
+        FROM df_auth_user_role daur LEFT JOIN df_auth_role dar ON (dar.`status` = 0 AND dar.`code` = daur.roleCode)
+        LEFT JOIN df_auth_acl daa ON (daa.subjectCode = dar.`code` AND daa.subjectType = 0 )
+        WHERE daa.subjectCode IS NOT NULL AND daa.resourceType = 1
+        AND daur.userCode = #{userCode} AND dar.`code` = #{roleCode})
+        and dao.status = 0
+        order by dao.id
+        <if test="offset != null">
+            limit ${offset}, #{rows}
+        </if>
+    </select>
 </mapper>
