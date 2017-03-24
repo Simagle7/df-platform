@@ -47,7 +47,7 @@ public class PatientParam extends BaseParam<Long> {
 	*/
 	public static final String F_IsSicken="isSicken";
 	
-	private Boolean gender; //性别，0：男，1：女
+	private Integer gender; //性别，0：男，1：女
 	private Integer age; //年龄
 	private String code; //病人代码，主键，为32位uuid
 	private Integer isSicken; //是否患病，0：否，1：是
@@ -62,13 +62,13 @@ public class PatientParam extends BaseParam<Long> {
 	/**
 	 * @return gender 性别，0：男，1：女
 	 */
-	public Boolean getGender(){
+	public Integer getGender(){
 		return this.gender;
 	}
 	/**
 	 * @param gender 性别，0：男，1：女
 	 */
-	public void setGender(Boolean gender){
+	public void setGender(Integer gender){
 		this.gender = gender;
 	}
 	/**

@@ -32,7 +32,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 public class Patient extends BaseDomain<Long> {
 	private static final long serialVersionUID = 1L;
 	
-	private Boolean gender; //性别，0：男，1：女
+	private Integer gender; //性别，0：男，1：女
 	private Integer age; //年龄
 	private String code; //病人代码，主键，为32位uuid
 	private Integer isSicken; //是否患病，0：否，1：是
@@ -47,13 +47,13 @@ public class Patient extends BaseDomain<Long> {
 	/**
 	 * @return gender 性别，0：男，1：女
 	 */
-	public Boolean getGender(){
+	public Integer getGender(){
 		return this.gender;
 	}
 	/**
 	 * @param gender 性别，0：男，1：女
 	 */
-	public void setGender(Boolean gender){
+	public void setGender(Integer gender){
 		this.gender = gender;
 	}
 	/**
@@ -118,8 +118,6 @@ public class Patient extends BaseDomain<Long> {
 		if(this == obj) return true;
 		Patient other = (Patient)obj;
 		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.append(getCode(),other.getCode())
 			.isEquals();
 	}
 }

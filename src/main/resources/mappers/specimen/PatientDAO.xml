@@ -12,12 +12,16 @@
     </sql>
     <insert id="insert" parameterType="cn.df.domain.specimen.Patient">
         INSERT INTO df_specimen_patient (
-		    gender
+		    id
+		    ,gender
 		    ,age
+		    ,code
 		    ,isSicken
         ) VALUES (
-		    	#{gender}
+		    	#{id}
+		    	,#{gender}
 		    	,#{age}
+		    	,#{code}
 		    	,#{isSicken}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
@@ -27,12 +31,16 @@
 
     <insert id="insertMap" >
         INSERT INTO df_specimen_patient (
-		    gender
+		    id
+		    ,gender
 		    ,age
+		    ,code
 		    ,isSicken
         ) VALUES (
-		    	#{map.gender}
+		    	#{map.id}
+		    	,#{map.gender}
 		    	,#{map.age}
+		    	,#{map.code}
 		    	,#{map.isSicken}
         )
     </insert>
@@ -41,23 +49,29 @@
     <update id="update" parameterType="cn.df.domain.specimen.Patient">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
+		    id=#{id},
 		    gender=#{gender},
 		    age=#{age},
+		    code=#{code},
 		    isSicken=#{isSicken},
         </trim>
         WHERE
-        id = #{id}
-        code = #{code} AND 
     </update>
 	
 	<update id="updateMap">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
+            <if test="map.id!=null">
+                id = #{map.id},
+            </if>
             <if test="map.gender!=null">
                 gender = #{map.gender},
             </if>
             <if test="map.age!=null">
                 age = #{map.age},
+            </if>
+            <if test="map.code!=null">
+                code = #{map.code},
             </if>
             <if test="map.isSicken!=null">
                 isSicken = #{map.isSicken},
@@ -70,11 +84,17 @@
     <update id="updateByCondition">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
+            <if test="update.id!=null">
+                id = #{update.id},
+            </if>
             <if test="update.gender!=null">
                 gender = #{update.gender},
             </if>
             <if test="update.age!=null">
                 age = #{update.age},
+            </if>
+            <if test="update.code!=null">
+                code = #{update.code},
             </if>
             <if test="update.isSicken!=null">
                 isSicken = #{update.isSicken},
@@ -82,11 +102,17 @@
         </trim>
 
         <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
             <if test="condition.gender!=null">
                 AND gender = #{condition.gender}
             </if>
             <if test="condition.age!=null">
                 AND age = #{condition.age}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
             </if>
             <if test="condition.isSicken!=null">
                 AND isSicken = #{condition.isSicken}
@@ -97,13 +123,13 @@
     <update id="updateNull" parameterType="cn.df.domain.specimen.Patient">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
+            id = #{id},
             gender = #{gender},
             age = #{age},
+            code = #{code},
             isSicken = #{isSicken},
         </trim>
         WHERE
-        id = #{id}
-        code = #{code} AND 
     </update>
     
     
@@ -111,8 +137,6 @@
     <delete id="deleteById" parameterType="java.lang.Long">
         DELETE FROM df_specimen_patient
         <trim prefix="WHERE" prefixOverrides="AND | OR">
-            AND id = #{id}
-            AND code = #{id}
         </trim>
     </delete>
 
@@ -155,8 +179,6 @@
         <include refid="Base_Column_List" />
         FROM df_specimen_patient
         <trim prefix="WHERE" prefixOverrides="AND | OR">
-            AND id = #{id}
-            AND code = #{id}
         </trim>
     </select>
 
