@@ -28,6 +28,5 @@ import cn.df.domain.specimen.Patient;
  */
 public interface IPatientDAO extends IDFBaseDAO<Patient> {
 
-	Patient findBycode(String code);
 
 }
