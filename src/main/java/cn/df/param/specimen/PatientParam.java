@@ -11,7 +11,7 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2017-03-22  Katybaby        新建	
+{  2017-03-24  Katybaby        新建	
 { 	                                                                     
 {*****************************************************************************
 */
@@ -50,7 +50,7 @@ public class PatientParam extends BaseParam<Long> {
 	private Boolean gender; //性别，0：男，1：女
 	private Integer age; //年龄
 	private String code; //病人代码，主键，为32位uuid
-	private Boolean isSicken; //是否患病，0：否，1：是
+	private Integer isSicken; //是否患病，0：否，1：是
     
 	/**
 	 *默认空构造函数
@@ -98,13 +98,13 @@ public class PatientParam extends BaseParam<Long> {
 	/**
 	 * @return isSicken 是否患病，0：否，1：是
 	 */
-	public Boolean getIsSicken(){
+	public Integer getIsSicken(){
 		return this.isSicken;
 	}
 	/**
 	 * @param isSicken 是否患病，0：否，1：是
 	 */
-	public void setIsSicken(Boolean isSicken){
+	public void setIsSicken(Integer isSicken){
 		this.isSicken = isSicken;
 	}
 	
