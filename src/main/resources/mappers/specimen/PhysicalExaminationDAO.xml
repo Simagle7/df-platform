@@ -6,9 +6,8 @@
     <sql id="Base_Column_List">
         id,
         patientCode,
-        MSCB,
-        MSJB,
         MSAH,
+        MSJB,
         MSWH,
         MH,
         MC,
@@ -27,137 +26,129 @@
     </sql>
     <insert id="insert" parameterType="cn.df.domain.specimen.PhysicalExamination">
         INSERT INTO df_specimen_physical_examination (
-		    patientCode
-		    ,MSCB
-		    ,MSJB
-		    ,MSAH
-		    ,MSWH
-		    ,MH
-		    ,MC
-		    ,YZSA
-		    ,YJFZ
-		    ,CYAH
-		    ,CJSD
-		    ,ENMA
-		    ,SFBYT
-		    ,XZSZ
-		    ,SDDW
-		    ,XTXS
-		    ,FLY
-		    ,XZKD
-		    ,XZZY
+        patientCode
+        ,MSAH
+        ,MSJB
+        ,MSWH
+        ,MH
+        ,MC
+        ,YZSA
+        ,YJFZ
+        ,CYAH
+        ,CJSD
+        ,ENMA
+        ,SFBYT
+        ,XZSZ
+        ,SDDW
+        ,XTXS
+        ,FLY
+        ,XZKD
+        ,XZZY
         ) VALUES (
-		    	#{patientCode}
-		    	,#{mSCB}
-		    	,#{mSJB}
-		    	,#{mSAH}
-		    	,#{mSWH}
-		    	,#{mH}
-		    	,#{mC}
-		    	,#{yZSA}
-		    	,#{yJFZ}
-		    	,#{cYAH}
-		    	,#{cJSD}
-		    	,#{eNMA}
-		    	,#{sFBYT}
-		    	,#{xZSZ}
-		    	,#{sDDW}
-		    	,#{xTXS}
-		    	,#{fLY}
-		    	,#{xZKD}
-		    	,#{xZZY}
+        #{patientCode}
+        ,#{mSAH}
+        ,#{mSJB}
+        ,#{mSWH}
+        ,#{mH}
+        ,#{mC}
+        ,#{yZSA}
+        ,#{yJFZ}
+        ,#{cYAH}
+        ,#{cJSD}
+        ,#{eNMA}
+        ,#{sFBYT}
+        ,#{xZSZ}
+        ,#{sDDW}
+        ,#{xTXS}
+        ,#{fLY}
+        ,#{xZKD}
+        ,#{xZZY}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
-        	SELECT LAST_INSERT_ID() AS ID
+            SELECT LAST_INSERT_ID() AS ID
         </selectKey>
     </insert>
 
     <insert id="insertMap" >
         INSERT INTO df_specimen_physical_examination (
-		    patientCode
-		    ,MSCB
-		    ,MSJB
-		    ,MSAH
-		    ,MSWH
-		    ,MH
-		    ,MC
-		    ,YZSA
-		    ,YJFZ
-		    ,CYAH
-		    ,CJSD
-		    ,ENMA
-		    ,SFBYT
-		    ,XZSZ
-		    ,SDDW
-		    ,XTXS
-		    ,FLY
-		    ,XZKD
-		    ,XZZY
+        patientCode
+        ,MSAH
+        ,MSJB
+        ,MSWH
+        ,MH
+        ,MC
+        ,YZSA
+        ,YJFZ
+        ,CYAH
+        ,CJSD
+        ,ENMA
+        ,SFBYT
+        ,XZSZ
+        ,SDDW
+        ,XTXS
+        ,FLY
+        ,XZKD
+        ,XZZY
         ) VALUES (
-		    	#{map.patientCode}
-		    	,#{map.mSCB}
-		    	,#{map.mSJB}
-		    	,#{map.mSAH}
-		    	,#{map.mSWH}
-		    	,#{map.mH}
-		    	,#{map.mC}
-		    	,#{map.yZSA}
-		    	,#{map.yJFZ}
-		    	,#{map.cYAH}
-		    	,#{map.cJSD}
-		    	,#{map.eNMA}
-		    	,#{map.sFBYT}
-		    	,#{map.xZSZ}
-		    	,#{map.sDDW}
-		    	,#{map.xTXS}
-		    	,#{map.fLY}
-		    	,#{map.xZKD}
-		    	,#{map.xZZY}
+        #{map.patientCode}
+        ,#{map.mSAH}
+        ,#{map.mSJB}
+        ,#{map.mSWH}
+        ,#{map.mH}
+        ,#{map.mC}
+        ,#{map.yZSA}
+        ,#{map.yJFZ}
+        ,#{map.cYAH}
+        ,#{map.cJSD}
+        ,#{map.eNMA}
+        ,#{map.sFBYT}
+        ,#{map.xZSZ}
+        ,#{map.sDDW}
+        ,#{map.xTXS}
+        ,#{map.fLY}
+        ,#{map.xZKD}
+        ,#{map.xZZY}
         )
     </insert>
-    
+
     <!-- 更新 -->
     <update id="update" parameterType="cn.df.domain.specimen.PhysicalExamination">
         UPDATE df_specimen_physical_examination
         <trim prefix="SET" suffixOverrides=",">
-		    patientCode=#{patientCode},
-		    MSCB=#{mSCB},
-		    MSJB=#{mSJB},
-		    MSAH=#{mSAH},
-		    MSWH=#{mSWH},
-		    MH=#{mH},
-		    MC=#{mC},
-		    YZSA=#{yZSA},
-		    YJFZ=#{yJFZ},
-		    CYAH=#{cYAH},
-		    CJSD=#{cJSD},
-		    ENMA=#{eNMA},
-		    SFBYT=#{sFBYT},
-		    XZSZ=#{xZSZ},
-		    SDDW=#{sDDW},
-		    XTXS=#{xTXS},
-		    FLY=#{fLY},
-		    XZKD=#{xZKD},
-		    XZZY=#{xZZY},
+            patientCode=#{patientCode},
+            MSAH=#{mSAH},
+            MSJB=#{mSJB},
+            MSWH=#{mSWH},
+            MH=#{mH},
+            MC=#{mC},
+            YZSA=#{yZSA},
+            YJFZ=#{yJFZ},
+            CYAH=#{cYAH},
+            CJSD=#{cJSD},
+            ENMA=#{eNMA},
+            SFBYT=#{sFBYT},
+            XZSZ=#{xZSZ},
+            SDDW=#{sDDW},
+            XTXS=#{xTXS},
+            FLY=#{fLY},
+            XZKD=#{xZKD},
+            XZZY=#{xZZY},
         </trim>
         WHERE
         id = #{id}
     </update>
-	
-	<update id="updateMap">
+
+    <update id="updateMap">
         UPDATE df_specimen_physical_examination
         <trim prefix="SET" suffixOverrides=",">
             <if test="map.patientCode!=null">
                 patientCode = #{map.patientCode},
             </if>
-            <if test="map.mSCB!=null">
-                MSCB = #{map.mSCB},
+            <if test="map.mSAH!=null">
+                MSAH = #{map.mSAH},
             </if>
             <if test="map.mSJB!=null">
                 MSJB = #{map.mSJB},
-            </if>
-            <if test="map.mSAH!=null">
-                MSAH = #{map.mSAH},
             </if>
             <if test="map.mSWH!=null">
                 MSWH = #{map.mSWH},
@@ -215,14 +206,11 @@
             <if test="update.patientCode!=null">
                 patientCode = #{update.patientCode},
             </if>
-            <if test="update.mSCB!=null">
-                MSCB = #{update.mSCB},
+            <if test="update.mSAH!=null">
+                MSAH = #{update.mSAH},
             </if>
             <if test="update.mSJB!=null">
                 MSJB = #{update.mSJB},
-            </if>
-            <if test="update.mSAH!=null">
-                MSAH = #{update.mSAH},
             </if>
             <if test="update.mSWH!=null">
                 MSWH = #{update.mSWH},
@@ -275,14 +263,11 @@
             <if test="condition.patientCode!=null">
                 AND patientCode = #{condition.patientCode}
             </if>
-            <if test="condition.mSCB!=null">
-                AND MSCB = #{condition.mSCB}
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSJB!=null">
                 AND MSJB = #{condition.mSJB}
-            </if>
-            <if test="condition.mSAH!=null">
-                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSWH!=null">
                 AND MSWH = #{condition.mSWH}
@@ -336,9 +321,8 @@
         UPDATE df_specimen_physical_examination
         <trim prefix="SET" suffixOverrides=",">
             patientCode = #{patientCode},
-            MSCB = #{mSCB},
-            MSJB = #{mSJB},
             MSAH = #{mSAH},
+            MSJB = #{mSJB},
             MSWH = #{mSWH},
             MH = #{mH},
             MC = #{mC},
@@ -358,8 +342,8 @@
         WHERE
         id = #{id}
     </update>
-    
-    
+
+
     <!-- 按Id删除 -->
     <delete id="deleteById" parameterType="java.lang.Long">
         DELETE FROM df_specimen_physical_examination
@@ -384,14 +368,11 @@
             <if test="patientCode!=null">
                 AND patientCode = #{patientCode}
             </if>
-            <if test="mSCB!=null">
-                AND MSCB = #{mSCB}
+            <if test="mSAH!=null">
+                AND MSAH = #{mSAH}
             </if>
             <if test="mSJB!=null">
                 AND MSJB = #{mSJB}
-            </if>
-            <if test="mSAH!=null">
-                AND MSAH = #{mSAH}
             </if>
             <if test="mSWH!=null">
                 AND MSWH = #{mSWH}
@@ -445,7 +426,7 @@
         DELETE FROM df_specimen_physical_examination WHERE
         ${property} = #{value}
     </delete>
-    
+
     <!--查询相关 -->
     <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.PhysicalExamination">
         SELECT
@@ -499,14 +480,11 @@
             <if test="condition.patientCode!=null">
                 ${condition.groupOp}   patientCode  ${condition.patientCode.op}  #{condition.patientCode.data}
             </if>
-            <if test="condition.mSCB!=null">
-                ${condition.groupOp}   MSCB  ${condition.MSCB.op}  #{condition.MSCB.data}
+            <if test="condition.mSAH!=null">
+                ${condition.groupOp}   MSAH  ${condition.MSAH.op}  #{condition.MSAH.data}
             </if>
             <if test="condition.mSJB!=null">
                 ${condition.groupOp}   MSJB  ${condition.MSJB.op}  #{condition.MSJB.data}
-            </if>
-            <if test="condition.mSAH!=null">
-                ${condition.groupOp}   MSAH  ${condition.MSAH.op}  #{condition.MSAH.data}
             </if>
             <if test="condition.mSWH!=null">
                 ${condition.groupOp}   MSWH  ${condition.MSWH.op}  #{condition.MSWH.data}
@@ -555,10 +533,10 @@
             </if>
 
 
-    </where>
+        </where>
 
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         <if test="offset != null">
             limit ${offset}, ${rows}
@@ -576,14 +554,11 @@
             <if test="patientCode!=null">
                 AND patientCode like CONCAT('%', #{patientCode} , '%')
             </if>
-            <if test="mSCB!=null">
-                AND MSCB like CONCAT('%', #{mSCB} , '%')
+            <if test="mSAH!=null">
+                AND MSAH like CONCAT('%', #{mSAH} , '%')
             </if>
             <if test="mSJB!=null">
                 AND MSJB like CONCAT('%', #{mSJB} , '%')
-            </if>
-            <if test="mSAH!=null">
-                AND MSAH like CONCAT('%', #{mSAH} , '%')
             </if>
             <if test="mSWH!=null">
                 AND MSWH like CONCAT('%', #{mSWH} , '%')
@@ -632,7 +607,7 @@
             </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -648,14 +623,11 @@
             <if test="condition.patientCode!=null">
                 AND patientCode = #{condition.patientCode}
             </if>
-            <if test="condition.mSCB!=null">
-                AND MSCB = #{condition.mSCB}
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSJB!=null">
                 AND MSJB = #{condition.mSJB}
-            </if>
-            <if test="condition.mSAH!=null">
-                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSWH!=null">
                 AND MSWH = #{condition.mSWH}
@@ -704,7 +676,7 @@
             </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -719,14 +691,11 @@
             <if test="condition.patientCode!=null">
                 AND patientCode = #{condition.patientCode}
             </if>
-            <if test="condition.mSCB!=null">
-                AND MSCB = #{condition.mSCB}
+            <if test="condition.mSAH!=null">
+                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSJB!=null">
                 AND MSJB = #{condition.mSJB}
-            </if>
-            <if test="condition.mSAH!=null">
-                AND MSAH = #{condition.mSAH}
             </if>
             <if test="condition.mSWH!=null">
                 AND MSWH = #{condition.mSWH}
@@ -779,72 +748,69 @@
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM df_specimen_physical_examination
-       <where>
-           <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
-           </if>
-           <if test="patientCode!=null">
-               ${groupOp} patientCode ${patientCode.op}  #{patientCode.data}
-           </if>
-           <if test="mSCB!=null">
-               ${groupOp} MSCB ${MSCB.op}  #{MSCB.data}
-           </if>
-           <if test="mSJB!=null">
-               ${groupOp} MSJB ${MSJB.op}  #{MSJB.data}
-           </if>
-           <if test="mSAH!=null">
-               ${groupOp} MSAH ${MSAH.op}  #{MSAH.data}
-           </if>
-           <if test="mSWH!=null">
-               ${groupOp} MSWH ${MSWH.op}  #{MSWH.data}
-           </if>
-           <if test="mH!=null">
-               ${groupOp} MH ${MH.op}  #{MH.data}
-           </if>
-           <if test="mC!=null">
-               ${groupOp} MC ${MC.op}  #{MC.data}
-           </if>
-           <if test="yZSA!=null">
-               ${groupOp} YZSA ${YZSA.op}  #{YZSA.data}
-           </if>
-           <if test="yJFZ!=null">
-               ${groupOp} YJFZ ${YJFZ.op}  #{YJFZ.data}
-           </if>
-           <if test="cYAH!=null">
-               ${groupOp} CYAH ${CYAH.op}  #{CYAH.data}
-           </if>
-           <if test="cJSD!=null">
-               ${groupOp} CJSD ${CJSD.op}  #{CJSD.data}
-           </if>
-           <if test="eNMA!=null">
-               ${groupOp} ENMA ${ENMA.op}  #{ENMA.data}
-           </if>
-           <if test="sFBYT!=null">
-               ${groupOp} SFBYT ${SFBYT.op}  #{SFBYT.data}
-           </if>
-           <if test="xZSZ!=null">
-               ${groupOp} XZSZ ${XZSZ.op}  #{XZSZ.data}
-           </if>
-           <if test="sDDW!=null">
-               ${groupOp} SDDW ${SDDW.op}  #{SDDW.data}
-           </if>
-           <if test="xTXS!=null">
-               ${groupOp} XTXS ${XTXS.op}  #{XTXS.data}
-           </if>
-           <if test="fLY!=null">
-               ${groupOp} FLY ${FLY.op}  #{FLY.data}
-           </if>
-           <if test="xZKD!=null">
-               ${groupOp} XZKD ${XZKD.op}  #{XZKD.data}
-           </if>
-           <if test="xZZY!=null">
-               ${groupOp} XZZY ${XZZY.op}  #{XZZY.data}
-           </if>
+        <where>
+            <if test="id!=null">
+                ${groupOp} id ${id.op}  #{id.data}
+            </if>
+            <if test="patientCode!=null">
+                ${groupOp} patientCode ${patientCode.op}  #{patientCode.data}
+            </if>
+            <if test="mSAH!=null">
+                ${groupOp} MSAH ${MSAH.op}  #{MSAH.data}
+            </if>
+            <if test="mSJB!=null">
+                ${groupOp} MSJB ${MSJB.op}  #{MSJB.data}
+            </if>
+            <if test="mSWH!=null">
+                ${groupOp} MSWH ${MSWH.op}  #{MSWH.data}
+            </if>
+            <if test="mH!=null">
+                ${groupOp} MH ${MH.op}  #{MH.data}
+            </if>
+            <if test="mC!=null">
+                ${groupOp} MC ${MC.op}  #{MC.data}
+            </if>
+            <if test="yZSA!=null">
+                ${groupOp} YZSA ${YZSA.op}  #{YZSA.data}
+            </if>
+            <if test="yJFZ!=null">
+                ${groupOp} YJFZ ${YJFZ.op}  #{YJFZ.data}
+            </if>
+            <if test="cYAH!=null">
+                ${groupOp} CYAH ${CYAH.op}  #{CYAH.data}
+            </if>
+            <if test="cJSD!=null">
+                ${groupOp} CJSD ${CJSD.op}  #{CJSD.data}
+            </if>
+            <if test="eNMA!=null">
+                ${groupOp} ENMA ${ENMA.op}  #{ENMA.data}
+            </if>
+            <if test="sFBYT!=null">
+                ${groupOp} SFBYT ${SFBYT.op}  #{SFBYT.data}
+            </if>
+            <if test="xZSZ!=null">
+                ${groupOp} XZSZ ${XZSZ.op}  #{XZSZ.data}
+            </if>
+            <if test="sDDW!=null">
+                ${groupOp} SDDW ${SDDW.op}  #{SDDW.data}
+            </if>
+            <if test="xTXS!=null">
+                ${groupOp} XTXS ${XTXS.op}  #{XTXS.data}
+            </if>
+            <if test="fLY!=null">
+                ${groupOp} FLY ${FLY.op}  #{FLY.data}
+            </if>
+            <if test="xZKD!=null">
+                ${groupOp} XZKD ${XZKD.op}  #{XZKD.data}
+            </if>
+            <if test="xZZY!=null">
+                ${groupOp} XZZY ${XZZY.op}  #{XZZY.data}
+            </if>
 
-       </where>
-    <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-    </if>
+        </where>
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
     </select>
 
     <select id="selectMaxId" resultType="java.lang.Long">
@@ -852,5 +818,5 @@
         MAX(id)
         FROM df_specimen_physical_examination
     </select>
-   
+
 </mapper>

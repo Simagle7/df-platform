@@ -11,20 +11,18 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2017-03-22  Katybaby        新建	
-{ 	                                                                     
+{  2017-03-27  Katybaby        新建
+{
 {*****************************************************************************
 */
 
 package cn.df.domain.specimen;
 
+import cn.df.common.domain.BaseDomain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.df.common.domain.BaseDomain;
-
-import java.util.*;
 
 /**
  * 《体格检查》 实体
@@ -33,11 +31,10 @@ import java.util.*;
  */
 public class PhysicalExamination extends BaseDomain<Long> {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String patientCode; //病人代码
-	private Boolean mSCB; //是否面色苍白
+	private Integer mSAH; //面试暗黑
 	private Boolean mSJB; //是否面色就白
-	private Boolean mSAH; //是否面色黯黑
 	private Boolean mSWH; //是否面色萎黄
 	private Boolean mH; //是否面红
 	private Boolean mC; //是否目赤
@@ -53,14 +50,14 @@ public class PhysicalExamination extends BaseDomain<Long> {
 	private Boolean fLY; //是否肺啰音
 	private Boolean xZKD; //是否心脏扩大
 	private Boolean xZZY; //是否心脏杂音
-    
+
 	/**
 	 *默认空构造函数
 	 */
 	public PhysicalExamination() {
 		super();
 	}
-	 
+
 	/**
 	 * @return patientCode 病人代码
 	 */
@@ -74,16 +71,16 @@ public class PhysicalExamination extends BaseDomain<Long> {
 		this.patientCode = patientCode;
 	}
 	/**
-	 * @return mSCB 是否面色苍白
+	 * @return mSAH 面试暗黑
 	 */
-	public Boolean getMSCB(){
-		return this.mSCB;
+	public Integer getMSAH(){
+		return this.mSAH;
 	}
 	/**
-	 * @param mSCB 是否面色苍白
+	 * @param mSAH 面试暗黑
 	 */
-	public void setMSCB(Boolean mSCB){
-		this.mSCB = mSCB;
+	public void setMSAH(Integer mSAH){
+		this.mSAH = mSAH;
 	}
 	/**
 	 * @return mSJB 是否面色就白
@@ -96,18 +93,6 @@ public class PhysicalExamination extends BaseDomain<Long> {
 	 */
 	public void setMSJB(Boolean mSJB){
 		this.mSJB = mSJB;
-	}
-	/**
-	 * @return mSAH 是否面色黯黑
-	 */
-	public Boolean getMSAH(){
-		return this.mSAH;
-	}
-	/**
-	 * @param mSAH 是否面色黯黑
-	 */
-	public void setMSAH(Boolean mSAH){
-		this.mSAH = mSAH;
 	}
 	/**
 	 * @return mSWH 是否面色萎黄
@@ -289,63 +274,61 @@ public class PhysicalExamination extends BaseDomain<Long> {
 	public void setXZZY(Boolean xZZY){
 		this.xZZY = xZZY;
 	}
-	
+
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-			.append("id",getId())
-			.append("patientCode",getPatientCode())
-			.append("MSCB",getMSCB())
-			.append("MSJB",getMSJB())
-			.append("MSAH",getMSAH())
-			.append("MSWH",getMSWH())
-			.append("MH",getMH())
-			.append("MC",getMC())
-			.append("YZSA",getYZSA())
-			.append("YJFZ",getYJFZ())
-			.append("CYAH",getCYAH())
-			.append("CJSD",getCJSD())
-			.append("ENMA",getENMA())
-			.append("SFBYT",getSFBYT())
-			.append("XZSZ",getXZSZ())
-			.append("SDDW",getSDDW())
-			.append("XTXS",getXTXS())
-			.append("FLY",getFLY())
-			.append("XZKD",getXZKD())
-			.append("XZZY",getXZZY())
-			.toString();
+				.append("id",getId())
+				.append("patientCode",getPatientCode())
+				.append("MSAH",getMSAH())
+				.append("MSJB",getMSJB())
+				.append("MSWH",getMSWH())
+				.append("MH",getMH())
+				.append("MC",getMC())
+				.append("YZSA",getYZSA())
+				.append("YJFZ",getYJFZ())
+				.append("CYAH",getCYAH())
+				.append("CJSD",getCJSD())
+				.append("ENMA",getENMA())
+				.append("SFBYT",getSFBYT())
+				.append("XZSZ",getXZSZ())
+				.append("SDDW",getSDDW())
+				.append("XTXS",getXTXS())
+				.append("FLY",getFLY())
+				.append("XZKD",getXZKD())
+				.append("XZZY",getXZZY())
+				.toString();
 	}
-	
+
 	public int hashCode() {
 		return new HashCodeBuilder()
-			.append(getId())
-			.append(getPatientCode())
-			.append(getMSCB())
-			.append(getMSJB())
-			.append(getMSAH())
-			.append(getMSWH())
-			.append(getMH())
-			.append(getMC())
-			.append(getYZSA())
-			.append(getYJFZ())
-			.append(getCYAH())
-			.append(getCJSD())
-			.append(getENMA())
-			.append(getSFBYT())
-			.append(getXZSZ())
-			.append(getSDDW())
-			.append(getXTXS())
-			.append(getFLY())
-			.append(getXZKD())
-			.append(getXZZY())
-			.toHashCode();
+				.append(getId())
+				.append(getPatientCode())
+				.append(getMSAH())
+				.append(getMSJB())
+				.append(getMSWH())
+				.append(getMH())
+				.append(getMC())
+				.append(getYZSA())
+				.append(getYJFZ())
+				.append(getCYAH())
+				.append(getCJSD())
+				.append(getENMA())
+				.append(getSFBYT())
+				.append(getXZSZ())
+				.append(getSDDW())
+				.append(getXTXS())
+				.append(getFLY())
+				.append(getXZKD())
+				.append(getXZZY())
+				.toHashCode();
 	}
-	
+
 	public boolean equals(Object obj) {
 		if(obj instanceof PhysicalExamination == false) return false;
 		if(this == obj) return true;
 		PhysicalExamination other = (PhysicalExamination)obj;
 		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
+				.append(getId(),other.getId())
+				.isEquals();
 	}
 }

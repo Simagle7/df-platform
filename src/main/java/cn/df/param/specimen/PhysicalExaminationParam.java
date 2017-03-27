@@ -11,20 +11,16 @@
 {  维护历史:													
 {  日期        维护人        维护类型						
 {  ---------------------------------------------------------------------------	
-{  2017-03-22  Katybaby        新建	
-{ 	                                                                     
+{  2017-03-27  Katybaby        新建
+{
 {*****************************************************************************
 */
 
 package cn.df.param.specimen;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import cn.df.common.param.BaseParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import cn.df.common.param.BaseParam;
-
-import java.util.*;
 
 /**
  * 《体格检查》 查询参数实体
@@ -33,88 +29,83 @@ import java.util.*;
  */
 public class PhysicalExaminationParam extends BaseParam<Long> {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	*字段常量——病人代码
-	*/
+	 *字段常量——病人代码
+	 */
 	public static final String F_PatientCode="patientCode";
 	/**
-	*字段常量——是否面色苍白
-	*/
-	public static final String F_MSCB="MSCB";
-	/**
-	*字段常量——是否面色就白
-	*/
-	public static final String F_MSJB="MSJB";
-	/**
-	*字段常量——是否面色黯黑
-	*/
+	 *字段常量——面试暗黑
+	 */
 	public static final String F_MSAH="MSAH";
 	/**
-	*字段常量——是否面色萎黄
-	*/
+	 *字段常量——是否面色就白
+	 */
+	public static final String F_MSJB="MSJB";
+	/**
+	 *字段常量——是否面色萎黄
+	 */
 	public static final String F_MSWH="MSWH";
 	/**
-	*字段常量——是否面红
-	*/
+	 *字段常量——是否面红
+	 */
 	public static final String F_MH="MH";
 	/**
-	*字段常量——是否目赤
-	*/
+	 *字段常量——是否目赤
+	 */
 	public static final String F_MC="MC";
 	/**
-	*字段常量——是否眼周色暗
-	*/
+	 *字段常量——是否眼周色暗
+	 */
 	public static final String F_YZSA="YZSA";
 	/**
-	*字段常量——是否眼睑浮肿
-	*/
+	 *字段常量——是否眼睑浮肿
+	 */
 	public static final String F_YJFZ="YJFZ";
 	/**
-	*字段常量——是否唇龈暗红
-	*/
+	 *字段常量——是否唇龈暗红
+	 */
 	public static final String F_CYAH="CYAH";
 	/**
-	*字段常量——是否唇甲色淡
-	*/
+	 *字段常量——是否唇甲色淡
+	 */
 	public static final String F_CJSD="CJSD";
 	/**
-	*字段常量——是否腭黏膜黯
-	*/
+	 *字段常量——是否腭黏膜黯
+	 */
 	public static final String F_ENMA="ENMA";
 	/**
-	*字段常量——是否少腹部压痛
-	*/
+	 *字段常量——是否少腹部压痛
+	 */
 	public static final String F_SFBYT="SFBYT";
 	/**
-	*字段常量——是否下肢水肿
-	*/
+	 *字段常量——是否下肢水肿
+	 */
 	public static final String F_XZSZ="XZSZ";
 	/**
-	*字段常量——是否色调低微
-	*/
+	 *字段常量——是否色调低微
+	 */
 	public static final String F_SDDW="SDDW";
 	/**
-	*字段常量——是否形体消瘦
-	*/
+	 *字段常量——是否形体消瘦
+	 */
 	public static final String F_XTXS="XTXS";
 	/**
-	*字段常量——是否肺啰音
-	*/
+	 *字段常量——是否肺啰音
+	 */
 	public static final String F_FLY="FLY";
 	/**
-	*字段常量——是否心脏扩大
-	*/
+	 *字段常量——是否心脏扩大
+	 */
 	public static final String F_XZKD="XZKD";
 	/**
-	*字段常量——是否心脏杂音
-	*/
+	 *字段常量——是否心脏杂音
+	 */
 	public static final String F_XZZY="XZZY";
-	
+
 	private String patientCode; //病人代码
-	private Boolean mSCB; //是否面色苍白
+	private Integer mSAH; //面试暗黑
 	private Boolean mSJB; //是否面色就白
-	private Boolean mSAH; //是否面色黯黑
 	private Boolean mSWH; //是否面色萎黄
 	private Boolean mH; //是否面红
 	private Boolean mC; //是否目赤
@@ -130,14 +121,14 @@ public class PhysicalExaminationParam extends BaseParam<Long> {
 	private Boolean fLY; //是否肺啰音
 	private Boolean xZKD; //是否心脏扩大
 	private Boolean xZZY; //是否心脏杂音
-    
+
 	/**
 	 *默认空构造函数
 	 */
 	public PhysicalExaminationParam() {
 		super();
 	}
-	 
+
 	/**
 	 * @return patientCode 病人代码
 	 */
@@ -151,16 +142,16 @@ public class PhysicalExaminationParam extends BaseParam<Long> {
 		this.patientCode = patientCode;
 	}
 	/**
-	 * @return mSCB 是否面色苍白
+	 * @return mSAH 面试暗黑
 	 */
-	public Boolean getMSCB(){
-		return this.mSCB;
+	public Integer getMSAH(){
+		return this.mSAH;
 	}
 	/**
-	 * @param mSCB 是否面色苍白
+	 * @param mSAH 面试暗黑
 	 */
-	public void setMSCB(Boolean mSCB){
-		this.mSCB = mSCB;
+	public void setMSAH(Integer mSAH){
+		this.mSAH = mSAH;
 	}
 	/**
 	 * @return mSJB 是否面色就白
@@ -173,18 +164,6 @@ public class PhysicalExaminationParam extends BaseParam<Long> {
 	 */
 	public void setMSJB(Boolean mSJB){
 		this.mSJB = mSJB;
-	}
-	/**
-	 * @return mSAH 是否面色黯黑
-	 */
-	public Boolean getMSAH(){
-		return this.mSAH;
-	}
-	/**
-	 * @param mSAH 是否面色黯黑
-	 */
-	public void setMSAH(Boolean mSAH){
-		this.mSAH = mSAH;
 	}
 	/**
 	 * @return mSWH 是否面色萎黄
@@ -366,30 +345,29 @@ public class PhysicalExaminationParam extends BaseParam<Long> {
 	public void setXZZY(Boolean xZZY){
 		this.xZZY = xZZY;
 	}
-	
+
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-			.append("id",getId())
-			.append("patientCode",getPatientCode())
-			.append("MSCB",getMSCB())
-			.append("MSJB",getMSJB())
-			.append("MSAH",getMSAH())
-			.append("MSWH",getMSWH())
-			.append("MH",getMH())
-			.append("MC",getMC())
-			.append("YZSA",getYZSA())
-			.append("YJFZ",getYJFZ())
-			.append("CYAH",getCYAH())
-			.append("CJSD",getCJSD())
-			.append("ENMA",getENMA())
-			.append("SFBYT",getSFBYT())
-			.append("XZSZ",getXZSZ())
-			.append("SDDW",getSDDW())
-			.append("XTXS",getXTXS())
-			.append("FLY",getFLY())
-			.append("XZKD",getXZKD())
-			.append("XZZY",getXZZY())
-			.toString();
+				.append("id",getId())
+				.append("patientCode",getPatientCode())
+				.append("MSAH",getMSAH())
+				.append("MSJB",getMSJB())
+				.append("MSWH",getMSWH())
+				.append("MH",getMH())
+				.append("MC",getMC())
+				.append("YZSA",getYZSA())
+				.append("YJFZ",getYJFZ())
+				.append("CYAH",getCYAH())
+				.append("CJSD",getCJSD())
+				.append("ENMA",getENMA())
+				.append("SFBYT",getSFBYT())
+				.append("XZSZ",getXZSZ())
+				.append("SDDW",getSDDW())
+				.append("XTXS",getXTXS())
+				.append("FLY",getFLY())
+				.append("XZKD",getXZKD())
+				.append("XZZY",getXZZY())
+				.toString();
 	}
-	
+
 }
