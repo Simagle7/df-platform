@@ -5,64 +5,86 @@
 
     <sql id="Base_Column_List">
         id,
+        code,
+        address,
+        name,
+        career,
         gender,
         age,
-        code,
+        probability,
         isSicken
     </sql>
     <insert id="insert" parameterType="cn.df.domain.specimen.Patient">
         INSERT INTO df_specimen_patient (
-		    id
-		    ,gender
-		    ,age
-		    ,code
-		    ,isSicken
+        address
+        ,name
+        ,career
+        ,gender
+        ,age
+        ,probability
+        ,isSicken
         ) VALUES (
-		    	#{id}
-		    	,#{gender}
-		    	,#{age}
-		    	,#{code}
-		    	,#{isSicken}
+        #{address}
+        ,#{name}
+        ,#{career}
+        ,#{gender}
+        ,#{age}
+        ,#{probability}
+        ,#{isSicken}
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
-        	SELECT LAST_INSERT_ID() AS ID
+            SELECT LAST_INSERT_ID() AS ID
         </selectKey>
     </insert>
 
     <insert id="insertMap" >
         INSERT INTO df_specimen_patient (
-		    id
-		    ,gender
-		    ,age
-		    ,code
-		    ,isSicken
+        address
+        ,name
+        ,career
+        ,gender
+        ,age
+        ,probability
+        ,isSicken
         ) VALUES (
-		    	#{map.id}
-		    	,#{map.gender}
-		    	,#{map.age}
-		    	,#{map.code}
-		    	,#{map.isSicken}
+        #{map.address}
+        ,#{map.name}
+        ,#{map.career}
+        ,#{map.gender}
+        ,#{map.age}
+        ,#{map.probability}
+        ,#{map.isSicken}
         )
     </insert>
-    
+
     <!-- 更新 -->
     <update id="update" parameterType="cn.df.domain.specimen.Patient">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
-		    id=#{id},
-		    gender=#{gender},
-		    age=#{age},
-		    code=#{code},
-		    isSicken=#{isSicken},
+            address=#{address},
+            name=#{name},
+            career=#{career},
+            gender=#{gender},
+            age=#{age},
+            probability=#{probability},
+            isSicken=#{isSicken},
         </trim>
         WHERE
+        id = #{id}
+        code = #{code} AND
     </update>
-	
-	<update id="updateMap">
+
+    <update id="updateMap">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
-            <if test="map.id!=null">
-                id = #{map.id},
+            <if test="map.address!=null">
+                address = #{map.address},
+            </if>
+            <if test="map.name!=null">
+                name = #{map.name},
+            </if>
+            <if test="map.career!=null">
+                career = #{map.career},
             </if>
             <if test="map.gender!=null">
                 gender = #{map.gender},
@@ -70,8 +92,8 @@
             <if test="map.age!=null">
                 age = #{map.age},
             </if>
-            <if test="map.code!=null">
-                code = #{map.code},
+            <if test="map.probability!=null">
+                probability = #{map.probability},
             </if>
             <if test="map.isSicken!=null">
                 isSicken = #{map.isSicken},
@@ -84,8 +106,14 @@
     <update id="updateByCondition">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
-            <if test="update.id!=null">
-                id = #{update.id},
+            <if test="update.address!=null">
+                address = #{update.address},
+            </if>
+            <if test="update.name!=null">
+                name = #{update.name},
+            </if>
+            <if test="update.career!=null">
+                career = #{update.career},
             </if>
             <if test="update.gender!=null">
                 gender = #{update.gender},
@@ -93,8 +121,8 @@
             <if test="update.age!=null">
                 age = #{update.age},
             </if>
-            <if test="update.code!=null">
-                code = #{update.code},
+            <if test="update.probability!=null">
+                probability = #{update.probability},
             </if>
             <if test="update.isSicken!=null">
                 isSicken = #{update.isSicken},
@@ -102,8 +130,14 @@
         </trim>
 
         <trim prefix="WHERE" prefixOverrides="AND | OR">
-            <if test="condition.id!=null">
-                AND id = #{condition.id}
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.career!=null">
+                AND career = #{condition.career}
             </if>
             <if test="condition.gender!=null">
                 AND gender = #{condition.gender}
@@ -111,8 +145,8 @@
             <if test="condition.age!=null">
                 AND age = #{condition.age}
             </if>
-            <if test="condition.code!=null">
-                AND code = #{condition.code}
+            <if test="condition.probability!=null">
+                AND probability = #{condition.probability}
             </if>
             <if test="condition.isSicken!=null">
                 AND isSicken = #{condition.isSicken}
@@ -123,20 +157,26 @@
     <update id="updateNull" parameterType="cn.df.domain.specimen.Patient">
         UPDATE df_specimen_patient
         <trim prefix="SET" suffixOverrides=",">
-            id = #{id},
+            address = #{address},
+            name = #{name},
+            career = #{career},
             gender = #{gender},
             age = #{age},
-            code = #{code},
+            probability = #{probability},
             isSicken = #{isSicken},
         </trim>
         WHERE
+        id = #{id}
+        code = #{code} AND
     </update>
-    
-    
+
+
     <!-- 按Id删除 -->
     <delete id="deleteById" parameterType="java.lang.Long">
         DELETE FROM df_specimen_patient
         <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+            AND code = #{id}
         </trim>
     </delete>
 
@@ -153,14 +193,26 @@
             <if test="id!=null">
                 AND id = #{id}
             </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="name!=null">
+                AND name = #{name}
+            </if>
+            <if test="career!=null">
+                AND career = #{career}
+            </if>
             <if test="gender!=null">
                 AND gender = #{gender}
             </if>
             <if test="age!=null">
                 AND age = #{age}
             </if>
-            <if test="code!=null">
-                AND code = #{code}
+            <if test="probability!=null">
+                AND probability = #{probability}
             </if>
             <if test="isSicken!=null">
                 AND isSicken = #{isSicken}
@@ -172,13 +224,15 @@
         DELETE FROM df_specimen_patient WHERE
         ${property} = #{value}
     </delete>
-    
+
     <!--查询相关 -->
     <select id="fetch" parameterType="java.lang.Long" resultType="cn.df.domain.specimen.Patient">
         SELECT
         <include refid="Base_Column_List" />
         FROM df_specimen_patient
         <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+            AND code = #{id}
         </trim>
     </select>
 
@@ -222,24 +276,36 @@
             <if test="condition.id!=null">
                 ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
             </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+            <if test="condition.address!=null">
+                ${condition.groupOp}   address  ${condition.address.op}  #{condition.address.data}
+            </if>
+            <if test="condition.name!=null">
+                ${condition.groupOp}   name  ${condition.name.op}  #{condition.name.data}
+            </if>
+            <if test="condition.career!=null">
+                ${condition.groupOp}   career  ${condition.career.op}  #{condition.career.data}
+            </if>
             <if test="condition.gender!=null">
                 ${condition.groupOp}   gender  ${condition.gender.op}  #{condition.gender.data}
             </if>
             <if test="condition.age!=null">
                 ${condition.groupOp}   age  ${condition.age.op}  #{condition.age.data}
             </if>
-            <if test="condition.code!=null">
-                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            <if test="condition.probability!=null">
+                ${condition.groupOp}   probability  ${condition.probability.op}  #{condition.probability.data}
             </if>
             <if test="condition.isSicken!=null">
                 ${condition.groupOp}   isSicken  ${condition.isSicken.op}  #{condition.isSicken.data}
             </if>
 
 
-    </where>
+        </where>
 
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
         <if test="offset != null">
             limit ${offset}, ${rows}
@@ -254,21 +320,33 @@
             <if test="id!=null">
                 AND id like CONCAT('%', #{id} , '%')
             </if>
+            <if test="code!=null">
+                AND code like CONCAT('%', #{code} , '%')
+            </if>
+            <if test="address!=null">
+                AND address like CONCAT('%', #{address} , '%')
+            </if>
+            <if test="name!=null">
+                AND name like CONCAT('%', #{name} , '%')
+            </if>
+            <if test="career!=null">
+                AND career like CONCAT('%', #{career} , '%')
+            </if>
             <if test="gender!=null">
                 AND gender like CONCAT('%', #{gender} , '%')
             </if>
             <if test="age!=null">
                 AND age like CONCAT('%', #{age} , '%')
             </if>
-            <if test="code!=null">
-                AND code like CONCAT('%', #{code} , '%')
+            <if test="probability!=null">
+                AND probability like CONCAT('%', #{probability} , '%')
             </if>
             <if test="isSicken!=null">
                 AND isSicken like CONCAT('%', #{isSicken} , '%')
             </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -281,21 +359,33 @@
             <if test="condition.id!=null">
                 AND id = #{condition.id}
             </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.career!=null">
+                AND career = #{condition.career}
+            </if>
             <if test="condition.gender!=null">
                 AND gender = #{condition.gender}
             </if>
             <if test="condition.age!=null">
                 AND age = #{condition.age}
             </if>
-            <if test="condition.code!=null">
-                AND code = #{condition.code}
+            <if test="condition.probability!=null">
+                AND probability = #{condition.probability}
             </if>
             <if test="condition.isSicken!=null">
                 AND isSicken = #{condition.isSicken}
             </if>
         </trim>
         <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
+            ORDER BY ${orderBy} ${sortBy}
         </if>
     </select>
 
@@ -307,14 +397,26 @@
             <if test="condition.id!=null">
                 AND id = #{condition.id}
             </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.name!=null">
+                AND name = #{condition.name}
+            </if>
+            <if test="condition.career!=null">
+                AND career = #{condition.career}
+            </if>
             <if test="condition.gender!=null">
                 AND gender = #{condition.gender}
             </if>
             <if test="condition.age!=null">
                 AND age = #{condition.age}
             </if>
-            <if test="condition.code!=null">
-                AND code = #{condition.code}
+            <if test="condition.probability!=null">
+                AND probability = #{condition.probability}
             </if>
             <if test="condition.isSicken!=null">
                 AND isSicken = #{condition.isSicken}
@@ -325,27 +427,39 @@
 
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM df_specimen_patient
-       <where>
-           <if test="id!=null">
-               ${groupOp} id ${id.op}  #{id.data}
-           </if>
-           <if test="gender!=null">
-               ${groupOp} gender ${gender.op}  #{gender.data}
-           </if>
-           <if test="age!=null">
-               ${groupOp} age ${age.op}  #{age.data}
-           </if>
-           <if test="code!=null">
-               ${groupOp} code ${code.op}  #{code.data}
-           </if>
-           <if test="isSicken!=null">
-               ${groupOp} isSicken ${isSicken.op}  #{isSicken.data}
-           </if>
+        <where>
+            <if test="id!=null">
+                ${groupOp} id ${id.op}  #{id.data}
+            </if>
+            <if test="code!=null">
+                ${groupOp} code ${code.op}  #{code.data}
+            </if>
+            <if test="address!=null">
+                ${groupOp} address ${address.op}  #{address.data}
+            </if>
+            <if test="name!=null">
+                ${groupOp} name ${name.op}  #{name.data}
+            </if>
+            <if test="career!=null">
+                ${groupOp} career ${career.op}  #{career.data}
+            </if>
+            <if test="gender!=null">
+                ${groupOp} gender ${gender.op}  #{gender.data}
+            </if>
+            <if test="age!=null">
+                ${groupOp} age ${age.op}  #{age.data}
+            </if>
+            <if test="probability!=null">
+                ${groupOp} probability ${probability.op}  #{probability.data}
+            </if>
+            <if test="isSicken!=null">
+                ${groupOp} isSicken ${isSicken.op}  #{isSicken.data}
+            </if>
 
-       </where>
-    <if test="orderBy!=null">
-        ORDER BY ${orderBy} ${sortBy}
-    </if>
+        </where>
+        <if test="orderBy!=null">
+            ORDER BY ${orderBy} ${sortBy}
+        </if>
     </select>
 
     <select id="selectMaxId" resultType="java.lang.Long">
@@ -353,5 +467,5 @@
         MAX(id)
         FROM df_specimen_patient
     </select>
-   
+
 </mapper>
