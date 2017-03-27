@@ -114,7 +114,7 @@ public class PatientController {
      */
     @ResponseBody
     @RequestMapping(value = "/diagnose")
-    public String diagnose(long id){
-        return patientService.queryDiagnose(id);
+    public double diagnose(long id){
+        return patientService.diagnose(id);
     }
 }

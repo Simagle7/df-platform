@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.df.dao.specimen.IPatientDAO">
-	<!-- 在这里存放用户自定义的映射配置（注：PatientDAO.xml里各节点的ID不能在这里重复出现）  -->
+    <update id="updateProbability">
+        UPDATE df_specimen_patient
+        SET probability = #{probability}
+        WHERE id = #{id}
+    </update>
+    <!-- 在这里存放用户自定义的映射配置（注：PatientDAO.xml里各节点的ID不能在这里重复出现）  -->
 
     <select id="queryPageEx" resultType="cn.df.domain.specimen.Patient">
         SELECT * FROM df_specimen_patient

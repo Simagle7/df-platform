@@ -48,4 +48,6 @@ public interface IPatientDAO extends IDFBaseDAO<Patient> {
      * @return  返回，统计结果
      */
     int countEx(@Param("condition") Map<String, Object> conditon);
+
+    int updateProbability(@Param("probability") double probability, @Param("id") long id);
 }
