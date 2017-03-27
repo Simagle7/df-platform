@@ -121,12 +121,15 @@ public class AuthOperationServiceImpl extends AbstractDFService<IDFBaseDAO<AuthO
         if(status ==0 && authModule.getStatus() == 1){
             throw new BizException(ERRORCODE.ENABLE_EXC.getCode(), ERRORCODE.ENABLE_EXC.getMessage()+ "所属模块已停用，请启用后再试！");
         }
+        //组装参数
         queryOperation.setStatus(status);
         queryOperation.setLastModifier(currentUser.getUid());
         queryOperation.setLastModDate(System.currentTimeMillis());
+        //更新操作状态，更新成功，返回更新成功状态码
         if(this.update(queryOperation) > 0){
             return RETURNCODE.UPDATE_COMPLETE.getMessage();
         }
+        //更新失败，抛出业务异常
         throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
     }
 

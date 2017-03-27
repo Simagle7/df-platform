@@ -88,8 +88,10 @@ public class DfRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String username = (String) token.getPrincipal();
+        //从数据库查询用户
         User user = (User) userService.findOne(UserParam.F_Username, username);
         AccountDto currentUser;
+        //如果用户存在，进入认证流程
         if (user != null){
             currentUser = new AccountDto();
             currentUser.setUid(user.getCode());

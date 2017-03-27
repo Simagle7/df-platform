@@ -72,4 +72,9 @@ public class PatientServiceImpl extends AbstractDFService<IDFBaseDAO<Patient>, P
     public String update(PatientParam param, AccountDto currentUser) {
         return null;
     }
+
+    @Override
+    public String queryDiagnose(long id) {
+        return null;
+    }
 }

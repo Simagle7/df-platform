@@ -106,4 +106,15 @@ public class PatientController {
             throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
         }
     }
+
+    /**
+     * 根据病案号进行疾病预测
+     * @param id  疾病id
+     * @return  返回，患病概率
+     */
+    @ResponseBody
+    @RequestMapping(value = "/diagnose")
+    public String diagnose(long id){
+        return patientService.queryDiagnose(id);
+    }
 }

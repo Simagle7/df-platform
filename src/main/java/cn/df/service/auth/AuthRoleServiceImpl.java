@@ -70,10 +70,8 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
     public BizData4Page queryPage(AuthRoleParam param, Integer pageNo, Integer pageSize) {
         //查询分页结果集
         List data = authRoleDAO.queryPageEx(param.toMap(),(pageNo-1)*pageSize, pageSize);
-
         //查询分页总数
         int records = authRoleDAO.countEx(param.toMap());
-
         //将分页结果封装并返回
         return PageUtils.toBizData4Page(data, pageNo, pageSize, records);
     }
@@ -84,21 +82,20 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
          if(param.getIsDefault()&& this.isExists(AuthRoleParam.F_IsDefault, param.getIsDefault())){
              throw new BizException(ERRORCODE.DEFAULT_ROLE_EXIST.getCode(), ERRORCODE.DEFAULT_ROLE_EXIST.getMessage());
          }
-
          //判断角色是否重名，角色名称要求唯一
          AuthRole queryRole = this.findOne(AuthRoleParam.F_Name, param.getName());
          if(queryRole != null){
              throw new BizException(ERRORCODE.ROLE_EXIST.getCode(), ERRORCODE.ROLE_EXIST.getMessage());
          }
-
          param.setCreator(currentUser.getUid());
          param.setCreateDate(System.currentTimeMillis());
          param.setStatus(DataStatusEnum.ENABLED.getValue());
          param.setCode(CommonUtils.getUUID());
-         //插入角色
+         //插入角色,插入成功，返回成功插入状态码
          if (this.insertMap(param.toMap()) != 0) {
              return RETURNCODE.ADD_COMPLETE.getMessage();
          }
+         //插入失败，抛出业务异常
          throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
      }
 
@@ -195,7 +192,7 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
 
     @Override
     public String saveAuth(String roleCode, String[] moduleCodes, String[] operationCodes, AccountDto accountDto) {
-        //对象封装
+        //权限控制关系（角色-资源）封装
         List<AuthAcl> authAcls = new ArrayList<>();
         for(String code: moduleCodes){
             AuthAcl authAcl = new AuthAcl();
@@ -228,9 +225,6 @@ public class AuthRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthRole>,
         if(authAcls.size() > 0){
             authAclDAO.insertBatch(authAcls);
         }
-        //更新系统权限
-//        dfRealm.clearCahced();
-
         return RETURNCODE.AUTH_SUCCESS.getMessage();
     }
 

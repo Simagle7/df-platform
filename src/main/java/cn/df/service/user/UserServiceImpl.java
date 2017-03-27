@@ -73,10 +73,7 @@ public class UserServiceImpl extends AbstractDFService<IDFBaseDAO<User>, User> i
                 throw new RuntimeException();
             }
         }
-        //从shiro的session给货品获取到session并进行设置
-//        Subject subject = SecurityUtils.getSubject();
-        //得到用户信息
-//        AccountDto accountDto = (AccountDto) subject.getPrincipal();
+        //将登陆成功的uid返回给客户端，用户角色选取
         return  ((AccountDto)SecurityUtils.getSubject().getPrincipal()).getUid();
     }
 
@@ -87,7 +84,9 @@ public class UserServiceImpl extends AbstractDFService<IDFBaseDAO<User>, User> i
 
      @Override
      public String add(UserParam param, AccountDto currentUser) {
+        //判断新增的账号是否存在
         if(!isExists(UserParam.F_Username, param.getUsername())) {
+            //封装用户基本信息
             param.setSalt(RandomStringUtils.randomAlphanumeric(8));
             param.setPassword(CommonUtils.getPassword(param.getPassword(),param.getSalt()));
             param.setCode(CommonUtils.getUUID());
@@ -95,19 +94,25 @@ public class UserServiceImpl extends AbstractDFService<IDFBaseDAO<User>, User> i
             param.setCreator(currentUser.getUid());
             param.setCreateDate(System.currentTimeMillis());
             param.setStatus(DataStatusEnum.ENABLED.getValue());
-            this.insertMap(param.toMap());
-            return RETURNCODE.ADD_COMPLETE.getMessage();
+            // 插入数据库，如果插入成功，返回成功操作码
+            if(this.insertMap(param.toMap()) > 0){
+                return RETURNCODE.ADD_COMPLETE.getMessage();
+            }
         }
+        //插入失败，抛出异常
         throw new BizException(ERRORCODE.ACCOUNT_EXISTS.getCode(), ERRORCODE.ACCOUNT_EXISTS.getMessage());
      }
 
      @Override
      public String update(UserParam param, AccountDto currentUser) {
+        //设置更新参数
         param.setLastModifier(currentUser.getUid());
         param.setLastModDate(System.currentTimeMillis());
+        //更新数据库中待更新用户的资料，更新成功，返回成功更新的操作码
         if(this.updateMap(param.toMap()) > 0){
             return RETURNCODE.UPDATE_COMPLETE.getMessage();
         }
+        //更新失败，抛出业务异常
         throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
      }
 
@@ -137,8 +142,11 @@ public class UserServiceImpl extends AbstractDFService<IDFBaseDAO<User>, User> i
 
      @Override
      public BizData4Page queryPage(UserParam param, Integer pageNo, Integer pageSize) {
+         //根据条件查询用户数据列表
          List<User> data = userDAO.queryPageEx(param.toMap(), (pageNo - 1) * pageSize, pageSize);
+         //统计符合条件的总记录数
          int records = userDAO.countEx(param.toMap());
+         //封装
          return PageUtils.toBizData4Page(data, pageNo, pageSize, records);
      }
 
@@ -159,8 +167,10 @@ public class UserServiceImpl extends AbstractDFService<IDFBaseDAO<User>, User> i
         //得到用户信息
         AccountDto accountDto = (AccountDto) subject.getPrincipal();
         accountDto.setRoleCode(roleCode);
+        //从session中获取用户信息
         Session session = subject.getSession();
         session.setAttribute("CURRENTUSER", accountDto);
+        //将用户信息返回给客户端
         return accountDto;
     }
 }

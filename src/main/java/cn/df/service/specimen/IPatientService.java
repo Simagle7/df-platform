@@ -59,4 +59,5 @@ public interface IPatientService<D extends IDFBaseDAO<T>, T extends BaseDomain> 
     String update(PatientParam param, AccountDto currentUser);
 
 
+    String queryDiagnose(long id);
 }

@@ -77,10 +77,11 @@ public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUs
 
      @Override
      public String save(String uid, String[] roleCodes, AccountDto currentUser) {
-         //删除之前的记录
          AuthUserRoleParam param = new AuthUserRoleParam();
          param.setUsercode(uid);
+         //删除之前用户-角色关系的记录
          this.deleteByCondition(param.toMap());
+         //组装新的用户-角色关系列表
          List<AuthUserRole> authRoleUsers = new ArrayList<>();
          AuthUserRole authRoleUser;
          for(String roleCode: roleCodes){
@@ -92,9 +93,11 @@ public class AuthUserRoleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthUs
              authRoleUser.setStatus(DataStatusEnum.ENABLED.getValue());
              authRoleUsers.add(authRoleUser);
          }
+         //批量插入用户-角色关系，若插入成功，则返回成功插入状态码
          if(authUserRoleDAO.insertBatch(authRoleUsers) > 0){
              return RETURNCODE.ADD_COMPLETE.getMessage();
          }
+         //若插入失败，则抛出业务异常
          throw new BizException(ERRORCODE.OPERATION_FAIL.getCode(), ERRORCODE.OPERATION_FAIL.getMessage());
      }
  }

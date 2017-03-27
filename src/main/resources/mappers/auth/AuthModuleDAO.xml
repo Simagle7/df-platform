@@ -128,6 +128,7 @@
 		    status=#{status},
         </trim>
         WHERE
+        id = #{id}
     </update>
 	
 	<update id="updateMap">

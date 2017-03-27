@@ -74,8 +74,11 @@ public class AuthModuleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthModu
              condition.remove(AuthModuleParam.F_Code);
              condition.put(AuthModuleParam.F_FullCode, new SearchField(AuthModuleParam.F_FullCode, "like", "%" + param.getCode() + "%"));
          }
+         // 根据条件查询模块列表数据
          List data = this.queryPage(condition, (pageNo - 1) * pageSize, pageSize);
+         // 查询符合条件的总记录数
          int records = this.count(condition);
+         // 封装分页数据
          return PageUtils.toBizData4Page(data, pageNo, pageSize, records);
      }
 
@@ -154,6 +157,7 @@ public class AuthModuleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthModu
             throw new BizException(ERRORCODE.MODULEURL_EXIST.getCode(), "模块" + ERRORCODE.MODULEURL_EXIST.getMessage());
         }
         try {
+            param.setCode(originAuthModule.getCode());
             //查询父节点
             AuthModule p_authModule = this.findOne(AuthModuleParam.F_Code, param.getpCode());
             if (p_authModule == null) {
@@ -214,6 +218,7 @@ public class AuthModuleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthModu
         authModuleDAO.updateStatus(queryAuthModule.getCode(), status, currentUser.getUid(), System.currentTimeMillis());
         //更新节点操作状态
         List<AuthModule> authModuleList = queryChildrenModules(queryAuthModule.getFullCode());
+        //更新模块以及子模块下操作状态
         for (AuthModule authModule : authModuleList) {
             updateOperationStatus(status, authModule.getCode(), currentUser.getUid());
         }
@@ -269,13 +274,13 @@ public class AuthModuleServiceImpl extends AbstractDFService<IDFBaseDAO<AuthModu
     /**
      * 根据模块code获取子模块，包括自己
      *
-     * @param fullCode 模块
+     * @param pCode 模块
      * @return 返回，模块列表
      */
-    private List<AuthModule> queryChildrenModules(String fullCode) {
-        Map<String, Object> condition = new HashMap<>();
-        condition.put(AuthModuleParam.F_FullCode, new SearchField(AuthModuleParam.F_FullCode, "like", fullCode + "%"));
-        return this.queryPage(condition, 0, Integer.MAX_VALUE);
+    private List<AuthModule> queryChildrenModules(String pCode) {
+//        Map<String, Object> condition = new HashMap<>();
+//        condition.put(AuthModuleParam.F_FullCode, new SearchField(AuthModuleParam.F_FullCode, "like", fullCode + "%"));
+        return this.findList(AuthModuleParam.F_Code, pCode);
     }
 
     @Override
